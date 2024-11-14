@@ -1057,6 +1057,63 @@ def draw_trichevron(d, colours, wid=UNSPECIFIED, hei=UNSPECIFIED,
     return base_sw
 
 
+def draw_crossdresser(d, colours, wid=UNSPECIFIED, hei=UNSPECIFIED,
+               x_start=0, y_start=0, size_ratio=1.0, orientation=None):
+    """
+    Draw an X in the style of this crossdresser flag: https://flag.library.lgbt/flags/crossdresser/
+    :param d: Drawing object
+    :param colours: in order top background, bottom background
+    :param wid: width of the area we are working with
+    :param hei: height of the area we are working with
+    :param x_start: the x-coordinate of the upper left corner of the rectangular area that is being drawn into
+    :param y_start: the y-coordinate of the upper left corner of the rectangular area that is being drawn into
+    :param size_ratio: size factor
+    :return: the height of the top/bottom chevrons
+    """
+    wid, hei = get_effective_dimensions(d, wid, hei)
+    midx = x_start + wid/2
+    midy = y_start + hei/2
+
+    draw_horiz_bars(d, colours, wid=wid, hei=hei, x_start=x_start, y_start=y_start)
+
+    line_wid = wid/8
+    line_hei = line_wid*(hei/wid)
+
+    top = y_start
+    bottom = y_start+hei
+    leftmost = x_start
+    rightmost = x_start + wid
+
+    p = draw.Path(fill=colours[0])
+    p.M(leftmost, bottom)
+    p.L(leftmost, bottom-line_hei)
+    p.L(midx-line_wid, midy)
+    p.L(midx+line_wid, midy)
+    p.L(rightmost, bottom-line_hei)
+    p.L(rightmost, bottom) # bottom right corner
+    p.L(rightmost-line_wid, bottom) # double back
+    p.L(midx, midy+line_hei)
+    p.L(x_start+line_wid, bottom)
+    p.L(x_start+line_wid, bottom)
+    p.Z()
+    d.append(p)
+
+    p = draw.Path(fill=colours[1])
+    p.M(leftmost, top)
+    p.L(leftmost, top+line_hei)
+    p.L(midx-line_wid, midy)
+    p.L(midx+line_wid, midy)
+    p.L(rightmost, top+line_hei)
+    p.L(rightmost, top) # bottom right corner
+    p.L(rightmost-line_wid, top) # double back
+    p.L(midx, midy-line_hei)
+    p.L(x_start+line_wid, top)
+    p.L(x_start+line_wid, top)
+    p.Z()
+    d.append(p)
+
+
+
 if __name__ == '__main__':
     doctest.testmod()
     wid = 500

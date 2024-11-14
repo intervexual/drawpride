@@ -11,9 +11,10 @@ Stripes:
 * Horizontal lines
 * Vertical lines
 * Diagonal lines in the style of the Disability Pride Flag
+* Reverse diagonal lines like in anarchist flags
 * Seychelles-style lines
-* Starburst-type lines
-* Concentric bezier curves in the style of the Mental Health Flag
+* Starburst-type patterns
+* Concentric bézier curves in the style of the Mental Health Flag
 * Concentric infinity symbols in the style of the Autistic Pride Day logo
 * Concentric vees in the style of the varsex flag
 * Concentric tees in the style of the tgirl/tboy flags
@@ -26,19 +27,20 @@ Rings:
 * Insetting a flag inside a Carpenter ring
 
 And other possible flag elements:
-* Text (e.g. the original polyamory flag)
+* Text (e.g. the original Polyamory flag)
 * Piles (the triangle that goes on the left-hand side of the Demisexual flag)
 * Nested piles (like in the Progress Pride flag)
-* Crosses
-* Squares
+* Crosses (like in the Ipsogender flag)
+* X-crosses (like in the Crossdresser flag)
+* Squares (like in the Dyadic and Endosex flags)
 * Half-squares (cut along diagonal, useful for endosex/dyadic flags)
-* Rhombii (squares rotated 45 degrees)
-* Hearts
+* Rhombii (squares rotated 45 degrees, used in an Altersex flag)
+* Hearts (like in the Biromantic flag)
 * Inverted triangles like in the Pink Triangle flag
 * The Rubber Zigzag
 * BDSM Triskelion
-* The Pocketgender Hourglass
-* Ally A/chevron
+* The Pocketgender Flag
+* Ally A (upside-down chevron)
 * Closet symbols
 * Perisex symbols
 * Altersex symbols
