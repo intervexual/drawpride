@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+     width="500" height="300" viewBox="0 0 500 300">
+<defs>
+</defs>
+<rect x="0" y="0" width="500" height="61" fill="white" />
+<rect x="0" y="60" width="500" height="61" fill="white" />
+<rect x="0" y="120" width="500" height="61" fill="#6e0170" />
+<rect x="0" y="180" width="500" height="61" fill="#d2d2d2" />
+<rect x="0" y="240" width="500" height="61" fill="#d2d2d2" />
+<path d="M0,0 L183.33333333333334,150.0 L0,300 L0,0 Z" fill="black" />
+</svg>

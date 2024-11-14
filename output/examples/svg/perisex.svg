@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+     width="500" height="300" viewBox="0 0 500 300">
+<defs>
+</defs>
+<rect x="0" y="0" width="500" height="301" fill="#626eb7" />
+<path d="M166.66666666666666,100.0 L333.33333333333337,100.0" stroke="white" stroke-width="12.5" stroke-linecap="round" />
+<path d="M166.66666666666666,100.0 L166.66666666666666,166.66666666666666" stroke="white" stroke-width="12.5" stroke-linecap="round" />
+<path d="M333.33333333333337,100.0 L333.33333333333337,200.0" stroke="white" stroke-width="12.5" stroke-linecap="round" />
+<path d="M133.33333333333331,204.16666666666666 L166.66666666666666,166.66666666666666 L200.0,204.16666666666666 Z" stroke="white" stroke-width="12.5" fill="white" stroke-linecap="round" />
+<path d="M300.00000000000006,166.66666666666666 L333.33333333333337,200.0 L366.6666666666667,166.66666666666666 Z" stroke="white" stroke-width="12.5" fill="white" stroke-linecap="round" />
+<path d="M250.0,100.0 L250.0,66.66666666666666" stroke="white" stroke-width="12.5" stroke-linecap="round" />
+</svg>

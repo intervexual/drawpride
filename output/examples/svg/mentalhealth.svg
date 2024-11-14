@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+     width="500" height="300" viewBox="0 0 500 300">
+<defs>
+</defs>
+<rect x="0" y="0" width="500" height="51" fill="#E40303" />
+<rect x="0" y="50" width="500" height="51" fill="#FF8C00" />
+<rect x="0" y="100" width="500" height="51" fill="#FFED00" />
+<rect x="0" y="150" width="500" height="51" fill="#008026" />
+<rect x="0" y="200" width="500" height="51" fill="#24408E" />
+<rect x="0" y="250" width="500" height="51" fill="#732982" />
+<path d="M125.0,0 L275.0,150.0 L125.0,300 L0,300 L0,0 L125.0,0 Z" fill="black" />
+<path d="M100.0,0 L250.0,150.0 L100.0,300 L0,300 L0,0 L100.0,0 Z" fill="#784f16" />
+<path d="M75.0,0 L225.0,150.0 L75.0,300 L0,300 L0,0 L75.0,0 Z" fill="#5BCEFA" />
+<path d="M50.0,0 L200.0,150.0 L50.0,300 L0,300 L0,0 L50.0,0 Z" fill="#F5A9B8" />
+<path d="M25.0,0 L175.0,150.0 L25.0,300 L0,300 L0,0 L25.0,0 Z" fill="white" />
+<path d="M0.0,0 L150.0,150.0 L0.0,300 L0,300 L0,0 L0.0,0 Z" fill="#FDD70A" />
+<circle cx="62.5" cy="150.0" r="37.5" fill="none" stroke-width="12.0" stroke="#7A01AA" fill-opacity="1" />
+</svg>

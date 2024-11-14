@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+     width="500" height="300" viewBox="0 0 500 300">
+<defs>
+</defs>
+<rect x="0" y="0" width="500" height="44" fill="#F89FC9" />
+<rect x="0" y="43" width="500" height="44" fill="#2E2826" />
+<rect x="0" y="86" width="500" height="44" fill="#7E7E7E" />
+<rect x="0" y="129" width="500" height="44" fill="white" />
+<rect x="0" y="171" width="500" height="44" fill="#7E7E7E" />
+<rect x="0" y="214" width="500" height="44" fill="#2E2826" />
+<rect x="0" y="257" width="500" height="44" fill="#F89FC9" />
+<path d="M293.75,77.5 C275.375,77.5,259.1875,86.6875,250.0,101.125 C240.8125,86.6875,224.625,77.5,206.25,77.5 C177.375,77.5,153.75,101.125,153.75,130.0 C153.75,182.5,250.0,225.8125,250.0,225.8125 S346.25,182.5,346.25,130.0 C346.25,101.125,322.625,77.5,293.75,77.5 Z" fill="#FEE900" stroke="none" />
+</svg>

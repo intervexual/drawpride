@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+     width="500" height="300" viewBox="0 0 500 300">
+<defs>
+<clipPath id="d0">
+<path d="M0,0 L-500,300 L0,300 L500,0 L500,0 Z" fill="white" />
+</clipPath>
+</defs>
+<path d="M0.0,0.0 L-500.0,300.0 L1.0,300.0 L501.0,0.0 L501.0,0.0 Z" fill="#626eb7" />
+<path d="M500.0,0.0 L0.0,300.0 L501.0,300.0 L1001.0,0.0 L1001.0,0.0 Z" fill="#c7d6ff" />
+<path d="M175.0,75.0 L325.0,75.0 L325.0,225.0 L175.0,225.0 Z" stroke="black" stroke-width="30.0" fill="#FDD70A" />
+<path d="M175.0,75.0 L325.0,75.0 L325.0,225.0 L175.0,225.0 Z" stroke="white" stroke-width="30.0" fill="none" clip-path="url(#d0)" />
+<rect x="218.0" y="110.0" width="64.0" height="80.0" ry="13.333333333333334" stroke="#7A01AA" fill="none" stroke-width="4.285714285714286" />
+<rect x="226.0" y="118.0" width="48.0" height="64.0" ry="5.333333333333334" stroke="#7A01AA" fill="none" stroke-width="4.285714285714286" />
+<path d="M250.0,118.0 L250.0,182.0" stroke="#7A01AA" stroke-width="4.285714285714286" />
+<path d="M242.0,142.0 L242.0,158.0" stroke="#7A01AA" stroke-width="4.285714285714286" />
+<path d="M258.0,142.0 L258.0,158.0" stroke="#7A01AA" stroke-width="4.285714285714286" />
+</svg>
