@@ -974,6 +974,32 @@ def draw_triskelion(d, colours, wid=UNSPECIFIED, hei=UNSPECIFIED,
     d.append(draw.Circle(x_cent-xoffs, bottomlevel, minirad,  fill=dotcolour))
 
 
+
+def draw_circle(d, fill_colour, outer_colour='none', wid=UNSPECIFIED, hei=UNSPECIFIED,
+               x_start=0, y_start=0, size_ratio=1.0, orientation=None):
+    """
+    Draw a solid circle
+    :param d: Drawing object
+    :param fill_colour: fill colour (string) of the circle
+    :param outer_colour: colour (string) of the outline of the circle
+    :param wid: width of the area we are working with
+    :param hei: height of the area we are working with
+    :param x_start: the x-coordinate of the upper left corner of the rectangular area that is being drawn into
+    :param y_start: the y-coordinate of the upper left corner of the rectangular area that is being drawn into
+    :param size_ratio: size factor
+    :return: none
+    """
+    wid, hei = get_effective_dimensions(d, wid, hei)
+    midx = x_start + wid/2
+    midy = y_start + hei/2
+    radius = (hei/2)*size_ratio*0.975
+    sw = 0
+    if outer_colour != 'none':
+        sw = hei/20
+    d.append(draw.Circle(midx, midy, radius, fill=fill_colour, stroke=outer_colour, stroke_width=sw))
+    return radius
+
+
 def draw_triangle(d, fill_colour, outer_colour='none', wid=UNSPECIFIED, hei=UNSPECIFIED,
                x_start=0, y_start=0, size_ratio=1.0, orientation=None):
     """
@@ -1008,6 +1034,44 @@ def draw_triangle(d, fill_colour, outer_colour='none', wid=UNSPECIFIED, hei=UNSP
 
     p = draw.Path(fill=fill_colour, stroke=outer_colour, stroke_width=sw)
     p.M(left,top).L(right, top).L(midx, bottom).L(left,top).Z()
+    d.append(p)
+
+
+def draw_asympile(d, fill_colour, outer_colour='none', wid=UNSPECIFIED, hei=UNSPECIFIED,
+               x_start=0, y_start=0, size_ratio=1.0, orientation=None):
+    """
+    Draw an asymmetric pile in the style of the tricolour polyamory flag
+    :param d: Drawing object
+    :param fill_colour: fill colour (string) of the triangle
+    :param outer_colour: colour (string) of the outline of the triangle
+    :param wid: width of the area we are working with
+    :param hei: height of the area we are working with
+    :param x_start: the x-coordinate of the upper left corner of the rectangular area that is being drawn into
+    :param y_start: the y-coordinate of the upper left corner of the rectangular area that is being drawn into
+    :param size_ratio: size factor
+    :return: none
+    """
+    wid, hei = get_effective_dimensions(d, wid, hei)
+    if outer_colour:
+        sw = hei/50
+    else:
+        sw = 0
+
+    horizlinewid = hei/3
+
+    top = y_start
+    bottom = y_start + hei
+    left = x_start
+    x_rightorigin = left + horizlinewid
+    x_rightmost = left + 2*horizlinewid
+    y_rightmost = top + horizlinewid
+
+    p = draw.Path(fill=fill_colour, stroke=outer_colour, stroke_width=sw)
+    p.M(left, top)
+    p.L(left, bottom)
+    p.L(x_rightmost, y_rightmost)
+    p.L(x_rightorigin, top)
+    p.L(left, top).Z()
     d.append(p)
 
 
@@ -1070,6 +1134,9 @@ def draw_crossdresser(d, colours, wid=UNSPECIFIED, hei=UNSPECIFIED,
     :param size_ratio: size factor
     :return: the height of the top/bottom chevrons
     """
+    if len(colours) == 1:
+        colours.append('none')
+
     wid, hei = get_effective_dimensions(d, wid, hei)
     midx = x_start + wid/2
     midy = y_start + hei/2
@@ -1112,6 +1179,44 @@ def draw_crossdresser(d, colours, wid=UNSPECIFIED, hei=UNSPECIFIED,
     p.Z()
     d.append(p)
 
+
+def draw_equals(d, top_colour, bottom_colour, wid=UNSPECIFIED, hei=UNSPECIFIED,
+               x_start=0, y_start=0, size_ratio=1.0, orientation=None):
+    """
+    Draw an equals sign in the style of the horizontal androgyne flag
+    :param d: Drawing object
+    :param top_colour: the colour of the top
+    :param bottom: the colour of the bottom
+    :param wid: width of the area we are working with
+    :param hei: height of the area we are working with
+    :param x_start: the x-coordinate of the upper left corner of the rectangular area that is being drawn into
+    :param y_start: the y-coordinate of the upper left corner of the rectangular area that is being drawn into
+    :param size_ratio: size factor
+    :return: the height of the top/bottom lines
+    """
+    wid, hei = get_effective_dimensions(d, wid, hei)
+    midx = x_start + wid/2
+    midy = y_start + hei/2
+
+    line_hei = hei/5
+    line_wid = size_ratio*(wid*0.43)/2
+
+    # top
+    p = draw.Path(fill=top_colour)
+    p.M(midx-line_wid, line_hei)
+    p.L(midx+line_wid, line_hei)
+    p.L(midx+line_wid, 2*line_hei)
+    p.L(midx-line_wid, 2*line_hei).Z()
+    d.append(p)
+
+    # bottom
+    p = draw.Path(fill=bottom_colour)
+    p.M(midx-line_wid, 3*line_hei)
+    p.L(midx+line_wid, 3*line_hei)
+    p.L(midx+line_wid, 4*line_hei)
+    p.L(midx-line_wid, 4*line_hei).Z()
+    d.append(p)
+    return line_hei
 
 
 if __name__ == '__main__':

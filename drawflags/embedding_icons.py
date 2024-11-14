@@ -1,6 +1,7 @@
 """
 Adding SVG icons to flags rather than creating them in drawsvg
 """
+import os
 from pride_shapes import *
 
 
@@ -79,6 +80,8 @@ def change_svg_colour(filepath, new_colour, old_colour, save_to_dir = 'output/ic
 
     if not name.endswith(':'):
         name += ':'
+    if not os.path.exists(save_to_dir):
+        os.makedirs(save_to_dir)
     newpath =  save_to_dir + name + endpath
     with open(newpath, 'w') as g:
         print(s, file=g)

@@ -26,27 +26,31 @@ Rings:
 * Segmented rings
 * Insetting a flag inside a Carpenter ring
 
-And other possible flag elements:
-* Text (e.g. the original Polyamory flag)
+Piles and other triangles:
 * Piles (the triangle that goes on the left-hand side of the Demisexual flag)
 * Nested piles (like in the Progress Pride flag)
+* Asymmetric piles (like in the tricolour Polyamory flag)
+* Inverted triangles like in the Pink Triangle flag
+* Ally A (upside-down chevron)
+* Inner triangles in the style of the Bissu flag
+
+And other possible flag elements:
+* Text (e.g. the original Polyamory flag)
 * Crosses (like in the Ipsogender flag)
 * X-crosses (like in the Crossdresser flag)
 * Squares (like in the Dyadic and Endosex flags)
 * Half-squares (cut along diagonal, useful for endosex/dyadic flags)
 * Rhombii (squares rotated 45 degrees, used in an Altersex flag)
 * Hearts (like in the Biromantic flag)
-* Inverted triangles like in the Pink Triangle flag
 * The Rubber Zigzag
 * BDSM Triskelion
 * The Pocketgender Flag
-* Ally A (upside-down chevron)
 * Closet symbols
 * Perisex symbols
 * Altersex symbols
 * Autism spectrum nautilus symbols
-* Inner triangles in the style of the Bissu flag
 * Métis-style lemniscates
+* Equals symbols like in the alternate Androgyne flag
 
 ## Examples of use
 A Jupyter notebook of examples is available in this directory (examples.ipynb).
