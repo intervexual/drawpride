@@ -117,3 +117,17 @@ if __name__ == '__main__':
     draw_horiz_bars(d, rainbow_stripes)
     draw_morocco_star(d, '#026233')
     filelocations = save_flag(d, 'morocco_rainbow',  commonsflags)
+
+    # https://commons.wikimedia.org/wiki/File:Wiradjuri_Aboriginal_Flag.svg
+    d = draw.Drawing(800*4, 400*4)
+    draw_horiz_bars(d, ['black', '#db0701'])
+    draw_southern_cross(d, '#fdc82e', x_start=d.width*0.01)
+    filelocations = save_flag(d, 'wiradjuri_aboriginal', commonsflags)
+
+    # https://commons.wikimedia.org/wiki/File:LGBT_Flag_of_Czechoslovakia_(Unofficial_civil).svg
+    rainbow_stripes = ['#d81525', '#ff6300', '#ffFF00', '#329c00', '#0600ce', '#ce32ff']
+    d = draw.Drawing(800*4, 533*4)
+    draw_horiz_bars(d, rainbow_stripes)
+    draw_pile(d, '#11457e', size_ratio=1.5)
+    draw_fivesided_star(d, '#de0700', secondary_size=0.38, wid=d.width/2, size_ratio=1.15, y_start=-d.height*0.205)
+    filelocations = save_flag(d, 'czechoslovakia_civil_rainbow', commonsflags)

@@ -132,7 +132,7 @@ def draw_southern_cross(d, primary_colour, secondary_colour='none', wid=UNSPECIF
     draw_australian_star(d, primary_colour[1], secondary_colour, wid=wid/2, hei=hei, x_start=(midx/2)+rightward, y_start=-right_y, size_ratio=starsize, sw=sw)
 
     # and then the little star
-    small_y = hei*0.04
+    small_y = hei*0.05
     small_x = hei*0.09
     draw_fivesided_star(d, primary_colour[3], secondary_colour,  wid=wid/2, hei=hei, x_start=(midx/2)+small_x, y_start=small_y,
                         size_ratio=starsize/2, secondary_size=0.475, sw=sw)
