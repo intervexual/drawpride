@@ -4,10 +4,10 @@
 <defs>
 </defs>
 <rect x="0" y="0" width="500" height="61" fill="#78e2bc" />
-<rect x="0" y="60" width="500" height="61" fill="#7da4e9" />
-<rect x="0" y="120" width="500" height="61" fill="#ffFFff" />
-<rect x="0" y="180" width="500" height="61" fill="#a269d4" />
-<rect x="0" y="240" width="500" height="61" fill="#e1899f" />
+<rect x="0" y="60.0" width="500" height="61" fill="#7da4e9" />
+<rect x="0" y="120.0" width="500" height="61" fill="#ffFFff" />
+<rect x="0" y="180.0" width="500" height="61" fill="#a269d4" />
+<rect x="0" y="240.0" width="500" height="61" fill="#e1899f" />
 <circle cx="250.0" cy="207.06521739130434" r="54.34782608695652" fill="none" stroke="black" stroke-width="10.869565217391305" />
 <circle cx="250.0" cy="207.06521739130434" r="32.608695652173914" fill="none" stroke="black" stroke-width="10.869565217391305" />
 <path d="M250.0,44.02173913043478 L315.2173913043478,174.45652173913044 L184.7826086956522,174.45652173913044 L250.0,44.02173913043478 Z" fill="white" stroke="black" stroke-width="10.869565217391305" />

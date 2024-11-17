@@ -7,10 +7,10 @@
 </clipPath>
 </defs>
 <rect x="0" y="0" width="500" height="61" fill="black" />
-<rect x="0" y="60" width="500" height="61" fill="white" />
-<rect x="0" y="120" width="500" height="61" fill="black" />
-<rect x="0" y="180" width="500" height="61" fill="white" />
-<rect x="0" y="240" width="500" height="61" fill="black" />
+<rect x="0" y="60.0" width="500" height="61" fill="white" />
+<rect x="0" y="120.0" width="500" height="61" fill="black" />
+<rect x="0" y="180.0" width="500" height="61" fill="white" />
+<rect x="0" y="240.0" width="500" height="61" fill="black" />
 <rect x="0" y="0" width="500" height="61" fill="#F5A9B8" clip-path="url(#d0)" />
 <rect x="0" y="60" width="500" height="61" fill="#5BCEFA" clip-path="url(#d0)" />
 <rect x="0" y="120" width="500" height="61" fill="white" clip-path="url(#d0)" />

@@ -25,6 +25,7 @@ TO IMPLEMENT
 import drawsvg as draw
 import math
 import doctest
+import numpy as np
 
 HORIZONTAL = 'H'
 VERTICAL = 'V'
@@ -78,7 +79,39 @@ def draw_stripes(d, colours, orientation, wid=UNSPECIFIED, hei=UNSPECIFIED, x_st
     return STRIPES[orientation](d, colours, wid=wid, hei=hei, x_start=x_start, y_start=y_start)
 
 
-def draw_horiz_bars(d, colours, wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0, n_bars = EMPTY):
+def get_relative_sizes(lst):
+    """
+    Turn a list of colours into two lists: unique colours and sizes
+    :param lst:
+    :return:
+    >>> get_relative_sizes(['a', 'a'])
+    (['a'], [1.0])
+    >>> get_relative_sizes(['a','b','a','a'])
+    (['a', 'b', 'a'], [0.25, 0.25, 0.5])
+    >>> get_relative_sizes(['a', 'a', 'b','a','a'])
+    (['a', 'b', 'a'], [0.4, 0.2, 0.4])
+    """
+    new_colours = []
+    last_colour = ''
+    how_many_last_colour = 1
+    quantities = []
+    for i, c in enumerate(lst):
+        if c != last_colour:
+            new_colours.append(c)
+            if i != 0:
+                quantities.append(how_many_last_colour)
+            last_colour = c
+            how_many_last_colour = 1
+        else:
+            how_many_last_colour += 1
+    quantities.append(how_many_last_colour)
+
+    q = np.array(quantities)
+    relquants = q / np.sum(q)
+
+    return new_colours, list(relquants)
+
+def draw_horiz_bars(d, colours, wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0):
     """
     Add horizontal bars to the flag
     :param d: Drawing object
@@ -89,7 +122,6 @@ def draw_horiz_bars(d, colours, wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_s
     :param y_start: the height to start drawing bars from. Default is zero, but if drawing a flag inside another
     you will want to use this parameter
     :param fudge: to ensure there's no gaps between flags
-    :param n_bars: number of bars to add (if not the length of colours)
     :return: the height of the bars drawn
     >>> d = draw.Drawing(500, 300)
     >>> draw_horiz_bars(d, RAINBOW)
@@ -99,20 +131,22 @@ def draw_horiz_bars(d, colours, wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_s
     >>> type(d.elements[0])
     <class 'drawsvg.elements.Rectangle'>
     """
-    if type(n_bars) not in [int, float]:
-        n_bars = len(colours)
     wid, hei = get_effective_dimensions(d, wid, hei)
+    new_colours, rel_sizes = get_relative_sizes(colours)
 
     fudge =  min(1, hei / 1000) # here to make sure no gaps between stripes on hi res flags
-    stp_hei = hei / n_bars
-    for i in range(n_bars):
-        d.append \
-            (draw.Rectangle(x_start, round(y_start + i * stp_hei), wid, math.ceil(stp_hei + fudge),
-                            fill=colours[i % len(colours)]))
+    current_height = y_start
+    stp_hei = hei
+    for i, c in enumerate(new_colours):
+        this_height = rel_sizes[i]*hei
+        stp_hei = min(this_height, stp_hei)
+        rect = draw.Rectangle(x_start, current_height, wid, math.ceil(this_height + fudge), fill=c)
+        current_height += this_height
+        d.append(rect)
     return stp_hei
 
 
-def draw_vert_bars(d, colours, wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0, n_bars=EMPTY):
+def draw_vert_bars(d, colours, wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0):
     """
     Add vertical bars to the flag
     :param d: Drawing object
@@ -123,7 +157,6 @@ def draw_vert_bars(d, colours, wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_st
     you will want to use this parameter
     :param wid: width of the area that the bars are being added to
     :param hei: height of the area that the bars are being added to
-    :param n_bars: number of bars to add
     :return: the height of the bars drawn
     >>> d = draw.Drawing(500, 300)
     >>> draw_vert_bars(d, RAINBOW)
@@ -133,15 +166,19 @@ def draw_vert_bars(d, colours, wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_st
     >>> type(d.elements[0])
     <class 'drawsvg.elements.Rectangle'>
     """
-    if type(n_bars) not in [int, float]:
-        n_bars = len(colours)
     wid, hei = get_effective_dimensions(d, wid, hei)
+    new_colours, rel_sizes = get_relative_sizes(colours)
 
-    stp_hei = wid / n_bars
-    for i in range(n_bars):
-        d.append(
-            draw.Rectangle(round(x_start + i * stp_hei), y_start, math.ceil(stp_hei), hei, fill=colours[i % len(colours)]))
-    return stp_hei
+    fudge =  min(1, wid / 1000) # here to make sure no gaps between stripes on hi res flags
+    current_width = x_start
+    stp_wid = wid
+    for i, c in enumerate(new_colours):
+        this_width = rel_sizes[i]*wid
+        stp_wid = min(this_width, stp_wid)
+        rect = draw.Rectangle(current_width, y_start, math.ceil(this_width + fudge), hei, fill=c)
+        current_width += this_width
+        d.append(rect)
+    return stp_wid
 
 
 def draw_diagonal_stripes(d, colours, wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0.0, y_start=0.0, fudge=2):

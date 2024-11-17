@@ -47,6 +47,7 @@ And other possible flag elements:
 * Half-squares (cut along diagonal, useful for endosex/dyadic flags)
 * Rhombii (squares rotated 45 degrees, used in an Altersex flag)
 * Hearts (like in the Biromantic flag)
+* The round shape on the side of the Peri- and Varioriented flags
 * The Rubber Zigzag
 * BDSM Triskelion
 * Armpit Fetish stripe shape

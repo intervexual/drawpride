@@ -2,15 +2,6 @@ import sys
 sys.path.insert(0, 'processflags/')
 from utils import *
 
-# some useful colours
-intersex_yellow = '#FDD70A'
-intersex_purple = '#7A01AA'
-trans_pink = '#F5A9B8'
-trans_blue = '#5BCEFA'
-trans_stripes = [trans_pink, trans_blue, 'white', trans_blue, trans_pink]
-disability_stripes = ['#CF7280', '#EEDE77', '#E8E8E8', '#7BC2E0', '#3CB07D']
-disability_grey = '#595959'
-
 if __name__ == '__main__':
     commonsflags = 'output/commons/'
 
@@ -163,3 +154,15 @@ if __name__ == '__main__':
     draw_fivesided_star(d, '#de0700', secondary_size=0.38, wid=d.width * 0.535, size_ratio=1.11,
                         y_start=-d.height * 0.19)
     filelocations = save_flag(d, 'czechoslovakia_civil_vaporwave', commonsflags)
+
+    # https://commons.wikimedia.org/wiki/File:Perioriented_flag.svg
+    d = draw.Drawing(800 * 4, 480 * 4)
+    draw_horiz_bars(d, ['#e34e00', '#fdb08c', '#fdb08c', '#e34e00'])
+    draw_side_bump(d, 'black')
+    filelocations = save_flag(d, 'perioriented', commonsflags)
+
+    # https://commons.wikimedia.org/wiki/File:Varioriented_flag.svg
+    d = draw.Drawing(800 * 4, 480 * 4)
+    draw_horiz_bars(d, ['#880366', '#d8a7d8', '#d8a7d8', '#880366'])
+    draw_side_bump(d, 'black')
+    filelocations = save_flag(d, 'varioriented', commonsflags)

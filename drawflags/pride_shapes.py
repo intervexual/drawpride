@@ -35,6 +35,38 @@ def draw_text(d, text_to_add, primary_colour, secondary_colour='none', wid=UNSPE
                        text_anchor='middle', dominant_baseline='middle', font_family='Times New Roman'))  # 8pt text at (-10, -35)
 
 
+def draw_side_bump(d, primary_colour, secondary_colour='none', wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0, size_ratio = 1.0, orientation=VERTICAL):
+    """
+    Add a bump to the left side of a flag like in the perioriented flag
+    :param d: Drawing object
+    :param primary_colour: fill of the bump (str hex code)
+    :param secondary_colour: outline of the bump (str hex code)
+    :param wid: width of the area we are working with
+    :param hei: height of the area we are working with
+    :param size_ratio: used to scale the size (width) of the pile
+    :return: none
+    """
+    wid, hei = get_effective_dimensions(d, wid, hei)
+
+    x_dist = ((wid/3) * size_ratio)+x_start # a third of the width by default
+
+    leftmost = x_start
+    bar_width = wid*0.265
+    left_bump = leftmost + bar_width
+    topmost = y_start
+    rightmost = left_bump + 0.92*bar_width
+    bottommost = topmost+hei
+    cy = topmost + 0.175*hei
+    p = draw.Path(fill=primary_colour, stroke=secondary_colour)
+    p.M(leftmost, topmost)
+    p.L(left_bump, topmost)
+    p.C(rightmost, topmost+cy, rightmost, bottommost-cy, left_bump, bottommost)
+    p.L(left_bump, bottommost)
+    p.L(leftmost, bottommost).L(leftmost, topmost)
+    p.Z()
+    d.append(p)
+
+
 def draw_pile(d, primary_colour, secondary_colour='none', wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0, size_ratio = 1.0, orientation=VERTICAL):
     """
     Add a triangle to the left side like in the demisexual flag

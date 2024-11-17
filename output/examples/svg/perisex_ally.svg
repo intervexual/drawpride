@@ -4,11 +4,11 @@
 <defs>
 </defs>
 <rect x="0" y="0" width="500" height="51" fill="black" />
-<rect x="0" y="50" width="500" height="51" fill="white" />
-<rect x="0" y="100" width="500" height="51" fill="black" />
-<rect x="0" y="150" width="500" height="51" fill="white" />
-<rect x="0" y="200" width="500" height="51" fill="black" />
-<rect x="0" y="250" width="500" height="51" fill="white" />
+<rect x="0" y="50.0" width="500" height="51" fill="white" />
+<rect x="0" y="100.0" width="500" height="51" fill="black" />
+<rect x="0" y="150.0" width="500" height="51" fill="white" />
+<rect x="0" y="200.0" width="500" height="51" fill="black" />
+<rect x="0" y="250.0" width="500" height="51" fill="white" />
 <path d="M0,300 L250.0,0 L500,300 L333.33333333333337,300 L250.0,200.0 L166.6666666666667,300" fill="#FDD70A" />
 <circle cx="250.0" cy="121.93750900259293" r="62.44999279792566" fill="none" stroke="#7A01AA" stroke-width="11.15178442820101" />
 </svg>

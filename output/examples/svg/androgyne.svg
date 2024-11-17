@@ -3,7 +3,7 @@
      width="500" height="300" viewBox="0 0 500 300">
 <defs>
 </defs>
-<rect x="0" y="0" width="167" height="300" fill="#FE007F" />
-<rect x="167" y="0" width="167" height="300" fill="#9832FF" />
-<rect x="333" y="0" width="167" height="300" fill="#00B8E7" />
+<rect x="0" y="0" width="168" height="300" fill="#FE007F" />
+<rect x="166.66666666666666" y="0" width="168" height="300" fill="#9832FF" />
+<rect x="333.3333333333333" y="0" width="168" height="300" fill="#00B8E7" />
 </svg>
