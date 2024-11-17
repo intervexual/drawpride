@@ -2,7 +2,7 @@ from pride_rings import *
 
 def draw_arbitrary_star(d, primary_colour, secondary_colour='none',  num_points=5,
                         wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-                        size_ratio=1.0, secondary_size=0.58, orientation=VERTICAL, square=True):
+                        size_ratio=1.0, secondary_size=0.58, orientation=VERTICAL, square=True, sw=0):
     """
     Draw a star of arbitrary points
     :param d: Drawing object
@@ -26,9 +26,8 @@ def draw_arbitrary_star(d, primary_colour, secondary_colour='none',  num_points=
     outer_radius = size_ratio*hei/4
     inner_radius = outer_radius*secondary_size
 
-    sw = 0
-    if secondary_colour != 'none':
-        sw = inner_radius / 8
+    if secondary_colour != 'none' and sw == 0:
+        sw = inner_radius *0.13
 
     ang_offset = rotateby
     if square:
@@ -46,10 +45,11 @@ def draw_arbitrary_star(d, primary_colour, secondary_colour='none',  num_points=
         p.L(*stop2)
     p.Z()
     d.append(p)
+    return sw
 
 
 def draw_fivesided_star(d, primary_colour, secondary_colour='none', wid=UNSPECIFIED, hei=UNSPECIFIED,
-                x_start=0, y_start=0, size_ratio=1.0, secondary_size=0.5, orientation=VERTICAL):
+                x_start=0, y_start=0, size_ratio=1.0, secondary_size=0.5, orientation=VERTICAL, sw=0):
     """
     Draw a five-pointed star
     :param d: Drawing object
@@ -65,11 +65,11 @@ def draw_fivesided_star(d, primary_colour, secondary_colour='none', wid=UNSPECIF
     """
     return draw_arbitrary_star(d, primary_colour, secondary_colour=secondary_colour, num_points=5,
                                wid=wid, hei=hei, x_start=x_start, y_start=y_start, size_ratio=size_ratio,
-                               orientation=orientation, secondary_size=secondary_size)
+                               orientation=orientation, secondary_size=secondary_size, sw=sw)
 
 
 def draw_australian_star(d, primary_colour, secondary_colour='none', wid=UNSPECIFIED, hei=UNSPECIFIED,
-                x_start=0, y_start=0, size_ratio=1.0, secondary_size=0.45, orientation=VERTICAL):
+                x_start=0, y_start=0, size_ratio=1.0, secondary_size=0.45, orientation=VERTICAL, sw=0):
     """
     Draw a seven-pointed star in the style of the Australian flag
     :param d: Drawing object
@@ -81,15 +81,16 @@ def draw_australian_star(d, primary_colour, secondary_colour='none', wid=UNSPECI
     :param y_start: the y-coordinate of the upper left corner of the rectangular area that is being drawn into
     :param size_ratio: size factor
     :param secondary_size: how spiky the star is. 0.45 by default for Aussie star.
+    :param sw: stroke width
     :return: the height of the top/bottom lines
     """
     return draw_arbitrary_star(d, primary_colour, secondary_colour=secondary_colour, num_points=7,
                                wid=wid, hei=hei, x_start=x_start, y_start=y_start, size_ratio=size_ratio,
-                               orientation=orientation, secondary_size=secondary_size)
+                               orientation=orientation, secondary_size=secondary_size, sw=sw)
 
 
 def draw_southern_cross(d, primary_colour, secondary_colour='none', wid=UNSPECIFIED, hei=UNSPECIFIED,
-                x_start=0, y_start=0, size_ratio=1.0, orientation=VERTICAL):
+                x_start=0, y_start=0, size_ratio=1.0, orientation=VERTICAL, sw=None):
     """
     Draw the Southern Cross like on the Australian flag
     :param d: Drawing object
@@ -107,27 +108,34 @@ def draw_southern_cross(d, primary_colour, secondary_colour='none', wid=UNSPECIF
     midx = x_start + wid/2
     midy = y_start + hei/2
 
+    if type(primary_colour) != list:
+        primary_colour = [primary_colour]*5
+
+    if sw == None:
+        sw = hei/100
+
     # top star is midx and about hei/6?
     top_offs = 2*hei/6
     starsize = 0.3
-    draw_australian_star(d, primary_colour, secondary_colour, wid=wid/2, hei=hei, x_start=midx/2, y_start=-top_offs, size_ratio=starsize)
+    draw_australian_star(d, primary_colour[0], secondary_colour, wid=wid/2, hei=hei, x_start=midx/2, y_start=-top_offs, size_ratio=starsize, sw=sw)
     # lower star is also midx
-    draw_australian_star(d, primary_colour, secondary_colour, wid=wid/2, hei=hei, x_start=midx/2, y_start=top_offs, size_ratio=starsize)
+    draw_australian_star(d, primary_colour[4], secondary_colour, wid=wid/2, hei=hei, x_start=midx/2, y_start=top_offs, size_ratio=starsize, sw=sw)
 
     # left star is at wid/4 and about 2/3 hei?
     leftward = hei*0.25
     left_y = hei*0.065
-    draw_australian_star(d, primary_colour, secondary_colour, wid=wid/2, hei=hei, x_start=(midx/2)-leftward, y_start=-left_y, size_ratio=starsize)
+    draw_australian_star(d, primary_colour[2], secondary_colour, wid=wid/2, hei=hei, x_start=(midx/2)-leftward, y_start=-left_y, size_ratio=starsize, sw=sw)
 
     # right star is at .75wid and higher than left
     right_y = hei*0.125
     rightward = hei*0.215
-    draw_australian_star(d, primary_colour, secondary_colour, wid=wid/2, hei=hei, x_start=(midx/2)+rightward, y_start=-right_y, size_ratio=starsize)
+    draw_australian_star(d, primary_colour[1], secondary_colour, wid=wid/2, hei=hei, x_start=(midx/2)+rightward, y_start=-right_y, size_ratio=starsize, sw=sw)
 
     # and then the little star
     small_y = hei*0.04
     small_x = hei*0.09
-    draw_fivesided_star(d, primary_colour, secondary_colour,  wid=wid/2, hei=hei, x_start=(midx/2)+small_x, y_start=small_y, size_ratio=starsize/2, secondary_size=0.475)
+    draw_fivesided_star(d, primary_colour[3], secondary_colour,  wid=wid/2, hei=hei, x_start=(midx/2)+small_x, y_start=small_y,
+                        size_ratio=starsize/2, secondary_size=0.475, sw=sw)
 
 
 def draw_heart(d, primary_colour, secondary_colour='none', wid=UNSPECIFIED, hei=UNSPECIFIED,
