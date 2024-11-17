@@ -34,6 +34,11 @@ Piles and other triangles:
 * Ally A (upside-down chevron)
 * Inner triangles in the style of the Bissu flag
 
+Stars:
+* Five-pointed stars
+* Southern Cross stars
+* Stars of arbitrary numbers of points, both traced out and filled in
+
 And other possible flag elements:
 * Text (e.g. the original Polyamory flag)
 * Crosses (like in the Ipsogender flag)
@@ -42,8 +47,6 @@ And other possible flag elements:
 * Half-squares (cut along diagonal, useful for endosex/dyadic flags)
 * Rhombii (squares rotated 45 degrees, used in an Altersex flag)
 * Hearts (like in the Biromantic flag)
-* Five-pointed stars
-* Southern Cross stars
 * The Rubber Zigzag
 * BDSM Triskelion
 * Armpit Fetish stripe shape

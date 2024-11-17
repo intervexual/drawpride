@@ -138,6 +138,140 @@ def draw_southern_cross(d, primary_colour, secondary_colour='none', wid=UNSPECIF
                         size_ratio=starsize/2, secondary_size=0.475, sw=sw)
 
 
+
+def draw_arbitrary_star_trace(d, primary_colour, secondary_colour='none',  num_points=5,
+                        wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                        size_ratio=1.0, secondary_size=0.58, orientation=VERTICAL, square=True, sw=0):
+    """
+    Draw a star of arbitrary points that is the traced out kinda star like a Star of David, with rounded edges
+    :param d: Drawing object
+    :param primary_colour: the fill of the star
+    :param secondary_colour: the outline of the star
+    :param wid: width of the area we are working with
+    :param hei: height of the area we are working with
+    :param x_start: the x-coordinate of the upper left corner of the rectangular area that is being drawn into
+    :param y_start: the y-coordinate of the upper left corner of the rectangular area that is being drawn into
+    :param size_ratio: size factor
+    :param secondary_size: how spiky the star is. 0.58 for Jewish star of david. 0.5 for regular 5-point star.
+    :return: the height of the top/bottom lines
+    """
+    rotateby = angle_offset_for_orientation(orientation)
+    wid, hei = get_effective_dimensions(d, wid, hei)
+
+    midx = x_start + wid/2
+    midy = y_start + hei/2
+
+    arc_width = 360 / num_points
+    outer_radius = size_ratio*hei/4
+
+    if sw == 0:
+        sw = outer_radius*secondary_size *0.23
+
+    ang_offset = rotateby
+
+    linecap = 'round'
+    for i in range(num_points):
+        if square:
+            p = draw.Path(stroke=primary_colour, fill=secondary_colour, stroke_width=sw, stroke_linecap=linecap)
+        else:
+            p = draw.Path(stroke=primary_colour, fill=secondary_colour, stroke_width=sw,
+                          transform=f'scale({wid / hei}, 1', stroke_linecap=linecap)
+            midx -= midx * (wid / hei) / 4
+
+        stop1 = get_triangle_coords(outer_radius, arc_width, i, cent_x=midx, cent_y=midy, offset=ang_offset)
+        stop2 = get_triangle_coords(outer_radius, arc_width, i+2, cent_x=midx, cent_y=midy, offset=ang_offset)
+        p.M(*stop1)
+        p.L(*stop2)
+        d.append(p)
+    return sw
+
+
+def draw_pointed_arbitrary_star_trace(d, primary_colour, secondary_colour='none',  num_points=5,
+                        wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                        size_ratio=1.0, secondary_size=0.58, orientation=VERTICAL, square=True, sw=0):
+    """
+    Draw a traced out kind of star, like the Star of David, with pointy points
+    :param d: Drawing object
+    :param primary_colour: the fill of the star
+    :param secondary_colour: the outline of the star
+    :param wid: width of the area we are working with
+    :param hei: height of the area we are working with
+    :param x_start: the x-coordinate of the upper left corner of the rectangular area that is being drawn into
+    :param y_start: the y-coordinate of the upper left corner of the rectangular area that is being drawn into
+    :param size_ratio: size factor
+    :param secondary_size: how spiky the star is. 0.58 for Jewish star of david. 0.5 for regular 5-point star.
+    :return: the height of the top/bottom lines
+    """
+    rotateby = angle_offset_for_orientation(orientation)
+    wid, hei = get_effective_dimensions(d, wid, hei)
+
+    midx = x_start + wid/2
+    midy = y_start + hei/2
+
+    arc_width = 360 / num_points
+    outer_radius = size_ratio*hei/4
+    inner_radius = outer_radius*0.63
+
+    if sw == 0 and secondary_colour != 'none':
+        sw = 2#outer_radius*secondary_size *0.23
+
+    ang_offset = rotateby
+
+    linecap = 'butt' #'round'
+    for i in range(num_points):
+        if square:
+            p = draw.Path(stroke=primary_colour, fill=secondary_colour, stroke_width=sw, stroke_linecap=linecap)
+        else:
+            p = draw.Path(stroke=primary_colour, fill=secondary_colour, stroke_width=sw,
+                          transform=f'scale({wid / hei}, 1', stroke_linecap=linecap)
+            midx -= midx * (wid / hei) / 4
+
+        stop1 = get_triangle_coords(outer_radius, arc_width, i, cent_x=midx, cent_y=midy, offset=ang_offset)
+        stop2 = get_triangle_coords(outer_radius, arc_width, i+2, cent_x=midx, cent_y=midy, offset=ang_offset)
+        stop4 = get_triangle_coords(inner_radius, arc_width, i, cent_x=midx, cent_y=midy, offset=ang_offset)
+        stop3 = get_triangle_coords(inner_radius, arc_width, i+2, cent_x=midx, cent_y=midy, offset=ang_offset)
+        p.M(*stop1)
+        p.L(*stop2)
+        if secondary_colour != 'none':
+            p.L(*stop3)
+        else:
+            p.M(*stop3)
+        p.L(*stop4)
+        if secondary_colour != 'none':
+            p.L(*stop1)
+        else:
+            p.M(*stop1)
+        p.Z()
+        d.append(p)
+    return sw
+
+def draw_morocco_star(d, primary_colour, secondary_colour='none', wid=UNSPECIFIED, hei=UNSPECIFIED,
+                x_start=0, y_start=0, size_ratio=1.0, secondary_size=0.5, orientation=VERTICAL, sw=0):
+    """
+    Draw a five-pointed star that is traced out like the Morocco star
+    :param d: Drawing object
+    :param primary_colour: the fill of the star
+    :param secondary_colour: the outline of the star
+    :param wid: width of the area we are working with
+    :param hei: height of the area we are working with
+    :param x_start: the x-coordinate of the upper left corner of the rectangular area that is being drawn into
+    :param y_start: the y-coordinate of the upper left corner of the rectangular area that is being drawn into
+    :param size_ratio: size factor
+    :param secondary_size: how spiky the star is. 0.385 if you want a horizontal line at mid-top
+    :return: the height of the top/bottom lines
+    """
+    wid, hei = get_effective_dimensions(d, wid, hei)
+
+    outer_radius = size_ratio*hei/4
+    inner_radius = outer_radius*0.63
+    if sw == 0:
+        y_start += (outer_radius-inner_radius)*0.25
+    return draw_pointed_arbitrary_star_trace(d, primary_colour, secondary_colour=primary_colour, num_points=5,
+                               wid=wid, hei=hei, x_start=x_start, y_start=y_start, size_ratio=size_ratio*1,
+                               orientation=orientation, secondary_size=secondary_size, sw=sw)
+
+
+
 def draw_heart(d, primary_colour, secondary_colour='none', wid=UNSPECIFIED, hei=UNSPECIFIED,
                x_start=0, y_start=0, size_ratio=1, orientation=VERTICAL):
     """
@@ -227,10 +361,14 @@ if __name__ == '__main__':
     d = draw.Drawing(wid, hei)
     pal = ['purple', 'orange', 'black', 'black']
     draw_horiz_bars(d, ['yellow'])
-    draw_fivesided_star(d, 'red', y_start=-100, x_start=100, orientation=DIAGONAL)
-    draw_arbitrary_star(d,'red', 'black', num_points=20, secondary_size=0.75, square=False)
+    #draw_fivesided_star(d, 'red', y_start=-100, x_start=100, orientation=DIAGONAL)
+    #draw_arbitrary_star(d,'red', 'black', num_points=20, secondary_size=0.75, square=False)
+    #draw_arbitrary_star_trace(d, 'red', num_points=5)
+    draw_pointed_arbitrary_star_trace(d, 'red', num_points=5)
+
     d.save_svg('drawflags/test2.svg')
 
+    '''
     # https://commons.wikimedia.org/wiki/File:Flag_of_Czechoslovakia_-_Vaporwave_pink_edition_(Unofficial_civil).svg
     d = draw.Drawing(500*4, 300*4)
     draw_horiz_bars(d, ['white', '#ff78c8'])
@@ -242,3 +380,4 @@ if __name__ == '__main__':
     draw_horiz_bars(d, ['black', '#cc0000'])
     draw_circle(d, '#ffff01', size_ratio=0.5)
     filelocations = save_flag(d, 'aus_indigenous')
+    '''

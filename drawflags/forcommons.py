@@ -110,3 +110,10 @@ if __name__ == '__main__':
     sw = draw_australian_star(d, '#0b3cff', 'white',  wid=leftwid, hei=lower_height, y_start=lower_start, size_ratio=left_size)
     draw_southern_cross(d, ['#fd0a00', '#ff8500', '#fffc00', '#307500', '#7d02b1'], 'white', wid=d.width/2, x_start=right_start, sw=sw)
     filelocations = save_flag(d, 'aus_indigenous_gay_rainbowstars_1:2',  commonsflags)
+
+    # https://commons.wikimedia.org/wiki/File:Flag_of_Morocco_LGBT.svg
+    rainbow_stripes = ['#fe0a00', '#ff9800', '#ffFF00', '#307500', '#0b3cff', '#7d02b1']
+    d = draw.Drawing(800*4, 533*4) #500*4, 300*4)
+    draw_horiz_bars(d, rainbow_stripes)
+    draw_morocco_star(d, '#026233')
+    filelocations = save_flag(d, 'morocco_rainbow',  commonsflags)
