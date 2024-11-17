@@ -42,8 +42,11 @@ And other possible flag elements:
 * Half-squares (cut along diagonal, useful for endosex/dyadic flags)
 * Rhombii (squares rotated 45 degrees, used in an Altersex flag)
 * Hearts (like in the Biromantic flag)
+* Five-pointed stars
+* Southern Cross stars
 * The Rubber Zigzag
 * BDSM Triskelion
+* Armpit Fetish stripe shape
 * The Pocketgender Flag
 * Closet symbols
 * Perisex symbols
@@ -51,6 +54,7 @@ And other possible flag elements:
 * Autism spectrum nautilus symbols
 * Métis-style lemniscates
 * Equals symbols like in the alternate Androgyne flag
+* The Bipolar Flag
 
 ## Examples of use
 A Jupyter notebook of examples is available in this directory (examples.ipynb).

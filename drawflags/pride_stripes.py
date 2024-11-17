@@ -694,6 +694,7 @@ def draw_concentric_tees(d, colours, wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0
     d.append(p)
     return tee_wid
 
+
 def draw_ally_stripes(d, colours, outer_colour='none', wid=UNSPECIFIED, hei=UNSPECIFIED,
                        x_start=0, y_start=0, size_ratio=1, orientation=VERTICAL):
     """
@@ -733,6 +734,52 @@ def draw_ally_stripes(d, colours, outer_colour='none', wid=UNSPECIFIED, hei=UNSP
             (draw.Rectangle(x_start, round(y_start + i * stp_hei), wid, math.ceil(stp_hei + fudge),
                             fill=colours[i % len(colours)], clip_path=clip))
     return stp_hei
+
+
+
+def draw_armpit_stripes(d, colours, outer_colour='none', wid=UNSPECIFIED, hei=UNSPECIFIED,
+                       x_start=0, y_start=0, size_ratio=1, orientation=VERTICAL):
+    """
+    Draw stripes in the style of the armpit flag
+    :param d: Drawing object
+    :param colours: the colours used
+    :param wid: width of the area we are working with
+    :param hei: height of the area we are working with
+    :param x_start: the x-coordinate of the upper left corner of the rectangular area that is being drawn into
+    :param y_start: the y-coordinate of the upper left corner of the rectangular area that is being drawn into
+    :param size_ratio: size factor
+    :return:
+    """
+    wid, hei = get_effective_dimensions(d, wid, hei)
+    ew = draw_vert_bars(d, colours, wid=wid/3, x_start=wid*(2/3))
+
+    leftmost = x_start
+    rightmost = wid - ew*len(colours)
+
+    line_hei = ew*((2*wid/3)/hei)*0.5
+    line_wid = ew
+
+    bottommost = hei + x_start - line_hei
+    top = y_start
+    fudge = line_hei/10
+    for i, c in enumerate(colours):
+        p = draw.Path(fill=c)
+        p.M(leftmost, bottommost - i*line_hei) # lower left
+        p.L(rightmost, top - (i-1) * line_hei+fudge) # lower right
+        p.L(rightmost, top - i*line_hei) # upper right
+        p.L(leftmost, bottommost - (i+1)*line_hei - fudge)
+        d.append(p)
+
+    '''
+    p = draw.Path(fill=colours[0])
+    p.M(leftmost, bottommost)
+    p.L(rightmost, top+line_hei)
+    p.L(rightmost, top)
+    p.L(leftmost, bottommost-line_hei)
+    d.append(p)
+    '''
+
+
 
 
 if __name__ == '__main__':
