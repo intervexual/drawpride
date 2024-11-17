@@ -131,3 +131,35 @@ if __name__ == '__main__':
     draw_pile(d, '#11457e', size_ratio=1.5)
     draw_fivesided_star(d, '#de0700', secondary_size=0.38, wid=d.width/2, size_ratio=1.15, y_start=-d.height*0.205)
     filelocations = save_flag(d, 'czechoslovakia_civil_rainbow', commonsflags)
+
+    # https://commons.wikimedia.org/wiki/File:Gay_Pride_Flag_of_the_Czechoslovakia_(Unofficial_civil).svg
+    d = draw.Drawing(800*4, 533*4)
+    draw_horiz_bars(d, ['white', '#fe0a00'])
+    draw_pile(d, '#f493f4', size_ratio=1.5)
+    draw_fivesided_star(d, '#de0700', secondary_size=0.38, wid=d.width*0.535, size_ratio=1.11, y_start=-d.height*0.19)
+    filelocations = save_flag(d, 'czechoslovakia_civil_gay', commonsflags)
+
+    # https://commons.wikimedia.org/wiki/File:Flag_of_Czechoslovakia_Bisexual_Vaporwave_(Unofficial_civil).svg
+    d = draw.Drawing(800 * 4, 533 * 4)
+    draw_horiz_bars(d, ['white', '#ff0a77'])
+    draw_pile(d, '#39d0e0', size_ratio=1.5)
+    draw_fivesided_star(d, '#de0700', secondary_size=0.38, wid=d.width * 0.535, size_ratio=1.11,
+                        y_start=-d.height * 0.19)
+    filelocations = save_flag(d, 'czechoslovakia_civil_bi_vaporwave', commonsflags)
+
+    # https://commons.wikimedia.org/wiki/File:Flag_of_the_Czechoslovakia_Bisexual_(Unofficial_civil).svg
+    d = draw.Drawing(800 * 4, 533 * 4)
+    draw_horiz_bars(d, ['white', '#ff0a77'])
+    draw_pile(d, '#0500be', size_ratio=1.5)
+    draw_fivesided_star(d, '#de0700', secondary_size=0.38, wid=d.width * 0.535, size_ratio=1.11,
+                        y_start=-d.height * 0.19)
+    filelocations = save_flag(d, 'czechoslovakia_civil_bi', commonsflags)
+
+    # https://commons.wikimedia.org/wiki/File:LGBT_Flag_of_Czechoslovakia_Vaporwave_(Unofficial_civil).svg
+    rainbow_stripes = ['#d81525', '#ff6300', '#ffFF00', '#329c00', '#0600ce', '#ce32ff']
+    d = draw.Drawing(800 * 4, 533 * 4)
+    draw_horiz_bars(d, rainbow_stripes)
+    draw_pile(d, '#39d0e0', size_ratio=1.5)
+    draw_fivesided_star(d, '#de0700', secondary_size=0.38, wid=d.width * 0.535, size_ratio=1.11,
+                        y_start=-d.height * 0.19)
+    filelocations = save_flag(d, 'czechoslovakia_civil_vaporwave', commonsflags)
