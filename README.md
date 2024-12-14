@@ -2,10 +2,10 @@
 
 Drawing Pride Flags in Python using the drawsvg library.
 
-See examples.ipynb for examples of how to make flags. :)
+See [examples.ipynb](https://github.com/intervexual/drawpride/blob/main/examples.ipynb) for examples of how to make flags. :)
 
 ## Basic drawing
-Support for drawing:
+Support for drawing as SVG and PNG:
 
 Stripes:
 * Horizontal lines
@@ -39,7 +39,7 @@ Triangular shapes:
 
 Stars:
 * Five-pointed stars
-* Southern Cross stars
+* The Southern Cross
 * Stars of David (both standard and outline-only)
 * Stars of arbitrary numbers of points, both traced out and filled in
 
@@ -61,12 +61,12 @@ And other possible flag elements:
 * Perisex symbols
 * Altersex symbols
 * Autism spectrum nautilus symbols
-* Métis-style lemniscates
+* Métis lemniscates
 * Equals symbols like in the alternate Androgyne flag
 * The Bipolar Flag
 
 ## Examples of use
-A Jupyter notebook of examples is available in this directory (examples.ipynb).
+A Jupyter notebook of examples is available in this directory ([examples.ipynb](https://github.com/intervexual/drawpride/blob/main/examples.ipynb)).
 
 Many of the same examples are also available in drawflags/examples.py for even more illustrative examples. Here are just two:
 ```
@@ -80,7 +80,8 @@ d = draw.Drawing(500, 300)
 draw_inset_into_intersex(d, trans_stripes, intersex_yellow, intersex_purple, orientation=HORIZONTAL)
 d.save_svg(outdir + 'intersextrans.svg')
 ```
-![Intersex-Trans](output/examples/intersextrans.png)
+
+![Intersex-Trans](output/examples/png/trans_intersex.png)
 
 ```
 d = draw.Drawing(500, 300)
@@ -89,25 +90,32 @@ draw_square(d, 'black')
 draw_diagonal_cut_square(d, 'white')
 d.save_svg(outdir + 'endosex.svg')
 ```
-![Endosex](output/examples/endosex.png)
+
+![Endosex](output/examples/png/endosex.png)
 
 ### Typical parameters
-The standard parameters of a given drawing function (e.g. draw_heart, draw_circle, etc) are:
-- d: a mutable drawing object that is altered by the function
+The standard parameters of a given drawing function (e.g. draw_heart, draw_ellipse, draw_concentric_rectangles, etc) are:
+- `d`: a mutable drawing object that is altered by the function
 - colour is specified by either:
-  - colours: a list of hex strings
-  - primary_colour and (optional) secondary_colour (both hex strings)
-- wid: the width of the rectangular area in which things will be drawn into (defaults to 100% of the width of d's canvas)
-- hei: the height of the rectangular area in which things will be drawn into (default: 100% d's canvas height)
-- x_start: the x-coordinate of the upper left corner of the rectangular area into which things will be drawn (default: 0)
-- y_start: the y-coordinate of the upper left corner of the rectangular area into which things will be drawn (default: 0)
-- size_ratio: a scaling factor that generally corresponds to the radius (or equivalent) of the object being drawn
-- stretch_ratio: a scaling factor that generally affects the convexity of the object being drawn. Not always used.
-- thick_ratio: a scaling factor that generally corresponds to the line thickness of the stroke width used to draw a given object (usually an outline of the object). Not always used.
-- orientation: a string which indicates the orientation of the object being drawn ('H' for horizontal, 'V' for vertical, 'D' for diagonal, 'R' for reverse diagonal). Not always used. Currently poorly supported.
+  - `colours': a list of hex strings
+  - `primary_colour' and (optional) `secondary_colour' (both hex strings)
+- and optional parameters:
+  - `wid`: the width of the rectangular area in which things will be drawn into (defaults to 100% of the width of `d`'s canvas)
+  - `hei`: the height of the rectangular area in which things will be drawn into (default: 100% of `d`'s canvas height)
+  - `x_start`: the x-coordinate of the upper left corner of the rectangular area into which things will be drawn (default: 0)
+  - `y_start`: the y-coordinate of the upper left corner of the rectangular area into which things will be drawn (default: 0)
+  - `size_ratio`: a scaling factor that generally corresponds to the radius (or equivalent) of the object being drawn
+  - `stretch_ratio`: a scaling factor that generally affects the convexity of the object being drawn. Not always used.
+  - `thick_ratio`: a scaling factor that generally corresponds to the line thickness of the stroke width used to draw a given object (usually an outline of the object). Not always used.
+  - `orientation`: a string which indicates the orientation of the object being drawn ('H' for horizontal, 'V' for vertical, 'D' for diagonal, 'R' for reverse diagonal). Not always used. Currently poorly supported.
 
-## TODOS
+Many functions return a number that corresponds to a dimension of the object that was drawn. For example, draw_horiz_bars returns
+the height of the typical horizontal bar. This number can then be used by later function calls to scale other flag elements.
+
+
+## TODOs
 Orientation support
+- Rethink the multipile to make the geometry easier
 - Vees
 - Chevrons
 - Seychelles
@@ -116,12 +124,12 @@ Orientation support
 - Square cutting
 - Nautilus (beyond vertical/horiz)
 
-Position support
-- basically everything right now defaults to putting it in the centre
-
 Colour
 - get the colour palette of a flag ordered by volume of flag
 - get the colour palette of a flag ordered alphabetically in the style of Wikimedia Commons' flag categorization
 
 Double check
 - positioning of the dots in the triskelion
+
+Embedding other SVGs
+- right now this does what drawsvg does, i.e. embeds the other SVG as an image. Not ideal and should not be used for uploads to Wikimedia Commons.
