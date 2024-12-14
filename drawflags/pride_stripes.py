@@ -58,7 +58,8 @@ def get_effective_dimensions(d, wid, hei):
     return wid, hei
 
 
-def draw_stripes(d, colours, orientation, wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0, n_bars = EMPTY, size_ratio=1.0):
+def draw_stripes(d, colours, orientation, wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0, n_bars = EMPTY,
+                 size_ratio=1.0, stretch_ratio=1.0, thick_ratio=1.0):
     """
     Wrapper function to draw any given stripes
     :param d: Drawing object
@@ -259,7 +260,9 @@ def draw_reverse_diagonal_stripes(d, colours, wid=UNSPECIFIED, hei=UNSPECIFIED, 
     return stripe_width
 
 
-def draw_vees(d, colours, wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0.0, size_ratio=1.0):
+def draw_vees(d, colours,
+              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
     """
     Draw concentric Vs in the style of the varsex flag
     :param d: Drawing object
@@ -297,7 +300,9 @@ def draw_vees(d, colours, wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0
     return line_width
 
 
-def draw_chevrons(d, colours, wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0, size_ratio=1.0):
+def draw_chevrons(d, colours,
+                  wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                  size_ratio=1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
     """
     Draw a series of chevrons with the colours provided by colours
     :param d: Drawing object
@@ -344,7 +349,9 @@ def draw_chevrons(d, colours, wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_sta
     return line_height
 
 
-def draw_concentric_rectangles(d, colours, wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0):
+def draw_concentric_rectangles(d, colours,
+              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
     """
     Draw concentric rectangles from the outside to the inside
     :param d: Drawing object
@@ -409,7 +416,9 @@ def get_triangle_coords(rad, arc_width, i, cent_x, cent_y, offset=-90):
     return x, y
 
 
-def draw_seychelles(d, colours, wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0):
+def draw_seychelles(d, colours,
+              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
     """
     Draw stripes like the flag of Seychelles
     :param d: Drawing object
@@ -508,7 +517,9 @@ def draw_starburst(d, colours, wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_st
     return (2*wid + 2*hei)/len(colours)
 
 
-def draw_concentric_circles(d, colours, wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0, orientation=VERTICAL):
+def draw_concentric_circles(d, colours,
+                            wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                            size_ratio=1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
     """
     Draw concentric circles from the outside inward
     :param d: Drawing object
@@ -538,7 +549,9 @@ def draw_concentric_circles(d, colours, wid=UNSPECIFIED, hei=UNSPECIFIED, x_star
     return stroke_wid
 
 
-def draw_concentric_ellipses(d, colours, wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0, orientation=VERTICAL):
+def draw_concentric_ellipses(d, colours,
+                             wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                             size_ratio=1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
     """
     Draw concentric circles from the outside inward
     :param d: Drawing object
@@ -571,7 +584,9 @@ def draw_concentric_ellipses(d, colours, wid=UNSPECIFIED, hei=UNSPECIFIED, x_sta
     return stroke_wid
 
 
-def draw_concentric_beziers(d, colours, wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0, size_ratio=1.0, orientation=VERTICAL):
+def draw_concentric_beziers(d, colours,
+                            wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                            size_ratio=1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
     """
     Draw concentric bezier curves in the style of the Mental Health flag
     :param d: Drawing object
@@ -622,7 +637,9 @@ def draw_concentric_beziers(d, colours, wid=UNSPECIFIED, hei=UNSPECIFIED, x_star
     return stroke_wid
 
 
-def draw_concentric_infinities(d, colours, bg_colour, wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0, size_ratio=1.0):
+def draw_concentric_infinities(d, colours, bg_colour,
+                             wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                             size_ratio=1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
     """
     Draw concentric infinity loops in the style of the Autistic Pride Day logo.
     :param d: drawing object
@@ -630,11 +647,12 @@ def draw_concentric_infinities(d, colours, bg_colour, wid=UNSPECIFIED, hei=UNSPE
     :param bg_colour: the background colour
     :param wid: width of area the symbol is being added to
     :param hei: height of the area the symbol is being added to
-    :param size_ratio: scaling factor
+    :param size_ratio: scaling factor (radius)
+    :param stretch_ratio: how far apart the two midpoints are
     :return: none
     """
     wid, hei = get_effective_dimensions(d, wid, hei)
-    total_thickness = size_ratio*(hei / 3)
+    total_thickness = stretch_ratio*size_ratio*(hei / 3)
 
     midy = hei/2
     midx = wid/2
@@ -681,7 +699,9 @@ def draw_concentric_infinities(d, colours, bg_colour, wid=UNSPECIFIED, hei=UNSPE
         d.append(p)
 
 
-def draw_concentric_tees(d, colours, wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0, size_ratio=1.0):
+def draw_concentric_tees(d, colours,
+                             wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                             size_ratio=1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
     """
     Draw concentric circles from the outside inward
     :param d: Drawing object
@@ -732,8 +752,9 @@ def draw_concentric_tees(d, colours, wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0
     return tee_wid
 
 
-def draw_ally_stripes(d, colours, outer_colour='none', wid=UNSPECIFIED, hei=UNSPECIFIED,
-                       x_start=0, y_start=0, size_ratio=1, orientation=VERTICAL):
+def draw_ally_stripes(d, colours,
+                             wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                             size_ratio=1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
     """
     Draw a chevron/vee in the style of the ally flag, but with stripes!
     :param d: Drawing object
@@ -774,8 +795,9 @@ def draw_ally_stripes(d, colours, outer_colour='none', wid=UNSPECIFIED, hei=UNSP
 
 
 
-def draw_armpit_stripes(d, colours, outer_colour='none', wid=UNSPECIFIED, hei=UNSPECIFIED,
-                       x_start=0, y_start=0, size_ratio=1, orientation=VERTICAL):
+def draw_armpit_stripes(d, colours,
+                             wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                             size_ratio=1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
     """
     Draw stripes in the style of the armpit flag
     :param d: Drawing object

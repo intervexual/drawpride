@@ -38,8 +38,9 @@ def inner_right_of_ring(hei):
 # Functions for draw rings in the style of the Carpenter intersex flag
 ##########################################################
 
-def draw_transparent_ring(d, colour_of_ring, fill_colour='none', wid=UNSPECIFIED, hei=UNSPECIFIED,
-                          opac=1, size_ratio=1.0, x_start=0, y_start=0, orientation=VERTICAL):
+def draw_transparent_ring(d, colour_of_ring, fill_colour='none',
+                          opac=1, size_ratio=1.0, thick_ratio=1.0, stretch_ratio=1.0, orientation=VERTICAL,
+                          x_start=0, y_start=0, wid=UNSPECIFIED, hei=UNSPECIFIED):
     '''Draw a ring with a transparent fill, of the size for a Carpenter flag
     Useful for making the intersex flag.
 
@@ -50,7 +51,7 @@ def draw_transparent_ring(d, colour_of_ring, fill_colour='none', wid=UNSPECIFIED
     '''
     wid, hei = get_effective_dimensions(d, wid, hei)
 
-    width_of_ring = ring_thickness(hei)  # 29-21
+    width_of_ring = thick_ratio*ring_thickness(hei)  # 29-21
     top_o = top_of_ring(hei) + width_of_ring / 2  # for a 100px
 
     width_of_ring *= size_ratio
@@ -140,7 +141,8 @@ def draw_inset_into_intersex(d, stripes, outer_colour, ring_colour, wid=UNSPECIF
 
 
 def draw_segmented_ring(d, colours, wid=UNSPECIFIED, hei=UNSPECIFIED, fill_colour = 'none',
-                        opac = 1, size_ratio=1.0, border_fill='none', border_ratio=2, orientation=VERTICAL,
+                        opac = 1, size_ratio=1.0, thick_ratio=1.0, stretch_ratio=1.0,
+                        border_fill='none', border_ratio=2, orientation=VERTICAL,
                         x_start=0, y_start=0):
     '''
     Draw a segmented ring flag.
@@ -200,7 +202,8 @@ def draw_ring(d, wid, hei, radius, thickness, ring_colour, fill_colour , opacity
 
 
 def draw_concentric_rings(d, colours, wid=UNSPECIFIED, hei=UNSPECIFIED,
-                          border_colour='none', border_thickness=0, inner_colour='none', size_ratio=1.0):
+                          border_colour='none', border_thickness=0, inner_colour='none',
+                          size_ratio=1.0, x_start=0, y_start=0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
     """
     Draw concentric rings approximately the size of a Carpenter ring. Intended for intersex flag mashups.
     :param d: Drawing object

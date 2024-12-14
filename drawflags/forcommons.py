@@ -166,3 +166,23 @@ if __name__ == '__main__':
     draw_horiz_bars(d, ['#880366', '#d8a7d8', '#d8a7d8', '#880366'])
     draw_side_bump(d, 'black')
     filelocations = save_flag(d, 'varioriented', commonsflags)
+
+    # https://commons.wikimedia.org/wiki/File:LGBT_Pride_Flag_of_Malaysia.svg
+    # This is incomplete because I realized the file, even though tagged as fake SVG,
+    # had actually been replaced with a real one, and so this was unnecessary
+    rainbow_stripes = ['#e12528', '#ff6300', '#f8e700', '#349d00', '#030093', '#732a81']
+    d = draw.Drawing(640 * 4, 323 * 4)
+    draw_horiz_bars(d, rainbow_stripes)
+    leftwid = d.width/2
+    lefthei = d.height*0.565
+    draw_horiz_bars(d, ['#010066'], wid=leftwid, hei=lefthei)
+    draw_arbitrary_star(d, '#ffcc00', num_points=14, wid=leftwid, hei=lefthei,
+                        x_start=leftwid/6.5, secondary_size=0.5, size_ratio=1.3)
+    filelocations = save_flag(d, 'malaysia_rainbow', commonsflags)
+
+    # https://www.reddit.com/r/vexillology/comments/v2luae/the_6colour_pride_flag_but_colourblindfriendly/
+    rainbow_stripes = ['#D60303', '#FF790B', '#EAEE03', '#06D68B', '#017EFF', '#6B0ECC']
+    d = draw.Drawing(500*3, 300*3)
+    draw_horiz_bars(d, rainbow_stripes)
+    filelocations = save_flag(d, 'rainbow_colourblind', commonsflags)
+

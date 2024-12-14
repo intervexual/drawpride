@@ -18,15 +18,18 @@ Stripes:
 * Concentric infinity symbols in the style of the Autistic Pride Day logo
 * Concentric vees in the style of the varsex flag
 * Concentric tees in the style of the tgirl/tboy flags
-* Concentric rectangles, ellipses, and circles
+* Concentric rectangles in the style of the kymenic flags
 
-Rings:
+Circular shapes:
 * Standard Carpenter intersex flag ring
 * Concentric rings
 * Segmented rings
 * Insetting a flag inside a Carpenter ring
+* Solid circles
+* Solid ellipses
+* Concentric ellipses and circles
 
-Piles and other triangles:
+Triangular shapes:
 * Piles (the triangle that goes on the left-hand side of the Demisexual flag)
 * Nested piles (like in the Progress Pride flag)
 * Asymmetric piles (like in the tricolour Polyamory flag)
@@ -37,6 +40,7 @@ Piles and other triangles:
 Stars:
 * Five-pointed stars
 * Southern Cross stars
+* Stars of David (both standard and outline-only)
 * Stars of arbitrary numbers of points, both traced out and filled in
 
 And other possible flag elements:
@@ -45,7 +49,8 @@ And other possible flag elements:
 * X-crosses (like in the Crossdresser flag)
 * Squares (like in the Dyadic and Endosex flags)
 * Half-squares (cut along diagonal, useful for endosex/dyadic flags)
-* Rhombii (squares rotated 45 degrees, used in an Altersex flag)
+* Rhombi (squares rotated 45 degrees, used in an Altersex flag)
+* Diamonds (rhombi that are squished horizontally)
 * Hearts (like in the Biromantic flag)
 * The round shape on the side of the Peri- and Varioriented flags
 * The Rubber Zigzag
@@ -86,6 +91,20 @@ d.save_svg(outdir + 'endosex.svg')
 ```
 ![Endosex](output/examples/endosex.png)
 
+### Typical parameters
+The standard parameters of a given drawing function (e.g. draw_heart, draw_circle, etc) are:
+- d: a mutable drawing object that is altered by the function
+- colour is specified by either:
+  - colours: a list of hex strings
+  - primary_colour and (optional) secondary_colour (both hex strings)
+- wid: the width of the rectangular area in which things will be drawn into (defaults to 100% of the width of d's canvas)
+- hei: the height of the rectangular area in which things will be drawn into (default: 100% d's canvas height)
+- x_start: the x-coordinate of the upper left corner of the rectangular area into which things will be drawn (default: 0)
+- y_start: the y-coordinate of the upper left corner of the rectangular area into which things will be drawn (default: 0)
+- size_ratio: a scaling factor that generally corresponds to the radius (or equivalent) of the object being drawn
+- stretch_ratio: a scaling factor that generally affects the convexity of the object being drawn. Not always used.
+- thick_ratio: a scaling factor that generally corresponds to the line thickness of the stroke width used to draw a given object (usually an outline of the object). Not always used.
+- orientation: a string which indicates the orientation of the object being drawn ('H' for horizontal, 'V' for vertical, 'D' for diagonal, 'R' for reverse diagonal). Not always used. Currently poorly supported.
 
 ## TODOS
 Orientation support

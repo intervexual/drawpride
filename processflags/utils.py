@@ -174,14 +174,14 @@ def parse_svg_path(s, rounding_precision=3, firstx=0, firsty=0):
         print(cmd)
     print('d.append(p)')
 
-def save_flag(d, name, directory='output/', save_png=True, save_svg=True, show_image=False):
+def save_flag(d, name, directory='output/', save_png=True, save_svg=True, show_image=False, suffix=''):
     assert directory.endswith('/')
     whether_save = {'png':save_png, 'svg':save_svg}
     saved_to = []
     for filetype in whether_save:
         if whether_save[filetype]:
             png_loc = directory + filetype + '/'
-            png_name = png_loc + name + '.' + filetype
+            png_name = png_loc + name + suffix + '.' + filetype
             if not os.path.exists(png_loc):
                 os.makedirs(png_loc)
             if filetype == 'png':
@@ -196,8 +196,79 @@ def save_flag(d, name, directory='output/', save_png=True, save_svg=True, show_i
     return saved_to
 
 
+def round_percent_to_nearest_five_unless_90s(n):
+    """
+    Round n to the nearest 5, unless n is above 90.
+    Then round to the nearest even number.
+    Never round to 100 unless n is already 100.
+    :param n: number
+    :return: rounded integer
+    >>> round_percent_to_nearest_five_unless_90s(32)
+    30
+    >>> round_percent_to_nearest_five_unless_90s(90.5)
+    90
+    >>> round_percent_to_nearest_five_unless_90s(91.5)
+    92
+    >>> round_percent_to_nearest_five_unless_90s(99.9)
+    98
+    >>> round_percent_to_nearest_five_unless_90s(97.6)
+    98
+    >>> round_percent_to_nearest_five_unless_90s(100)
+    100
+    >>> round_percent_to_nearest_five_unless_90s(105)
+    100
+    """
+    if n < 90:
+        return round_to_nearest_five(n)
+    if n >= 100:
+        return 100
+    r = round_to_nearest_even_number(n)
+    if r == 100:
+        return 98
+    return r
+
+def round_to_nearest_five(n):
+    """
+    Round n to the nearest 5
+    :param n: number
+    :return: rounded integer to nearest 5
+    >>> round_to_nearest_five(323)
+    325
+    >>> round_to_nearest_five(46.2)
+    45
+    >>> round_to_nearest_five(-10.5983)
+    -10
+    >>> round_to_nearest_five(0)
+    0
+    """
+    return round(n/5)*5
+
+
+def round_to_nearest_even_number(n):
+    """
+    Round n to the nearest even integer
+    :param n: number to round
+    :return: integer rounded to nearest even
+    >>> round_to_nearest_even_number(23.1)
+    24
+    >>> round_to_nearest_even_number(24)
+    24
+    >>> round_to_nearest_even_number(24.9)
+    24
+    >>> round_to_nearest_even_number(-0.34)
+    0
+    >>> round_to_nearest_even_number(-3.6)
+    -4
+    >>> round_to_nearest_even_number(333)
+    332
+    """
+    return round(n/2)*2
+
+
+
+
 if __name__ == '__main__':
-    #doctest.testmod()
+    doctest.testmod()
     #s = 'M233.14606,2008.031C659.81265,2747.0389999999998,1783.8721,2105.1105,1357.2055,1366.1024C1781.7582,619.3380099999999,2919.4029,1263.3265999999999,2484.9812,2004.3931M1366.1206,76.818124C507.12735,71.109224,498.21223,1371.7897,1357.2055,1366.1024M2637.1773000000003,1366.1184C2648.5952,-351.86798,65.859465,-351.90088,77.233765,1366.0864C88.458065,3061.4318,2625.91,3061.4641,2637.1773,1366.1184Z'
     #s = 'M233.14606,2008.031C659.81265,2747.0389999999998,1783.8721,2105.1105,1357.2055,1366.1024C1781.7582,619.3380099999999,2919.4029,1263.3265999999999,2484.9812,2004.3931'
     s = 'M 1366.1206,76.818124 C 507.12735,71.109224, 498.21223,1371.7897, 1357.2055,1366.1024'
@@ -212,4 +283,4 @@ if __name__ == '__main__':
     s = 'M163.20014,98.298651L162.06588,99.373124L162.34792,100.91458L160.975,100.16554000000001L159.60208,100.91458L159.88412,99.373124L158.74985,98.298651L160.30216000000001,98.09227600000001L160.97500000000002,96.68125300000001L161.64783000000003,98.09227600000001Z'
     #parse_svg_path(s)
     s = 'M142.74646,113.87472C142.67576000000003,113.69057,142.61798000000002,112.94954,142.61798000000002,112.22798C142.61798000000002,100.0677,136.35897000000003,83.716184,117.64081000000002,46.975684C114.96350000000001,41.720604,112.77299000000002,37.362914,112.77299000000002,37.291934C112.77299000000002,37.220934,120.73131000000002,37.162864,130.45815000000002,37.162864H148.14333000000002L155.30282000000003,51.609114C172.96919000000003,87.25591399999999,177.75215000000003,100.28757999999999,177.75440000000003,112.78078L177.75465000000003,114.20952999999999H160.3148C144.60719,114.20952999999999,142.86218,114.17622999999999,142.74645999999998,113.87471999999998Z'
-    parse_svg_path(s, 0)
+    #parse_svg_path(s, 0)

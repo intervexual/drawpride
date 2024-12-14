@@ -6,7 +6,8 @@ from pride_shapes import *
 
 
 def embed_icon(d, path_to_icon, colours, icondir='icons/', orientation=None,
-               wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0, size_ratio=1.0,
+               wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+               size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0,
                name='ch'):
     """
     Wrapper for various ways of adding/embedding icons.

@@ -9,7 +9,9 @@ import drawsvg
 from stars_and_hearts import *
 
 
-def draw_text(d, text_to_add, primary_colour, secondary_colour='none', wid=UNSPECIFIED, hei=UNSPECIFIED, size_ratio=1.0, x_start=0, y_start=0, orientation=VERTICAL, name=None):
+def draw_text(d, text_to_add, primary_colour, secondary_colour='none', name='ch',
+              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
     """
     Add text to the flag
     :param d: Drawing object
@@ -35,7 +37,9 @@ def draw_text(d, text_to_add, primary_colour, secondary_colour='none', wid=UNSPE
                        text_anchor='middle', dominant_baseline='middle', font_family='Times New Roman'))  # 8pt text at (-10, -35)
 
 
-def draw_side_bump(d, primary_colour, secondary_colour='none', wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0, size_ratio = 1.0, orientation=VERTICAL):
+def draw_side_bump(d, primary_colour, secondary_colour='none',
+              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
     """
     Add a bump to the left side of a flag like in the perioriented flag
     :param d: Drawing object
@@ -44,6 +48,7 @@ def draw_side_bump(d, primary_colour, secondary_colour='none', wid=UNSPECIFIED, 
     :param wid: width of the area we are working with
     :param hei: height of the area we are working with
     :param size_ratio: used to scale the size (width) of the pile
+    :param stretch_ratio: scaling factor used to affect concavity
     :return: none
     """
     wid, hei = get_effective_dimensions(d, wid, hei)
@@ -56,7 +61,7 @@ def draw_side_bump(d, primary_colour, secondary_colour='none', wid=UNSPECIFIED, 
     topmost = y_start
     rightmost = left_bump + 0.92*bar_width
     bottommost = topmost+hei
-    cy = topmost + 0.175*hei
+    cy = topmost + 0.175*hei*stretch_ratio
     p = draw.Path(fill=primary_colour, stroke=secondary_colour)
     p.M(leftmost, topmost)
     p.L(left_bump, topmost)
@@ -67,7 +72,9 @@ def draw_side_bump(d, primary_colour, secondary_colour='none', wid=UNSPECIFIED, 
     d.append(p)
 
 
-def draw_pile(d, primary_colour, secondary_colour='none', wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0, size_ratio = 1.0, orientation=VERTICAL):
+def draw_pile(d, primary_colour, secondary_colour='none',
+              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
     """
     Add a triangle to the left side like in the demisexual flag
     (it's called a pile: https://en.wikipedia.org/wiki/Glossary_of_vexillology )
@@ -99,8 +106,9 @@ def draw_pile(d, primary_colour, secondary_colour='none', wid=UNSPECIFIED, hei=U
     d.append(p)
 
 
-def draw_multipile(d, colours, wid=UNSPECIFIED, hei=UNSPECIFIED,  x_start=0, y_start=0,
-                   size_ratio = 1.0, line_width=UNSPECIFIED, orientation=VERTICAL):
+def draw_multipile(d, colours,
+              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
     """
     Add a triangle to the left side like in the demisexual flag
     (it's called a pile: https://en.wikipedia.org/wiki/Glossary_of_vexillology )
@@ -119,25 +127,24 @@ def draw_multipile(d, colours, wid=UNSPECIFIED, hei=UNSPECIFIED,  x_start=0, y_s
     """
     wid, hei = get_effective_dimensions(d, wid, hei)
 
-    if type(line_width) not in [int, float] or line_width < 0:
-        line_width = wid/10
+    line_width = thick_ratio*wid/(len(colours)+2) # +2 because the chevron goes out by two
     piles = []
     first_width = None
     for i, primary_colour in enumerate(colours):
         x_offset = i*line_width + x_start
-        x_dist = ((wid/3) * size_ratio)+x_offset # a third of the width by default
+        rightmost = x_offset + line_width*3*size_ratio
 
         leftmost = x_offset
         topmost = 0
         p = draw.Path(fill=primary_colour)
         p.M(leftmost, topmost)
-        p.L(x_dist, hei / 2)
+        p.L(rightmost, hei / 2)
         p.L(leftmost, hei)
         p.L(x_start, hei).L(x_start, topmost)
         p.L(leftmost, topmost).Z()
         piles.append(p)
         if not first_width:
-            first_width = x_dist
+            first_width = rightmost
 
     # add them in reverse order
     for p in reversed(piles):
@@ -145,7 +152,9 @@ def draw_multipile(d, colours, wid=UNSPECIFIED, hei=UNSPECIFIED,  x_start=0, y_s
     return first_width
 
 
-def draw_corners(d, primary_colour, wid=UNSPECIFIED, hei=UNSPECIFIED, size_ratio=1.0, orientation=VERTICAL):
+def draw_corners(d, primary_colour, secondary_colour='none',
+              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
     """
     Add diagonal corners in the style of the disability pride flag
     :param d: Drawing object
@@ -178,7 +187,9 @@ def draw_corners(d, primary_colour, wid=UNSPECIFIED, hei=UNSPECIFIED, size_ratio
 
 
 
-def draw_topbottom(d, primary_colour, wid=UNSPECIFIED, hei=UNSPECIFIED, size_ratio=1.0, orientation=VERTICAL):
+def draw_topbottom(d, primary_colour, secondary_colour='none',
+              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
     """
     Add stripes to top and bottom. Used for mashup flags.
     :param d: Drawing object
@@ -210,7 +221,9 @@ def draw_topbottom(d, primary_colour, wid=UNSPECIFIED, hei=UNSPECIFIED, size_rat
     d.append(p)
 
 
-def draw_perisex(d, primary_colour, wid=UNSPECIFIED, hei=UNSPECIFIED, size_ratio=1.0, orientation=VERTICAL):
+def draw_perisex(d, primary_colour, secondary_colour='none',
+              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
     """
     Draws an abstract scale/balance thing with f and m ends
     :param d: drawing image
@@ -264,7 +277,9 @@ def draw_perisex(d, primary_colour, wid=UNSPECIFIED, hei=UNSPECIFIED, size_ratio
     d.append(draw.Line(wid / 2, h, wid / 2, h - hangar, stroke=primary_colour, stroke_width=sw, stroke_linecap='round'))
 
 
-def draw_rhombus(d, primary_colour, secondary_colour='none', wid=UNSPECIFIED, hei=UNSPECIFIED, size_ratio=1.0, orientation=VERTICAL):
+def draw_rhombus(d, primary_colour, secondary_colour='none',
+              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
     """
     Draw a square on a diagonal
     :param d: Drawing object
@@ -272,7 +287,9 @@ def draw_rhombus(d, primary_colour, secondary_colour='none', wid=UNSPECIFIED, he
     :param secondary_colour: outline colour of rhombus
     :param wid: width of the area we are working with
     :param hei: height of the area we are working with
-    :param size_ratio: size factor
+    :param size_ratio: size factor (radius)
+    :param stretch_ratio: horizontal stretching to make diamonds
+    :param thick_ratio: scaling factor for the stroke width of the outline
     :return: none
     >>> d = draw.Drawing(500, 300)
     >>> draw_rhombus(d, RAINBOW[0])
@@ -282,19 +299,22 @@ def draw_rhombus(d, primary_colour, secondary_colour='none', wid=UNSPECIFIED, he
     <class 'drawsvg.elements.Path'>
     """
     wid, hei = get_effective_dimensions(d, wid, hei)
-    p = draw.Path(stroke=secondary_colour, stroke_width=hei / 10, fill=primary_colour)
+    sw = thick_ratio* hei / 10
+    p = draw.Path(stroke=secondary_colour, stroke_width=sw, fill=primary_colour)
     radius_perc = 0.25 # by default have it take up 1/4 of the height
-    radius = hei * radius_perc * size_ratio
+    y_radius = hei * radius_perc * size_ratio
+    x_radius = y_radius*stretch_ratio
     mx, my = wid/2, hei/2
-    p.M(mx, my-radius)
-    p.L(mx+radius, my)
-    p.L(mx, my+radius)
-    p.L(mx-radius, my).Z()
+    p.M(mx, my-y_radius)
+    p.L(mx+x_radius, my)
+    p.L(mx, my+y_radius)
+    p.L(mx-x_radius, my).Z()
     d.append(p)
 
 
-def draw_square(d, primary_colour, secondary_colour='none', wid=UNSPECIFIED, hei=UNSPECIFIED,
-                x_start=0, y_start=0, size_ratio = 1.0, orientation=VERTICAL):
+def draw_square(d, primary_colour, secondary_colour='none',
+              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
     """Draw a square in the style of the dyadic/endosex flag.
     :param d: Drawing object
     :param primary_colour: outline colour of the square
@@ -324,7 +344,9 @@ def draw_square(d, primary_colour, secondary_colour='none', wid=UNSPECIFIED, hei
     return radius + sw
 
 
-def draw_diagonal_cut_square(d, primary_colour, wid=UNSPECIFIED, hei=UNSPECIFIED, size_ratio=1.0, orientation=VERTICAL):
+def draw_diagonal_cut_square(d, primary_colour, secondary_colour='none',
+              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
     """Draw half of a square that is cut diagonally, to be superimposed with draw_square
     to produce dyadic/endosex flags.
     :param d: Drawing object
@@ -375,8 +397,9 @@ def draw_diagonal_cut_square(d, primary_colour, wid=UNSPECIFIED, hei=UNSPECIFIED
         d.append(pr)
 
 
-def draw_bissu(d, primary_colour, secondary_colour, wid=UNSPECIFIED, hei=UNSPECIFIED,
-               x_start=0, y_start=0, orientation=VERTICAL):
+def draw_bissu(d, primary_colour, secondary_colour='none',
+              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
     """
     Draw triangles in the style of the Bissu flag
     :param d: Drawing ojbect
@@ -397,8 +420,9 @@ def draw_bissu(d, primary_colour, secondary_colour, wid=UNSPECIFIED, hei=UNSPECI
     d.append(p)
 
 
-def draw_altersex_symbol(d, primary_colour, secondary_colour, wid=UNSPECIFIED, hei=UNSPECIFIED,
-                         x_start=0, y_start=0, size_ratio=1.0, orientation=VERTICAL):
+def draw_altersex_symbol(d, primary_colour, secondary_colour='none',
+              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
     '''
     Draw a triangle with a ring
     :param d: Drawing object
@@ -407,6 +431,7 @@ def draw_altersex_symbol(d, primary_colour, secondary_colour, wid=UNSPECIFIED, h
     :param wid: width of the area we are working with
     :param hei: height of the area we are working with
     :param size_ratio: size factor
+    :param thick_ratio: scaling factor for the outline's stroke width
     :return: none
     >>> d = draw.Drawing(500, 300)
     >>> draw_altersex_symbol(d, RAINBOW[0], RAINBOW[1])
@@ -417,7 +442,7 @@ def draw_altersex_symbol(d, primary_colour, secondary_colour, wid=UNSPECIFIED, h
     '''
     wid, hei = get_effective_dimensions(d, wid, hei)
     radius = size_ratio * hei / 6.9 # 6.9 for lower align, 6 originally
-    sw = radius/4 # started with /4
+    sw = thick_ratio*radius/4 # started with /4
     x_mid = wid/2
 
     # triangle measurements
@@ -447,7 +472,9 @@ def draw_altersex_symbol(d, primary_colour, secondary_colour, wid=UNSPECIFIED, h
     d.append(draw.Circle(x_mid, y_coord, radius, fill='none', stroke=secondary_colour, stroke_width=sw))
 
 
-def draw_cross(d, primary_colour, wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0, size_ratio=1.0, orientation=VERTICAL):
+def draw_cross(d, primary_colour, secondary_colour='none',
+              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
     """
     Draw a cross that is, by default, the right size to produce the ipsogender flag
     when combined with a Carpenter ring.
@@ -455,7 +482,9 @@ def draw_cross(d, primary_colour, wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y
     :param primary_colour: fill of the cross
     :param wid: width of area the symbol is being added to
     :param hei: height of the area the symbol is being added to
-    :param size_ratio: scaling factor
+    :param size_ratio: scaling factor for radius
+    :param thick_ratio: scaling factor for line width
+    :param stretch_ratio: scaling factor that affects how symmetric the cross is
     :return: none
     """
     wid, hei = get_effective_dimensions(d, wid, hei)
@@ -465,31 +494,36 @@ def draw_cross(d, primary_colour, wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y
     # vertical bar
     intop = top_of_ring(hei)
     inbot = base_of_ring(hei)
-    thickness = ring_thickness(hei)*size_ratio
+    thickness = ring_thickness(hei)*size_ratio*thick_ratio
     line_height = (inbot - intop)*size_ratio
     d.append(
-        draw.Rectangle(midx - (thickness / 2), intop + (thickness / 2), thickness, line_height, fill=primary_colour))
+        draw.Rectangle(midx - (thickness / 2), midy - (line_height*0.5), thickness, line_height, fill=primary_colour))
 
     # horizontal bar
-    line_width = line_height
+    line_width = line_height*stretch_ratio
     d.append(
-        draw.Rectangle(midx - line_width / 2, midy - (thickness / 2), line_width, thickness, fill=primary_colour))
+        draw.Rectangle(midx - line_width / 2, midy - (thickness*0.5), line_width, thickness, fill=primary_colour))
 
 
-def draw_metis_lemniscate(d, primary_colour, wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0, size_ratio=1.0,
-                          horiz_stretch=0.15, orientation=VERTICAL):
+def draw_metis_lemniscate(d, primary_colour, secondary_colour='none',
+              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
     """
-    Draw an infinity symbol (lemniscate) in the style of the Metis flag.
+    Draw an infinity symbol (lemniscate) in the style of the Métis flag.
     :param d: drawing object
     :param primary_colour: fill of the infinity symbol
     :param wid: width of area the symbol is being added to
     :param hei: height of the area the symbol is being added to
-    :param size_ratio: scaling factor
+    :param size_ratio: scaling factor (radius-equivalent)
+    :param stretch_ratio: how round vs spiky it is. Low value is more like a ⋈ shape
+    :param thick_ratio: how thick the infinity is. Default is based on Métis flag.
     :return: none
     """
     wid, hei = get_effective_dimensions(d, wid, hei)
-    stroke_wid = (24/300)*hei*size_ratio
+    stroke_wid = (24/300)*hei*thick_ratio
     p = draw.Path(stroke=primary_colour, fill='none', stroke_width=stroke_wid)
+
+    horiz_stretch = 0.15*stretch_ratio
 
     later_x = (110/400)*wid # 110
     start_x = wid - later_x # 290
@@ -536,8 +570,10 @@ def single_nautilus_segment(d, wid, hei, arr, primary_colour, step_size, border_
     d.append(p.Z())
 
 
-def draw_nautilus(d, colours, wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0, size_ratio=1.0,
-                  is_horizontal=True, border_colour='black', border_size=0, orientation=VERTICAL):
+def draw_nautilus(d, colours,
+              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL,
+              border_colour='black', border_size=0):
     """
     Draw an autistic spectrum nautilus symbol
     :param d: Drawing object
@@ -548,6 +584,7 @@ def draw_nautilus(d, colours, wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_sta
     :param is_horizontal: vertical or horizontal?
     :return: none
     """
+    is_horizontal = orientation == HORIZONTAL
     wid, hei = get_effective_dimensions(d, wid, hei)
     height_perc = (120 / 300)*size_ratio
     border_width = 5*size_ratio*border_size
@@ -592,8 +629,9 @@ def draw_nautilus(d, colours, wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_sta
         single_nautilus_segment(d, wid, hei, trigged, fill, step_size, border_width=border_width, border_colour=border_colour)
 
 
-def draw_closet_symbol(d, primary_colour, secondary_colour='none', wid=UNSPECIFIED, hei=UNSPECIFIED,
-                       x_start=0, y_start=0, size_ratio=1, orientation=VERTICAL):
+def draw_closet_symbol(d, primary_colour, secondary_colour='none',
+              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
     """
     Draw a closet symbol, similar in style to the one in isobug's closeted intersex flag
     :param d: Drawing object
@@ -604,14 +642,16 @@ def draw_closet_symbol(d, primary_colour, secondary_colour='none', wid=UNSPECIFI
     :param x_start: the x-coordinate of the upper left corner of the rectangular area that is being drawn into
     :param y_start: the y-coordinate of the upper left corner of the rectangular area that is being drawn into
     :param size_ratio: size factor
+    :param stretch_ratio: scaling factor for the width
+    :param thick_ratio: scaling factor for the stroke thickness
     :return: none
     """
     wid, hei = get_effective_dimensions(d, wid, hei)
-    stroke_width = (hei / 28)*size_ratio
+    stroke_width = (hei / 28)*thick_ratio*size_ratio
 
     # for the outer rectangle
     closet_hei = (hei * (2/3))*size_ratio
-    closet_wid = closet_hei * .8
+    closet_wid = closet_hei * .8 * stretch_ratio
     upper_left = (wid/2) - closet_wid/2
     upper_top = (hei/2) - (closet_hei/2)
     round_radius = closet_hei / 6
@@ -644,6 +684,7 @@ def triangle_side_from_hypot(hypot, sidelen):
     """
     return math.sqrt(hypot**2 - sidelen**2)
 
+
 def rubber_helper(line_hei, sw, topln_start_y, topln_start_x, topln_descend_hypot, angle_descent, angle_ascent):
     """
     Helper function for calculating rubber flag lines
@@ -675,8 +716,9 @@ def rubber_helper(line_hei, sw, topln_start_y, topln_start_x, topln_descend_hypo
     return midln_start_x, midln_start_y, midln_descend_x, midln_descend_y, midln_ascend_x, midln_descend_hypot
 
 
-def draw_rubber_zigzags(d, primary_colour, secondary_colour='none', wid=UNSPECIFIED, hei=UNSPECIFIED,
-                        x_start=0, y_start=0, size_ratio=1, orientation=VERTICAL):
+def draw_rubber_zigzags(d, primary_colour, secondary_colour='none',
+              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
     """
     Draw zigzag stripes in the style of the rubber pride flag.
     :param d: Drawing object
@@ -740,7 +782,8 @@ def draw_rubber_zigzags(d, primary_colour, secondary_colour='none', wid=UNSPECIF
 
 
 def draw_refugeeline(d, primary_colour, secondary_colour='none',
-                     wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0, size_ratio=1, orientation=VERTICAL):
+              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
     """
     Draw a single horizontal line in the style of the refugee flag
     :param d: Drawing object
@@ -763,8 +806,9 @@ def draw_refugeeline(d, primary_colour, secondary_colour='none',
     return top_of_line
 
 
-def draw_intersex_ally(d, primary_colour, secondary_colour='none', wid=UNSPECIFIED, hei=UNSPECIFIED,
-                       x_start=0, y_start=0, size_ratio=1, orientation=VERTICAL):
+def draw_intersex_ally(d, primary_colour, secondary_colour='none',
+              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
     """
     Draw a chevron/vee in the style of the ally flag
     :param d: Drawing object
@@ -808,8 +852,9 @@ def draw_intersex_ally(d, primary_colour, secondary_colour='none', wid=UNSPECIFI
     return r
 
 
-def draw_pocketgender_hourglass(d, colours, wid=UNSPECIFIED, hei=UNSPECIFIED,
-               x_start=0, y_start=0, size_ratio=1, orientation=None):
+def draw_pocketgender_hourglass(d, colours,
+              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
     """
     Draw a straight hourglass type shape seen in the pocket gender flag
     :param d: Drawing object
@@ -855,8 +900,9 @@ def draw_pocketgender_hourglass(d, colours, wid=UNSPECIFIED, hei=UNSPECIFIED,
     d.append(p)
 
 
-def draw_triskelion(d, colours, wid=UNSPECIFIED, hei=UNSPECIFIED,
-               x_start=0, y_start=0, size_ratio=1.0, orientation=None):
+def draw_triskelion(d, colours,
+              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
     """
     Draw a triskelion symbol used for BDSM fetish flags.
     Based on: https://commons.wikimedia.org/wiki/File:Dotted_triskelion_(fixed_width).svg
@@ -866,7 +912,9 @@ def draw_triskelion(d, colours, wid=UNSPECIFIED, hei=UNSPECIFIED,
     :param hei: height of the area we are working with
     :param x_start: the x-coordinate of the upper left corner of the rectangular area that is being drawn into
     :param y_start: the y-coordinate of the upper left corner of the rectangular area that is being drawn into
-    :param size_ratio: size factor
+    :param size_ratio: size factor (radius)
+    :param stretch_ratio: scaling factor for the radii of the inner dots
+    :param thick_ratio: scaling factor for the stroke width inside the triskelion
     :return: none
     """
     wid, hei = get_effective_dimensions(d, wid, hei)
@@ -904,7 +952,7 @@ def draw_triskelion(d, colours, wid=UNSPECIFIED, hei=UNSPECIFIED,
     y11 = y_start + 1263.0 * h
     y12 = y_start + 2004.0 * h
 
-    sw=hei/20
+    sw=thick_ratio*hei/20
     pathcolour = colours[0]
     circlebg = 'none'
     if len(colours) > 1:
@@ -925,7 +973,7 @@ def draw_triskelion(d, colours, wid=UNSPECIFIED, hei=UNSPECIFIED,
     p.C(x10, y10, x11, y11, x12, y12)
     d.append(p)
 
-    minirad = rad/6
+    minirad = stretch_ratio*rad/6
     bottomlevel = y_cent+rad/4 # is this actually correct?
     xoffs = rad/2 # is this actually correct?
     d.append(draw.Circle(x_cent, y_cent-rad/2, minirad,  fill=dotcolour))
@@ -933,8 +981,9 @@ def draw_triskelion(d, colours, wid=UNSPECIFIED, hei=UNSPECIFIED,
     d.append(draw.Circle(x_cent-xoffs, bottomlevel, minirad,  fill=dotcolour))
 
 
-def draw_circle(d, primary_colour, secondary_colour='none', wid=UNSPECIFIED, hei=UNSPECIFIED,
-               x_start=0, y_start=0, size_ratio=1.0, orientation=None):
+def draw_circle(d, primary_colour, secondary_colour='none',
+              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
     """
     Draw a solid circle
     :param d: Drawing object
@@ -953,13 +1002,43 @@ def draw_circle(d, primary_colour, secondary_colour='none', wid=UNSPECIFIED, hei
     radius = (hei/2)*size_ratio*0.975
     sw = 0
     if secondary_colour != 'none':
-        sw = hei/20
+        sw = thick_ratio*hei/20
     d.append(draw.Circle(midx, midy, radius, fill=primary_colour, stroke=secondary_colour, stroke_width=sw))
     return radius
 
 
-def draw_triangle(d, primary_colour, secondary_colour='none', wid=UNSPECIFIED, hei=UNSPECIFIED,
-               x_start=0, y_start=0, size_ratio=1.0, orientation=None):
+def draw_ellipse(d, primary_colour, secondary_colour='none',
+              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
+    """
+    Draw a solid ellipse
+    :param d: Drawing object
+    :param primary_colour: fill colour (string) of the circle
+    :param secondary_colour: colour (string) of the outline of the circle
+    :param wid: width of the area we are working with
+    :param hei: height of the area we are working with
+    :param x_start: the x-coordinate of the upper left corner of the rectangular area that is being drawn into
+    :param y_start: the y-coordinate of the upper left corner of the rectangular area that is being drawn into
+    :param size_ratio: y-axis radius
+    :param stretch_ratio: scaling factor of the x-axis radius
+    :param thick_ratio: scaling factor for outline of the ellipse (if used)
+    :return: none
+    """
+    wid, hei = get_effective_dimensions(d, wid, hei)
+    midx = x_start + wid/2
+    midy = y_start + hei/2
+    radius = (hei/2)*size_ratio*0.975
+    sw = 0
+    if secondary_colour != 'none':
+        sw = thick_ratio*hei/20
+    d.append(draw.Ellipse(midx, midy, radius*stretch_ratio, radius, fill=primary_colour, stroke=secondary_colour, stroke_width=sw))
+    return radius
+
+
+
+def draw_triangle(d, primary_colour, secondary_colour='none',
+              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
     """
     Draw an inverted triangle like the pink triangle flag
     :param d: Drawing object
@@ -995,8 +1074,9 @@ def draw_triangle(d, primary_colour, secondary_colour='none', wid=UNSPECIFIED, h
     d.append(p)
 
 
-def draw_asympile(d, primary_colour, secondary_colour='none', wid=UNSPECIFIED, hei=UNSPECIFIED,
-               x_start=0, y_start=0, size_ratio=1.0, orientation=None):
+def draw_asympile(d, primary_colour, secondary_colour='none',
+              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
     """
     Draw an asymmetric pile in the style of the tricolour polyamory flag
     :param d: Drawing object
@@ -1033,8 +1113,9 @@ def draw_asympile(d, primary_colour, secondary_colour='none', wid=UNSPECIFIED, h
     d.append(p)
 
 
-def draw_trichevron(d, colours, wid=UNSPECIFIED, hei=UNSPECIFIED,
-               x_start=0, y_start=0, size_ratio=1.0, orientation=None):
+def draw_trichevron(d, colours,
+              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
     """
     Draw three chevrons in this style from https://queerflag.tumblr.com/post/151443283619/bizexuals-more-queer-pride-flagsvariations
     :param d: Drawing object
@@ -1079,8 +1160,9 @@ def draw_trichevron(d, colours, wid=UNSPECIFIED, hei=UNSPECIFIED,
     return base_sw
 
 
-def draw_crossdresser(d, colours, wid=UNSPECIFIED, hei=UNSPECIFIED,
-               x_start=0, y_start=0, size_ratio=1.0, orientation=None):
+def draw_crossdresser(d, colours,
+              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
     """
     Draw an X in the style of this crossdresser flag: https://flag.library.lgbt/flags/crossdresser/
     :param d: Drawing object
@@ -1138,8 +1220,9 @@ def draw_crossdresser(d, colours, wid=UNSPECIFIED, hei=UNSPECIFIED,
     d.append(p)
 
 
-def draw_equals(d, primary_colour, secondary_colour, wid=UNSPECIFIED, hei=UNSPECIFIED,
-                x_start=0, y_start=0, size_ratio=1.0, orientation=None):
+def draw_equals(d, primary_colour, secondary_colour='none',
+              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
     """
     Draw an equals sign in the style of the horizontal androgyne flag
     :param d: Drawing object
@@ -1177,11 +1260,9 @@ def draw_equals(d, primary_colour, secondary_colour, wid=UNSPECIFIED, hei=UNSPEC
     return line_hei
 
 
-
-
-
-def draw_bipolar(d, primary_colour, secondary_colour='none', wid=UNSPECIFIED, hei=UNSPECIFIED,
-                x_start=0, y_start=0, size_ratio=1.0, secondary_size=0.5, orientation=VERTICAL):
+def draw_bipolar(d, primary_colour, secondary_colour='none',
+              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
     """
     Draw the bipolar symbol
     :param d: Drawing object
@@ -1283,17 +1364,82 @@ def draw_bipolar(d, primary_colour, secondary_colour='none', wid=UNSPECIFIED, he
     d.append(p)
 
 
+def draw_belt(d, primary_colour, secondary_colour='none',
+              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
+    # default size should be voidpunk
+    wid, hei = get_effective_dimensions(d, wid, hei)
+    midx = x_start + wid/2
+    midy = y_start + hei/2
+
+    radius = size_ratio*(hei*0.185)
+    belt_thickness = thick_ratio*(hei/4)*(1/3)
+
+    p = draw.Path(stroke_width=belt_thickness, stroke=primary_colour)
+    p.M(x_start, midy).L(midx-radius, midy)
+    p.M(x_start+wid, midy).L(midx+radius, midy)
+    d.append(p)
+
+    d.append(draw.Circle(midx, midy, radius,
+                         stroke=primary_colour, fill=secondary_colour,
+                         stroke_width=belt_thickness*0.825))
+
+    return belt_thickness
+
+
+def draw_diamond(d, primary_colour, secondary_colour='none',
+              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
+    """
+    Draw a Diamond, based on the Alderspintellic flag
+    from https://www.tumblr.com/revenant-coining/704184782702149633/alderspintellic-an-aldernic-term-for-one-is-or
+    :param d: Drawing object
+    :param primary_colour: the fill of the diamond
+    :param secondary_colour: optional outline of diamond
+    :param wid: width of the area we are working with
+    :param hei: height of the area we are working with
+    :param x_start: the x-coordinate of the upper left corner of the rectangular area that is being drawn into
+    :param y_start: the y-coordinate of the upper left corner of the rectangular area that is being drawn into
+    :param size_ratio: size factor. The "radius" of the diamond.
+    :param stretch_ratio: scaling factor used to stretch the diamond horizontally.
+    :param thick_ratio: scaling factor for the line width of the outline (if used)
+    :return: stroke width
+    """
+
+    wid, hei = get_effective_dimensions(d, wid, hei)
+    midx = x_start + wid/2
+    midy = y_start + hei/2
+
+    diamond_height = hei*0.3*size_ratio
+    diamond_width = diamond_height*0.8*stretch_ratio
+
+    p = draw.Path(fill=primary_colour)
+    if secondary_colour != 'none':
+        sw = diamond_height*0.035*thick_ratio
+        p = draw.Path(fill=primary_colour, stroke=secondary_colour, stroke_width=sw)
+    p.M(midx, midy-diamond_height)
+    p.L(midx+diamond_width, midy)
+    p.L(midx, midy+diamond_height)
+    p.L(midx-diamond_width, midy)
+    p.L(midx, midy-diamond_height).Z()
+    d.append(p)
+    return diamond_height
+
+
 if __name__ == '__main__':
     doctest.testmod()
     wid = 500
     hei = 300
     d = draw.Drawing(wid, hei)
     draw_horiz_bars(d, ['black'])
+    '''
     draw_perisex(d, 'white')
     draw_rhombus(d, 'blue', size_ratio=0.75)
     draw_square(d, 'green', size_ratio=1.8)
     draw_diagonal_cut_square(d, 'green', size_ratio=1.8)
     draw_altersex_symbol(d, 'red', 'pink', size_ratio=0.1)
+    '''
+    draw_diamond(d, 'white', 'red')
     d.save_png('drawflags/test.png')
 
     d = draw.Drawing(wid, hei)

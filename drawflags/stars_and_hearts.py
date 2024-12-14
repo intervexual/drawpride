@@ -1,8 +1,9 @@
 from pride_rings import *
 
-def draw_arbitrary_star(d, primary_colour, secondary_colour='none',  num_points=5,
-                        wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-                        size_ratio=1.0, secondary_size=0.58, orientation=VERTICAL, square=True, sw=0):
+
+def draw_arbitrary_star(d, primary_colour, secondary_colour='none', num_points=5, square=True,
+              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+              size_ratio = 1.0, stretch_ratio=0.58, thick_ratio=1.0, orientation=VERTICAL):
     """
     Draw a star of arbitrary points
     :param d: Drawing object
@@ -13,9 +14,11 @@ def draw_arbitrary_star(d, primary_colour, secondary_colour='none',  num_points=
     :param x_start: the x-coordinate of the upper left corner of the rectangular area that is being drawn into
     :param y_start: the y-coordinate of the upper left corner of the rectangular area that is being drawn into
     :param size_ratio: size factor
-    :param secondary_size: how spiky the star is. 0.58 for Jewish star of david. 0.5 for regular 5-point star.
+    :param stretch_ratio: how spiky the star is. 0.58 for Jewish star of david. 0.5 for regular 5-point star.
+    :param thick_ratio: scaling factor for stroke thickness. Defaults to hei/100.
     :return: the height of the top/bottom lines
     """
+    #secondary_size = 0.58*stretch_ratio
     rotateby = angle_offset_for_orientation(orientation)
     wid, hei = get_effective_dimensions(d, wid, hei)
 
@@ -24,10 +27,12 @@ def draw_arbitrary_star(d, primary_colour, secondary_colour='none',  num_points=
 
     arc_width = 360 / num_points
     outer_radius = size_ratio*hei/4
-    inner_radius = outer_radius*secondary_size
+    inner_radius = outer_radius*stretch_ratio
 
-    if secondary_colour != 'none' and sw == 0:
-        sw = inner_radius *0.13
+    if secondary_colour != 'none':
+        sw = thick_ratio*hei/100
+    else:
+        sw = 0
 
     ang_offset = rotateby
     if square:
@@ -48,8 +53,9 @@ def draw_arbitrary_star(d, primary_colour, secondary_colour='none',  num_points=
     return sw
 
 
-def draw_fivesided_star(d, primary_colour, secondary_colour='none', wid=UNSPECIFIED, hei=UNSPECIFIED,
-                x_start=0, y_start=0, size_ratio=1.0, secondary_size=0.5, orientation=VERTICAL, sw=0):
+def draw_fivesided_star(d, primary_colour, secondary_colour='none',
+              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
     """
     Draw a five-pointed star
     :param d: Drawing object
@@ -60,16 +66,42 @@ def draw_fivesided_star(d, primary_colour, secondary_colour='none', wid=UNSPECIF
     :param x_start: the x-coordinate of the upper left corner of the rectangular area that is being drawn into
     :param y_start: the y-coordinate of the upper left corner of the rectangular area that is being drawn into
     :param size_ratio: size factor
-    :param secondary_size: how spiky the star is. 0.385 if you want a horizontal line at mid-top
+    :param stretch_size: how spiky the star is. 0.385 if you want a horizontal line at mid-top
+    :param thick_ratio: scaling factor for the stroke width.
     :return: the height of the top/bottom lines
     """
     return draw_arbitrary_star(d, primary_colour, secondary_colour=secondary_colour, num_points=5,
                                wid=wid, hei=hei, x_start=x_start, y_start=y_start, size_ratio=size_ratio,
-                               orientation=orientation, secondary_size=secondary_size, sw=sw)
+                               orientation=orientation, stretch_ratio=stretch_ratio*0.5, thick_ratio=thick_ratio)
 
 
-def draw_australian_star(d, primary_colour, secondary_colour='none', wid=UNSPECIFIED, hei=UNSPECIFIED,
-                x_start=0, y_start=0, size_ratio=1.0, secondary_size=0.45, orientation=VERTICAL, sw=0):
+def draw_sevensided_star(d, primary_colour, secondary_colour='none',
+              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
+    """
+    Draw a seven pointed star polygon in the style of the morvigender flag
+    https://genderqueer-dream.tumblr.com/post/638442638940504064/beyond-mogai-pride-flags-morvivgender-a
+    :param d: Drawing object
+    :param primary_colour: the fill of the star
+    :param secondary_colour: the outline of the star
+    :param wid: width of the area we are working with
+    :param hei: height of the area we are working with
+    :param x_start: the x-coordinate of the upper left corner of the rectangular area that is being drawn into
+    :param y_start: the y-coordinate of the upper left corner of the rectangular area that is being drawn into
+    :param size_ratio: size factor (radius)
+    :param stretch_size: how spiky the star is
+    :param thick_ratio: scaling factor for the stroke width.
+    :return: the height of the top/bottom lines
+    """
+    return draw_arbitrary_star_trace(d,   primary_colour, secondary_colour=secondary_colour, num_points=7, offset=3,
+                                     wid=wid, hei=hei, x_start=x_start, y_start=y_start, size_ratio=size_ratio,
+                                     orientation=orientation,
+                                     thick_ratio=thick_ratio)
+
+
+def draw_australian_star(d, primary_colour, secondary_colour='none',
+                         wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                         size_ratio=1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
     """
     Draw a seven-pointed star in the style of the Australian flag
     :param d: Drawing object
@@ -79,18 +111,20 @@ def draw_australian_star(d, primary_colour, secondary_colour='none', wid=UNSPECI
     :param hei: height of the area we are working with
     :param x_start: the x-coordinate of the upper left corner of the rectangular area that is being drawn into
     :param y_start: the y-coordinate of the upper left corner of the rectangular area that is being drawn into
-    :param size_ratio: size factor
-    :param secondary_size: how spiky the star is. 0.45 by default for Aussie star.
-    :param sw: stroke width
+    :param size_ratio: size factor used for the radii of the stars
+    :param stretch_size: how spiky the stars are. Set to the default Aussie star (0.45).
+    :param thick_ratio: scaling factor for stroke width. Set to default Aussie star.
     :return: the height of the top/bottom lines
     """
+    secondary_size = 0.45
     return draw_arbitrary_star(d, primary_colour, secondary_colour=secondary_colour, num_points=7,
                                wid=wid, hei=hei, x_start=x_start, y_start=y_start, size_ratio=size_ratio,
-                               orientation=orientation, secondary_size=secondary_size, sw=sw)
+                               orientation=orientation, stretch_ratio=secondary_size, thick_ratio=thick_ratio)
 
 
-def draw_southern_cross(d, primary_colour, secondary_colour='none', wid=UNSPECIFIED, hei=UNSPECIFIED,
-                x_start=0, y_start=0, size_ratio=1.0, orientation=VERTICAL, sw=None):
+def draw_southern_cross(d, primary_colour, secondary_colour='none',
+                         wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                         size_ratio=1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
     """
     Draw the Southern Cross like on the Australian flag
     :param d: Drawing object
@@ -100,8 +134,9 @@ def draw_southern_cross(d, primary_colour, secondary_colour='none', wid=UNSPECIF
     :param hei: height of the area we are working with
     :param x_start: the x-coordinate of the upper left corner of the rectangular area that is being drawn into
     :param y_start: the y-coordinate of the upper left corner of the rectangular area that is being drawn into
-    :param size_ratio: size factor
-    :param secondary_size: how spiky the star is. 0.45 by default for Aussie star.
+    :param size_ratio: size factor used for the radii of the stars
+    :param stretch_size: how spiky the stars are. Set to the default Aussie star (0.45).
+    :param thick_ratio: scaling factor for stroke width. Set to default Aussie star.
     :return: the height of the top/bottom lines
     """
     wid, hei = get_effective_dimensions(d, wid, hei)
@@ -111,37 +146,46 @@ def draw_southern_cross(d, primary_colour, secondary_colour='none', wid=UNSPECIF
     if type(primary_colour) != list:
         primary_colour = [primary_colour]*5
 
-    if sw == None:
-        sw = hei/100
+    sw = thick_ratio*hei/100
 
     # top star is midx and about hei/6?
     top_offs = 2*hei/6
     starsize = 0.3
-    draw_australian_star(d, primary_colour[0], secondary_colour, wid=wid/2, hei=hei, x_start=midx/2, y_start=-top_offs, size_ratio=starsize, sw=sw)
+    draw_australian_star(d, primary_colour[0], secondary_colour,
+                         wid=wid/2, hei=hei, x_start=midx/2, y_start=-top_offs,
+                         size_ratio=starsize, thick_ratio=thick_ratio, stretch_ratio=stretch_ratio)
+
     # lower star is also midx
-    draw_australian_star(d, primary_colour[4], secondary_colour, wid=wid/2, hei=hei, x_start=midx/2, y_start=top_offs, size_ratio=starsize, sw=sw)
+    draw_australian_star(d, primary_colour[4], secondary_colour,
+                         wid=wid/2, hei=hei, x_start=midx/2, y_start=top_offs,
+                         size_ratio=starsize, thick_ratio=thick_ratio, stretch_ratio=stretch_ratio)
 
     # left star is at wid/4 and about 2/3 hei?
     leftward = hei*0.25
     left_y = hei*0.065
-    draw_australian_star(d, primary_colour[2], secondary_colour, wid=wid/2, hei=hei, x_start=(midx/2)-leftward, y_start=-left_y, size_ratio=starsize, sw=sw)
+    draw_australian_star(d, primary_colour[2], secondary_colour,
+                         wid=wid/2, hei=hei, x_start=(midx/2)-leftward, y_start=-left_y,
+                         size_ratio=starsize, thick_ratio=thick_ratio, stretch_ratio=stretch_ratio)
 
     # right star is at .75wid and higher than left
     right_y = hei*0.125
     rightward = hei*0.215
-    draw_australian_star(d, primary_colour[1], secondary_colour, wid=wid/2, hei=hei, x_start=(midx/2)+rightward, y_start=-right_y, size_ratio=starsize, sw=sw)
+    draw_australian_star(d, primary_colour[1], secondary_colour,
+                         wid=wid/2, hei=hei, x_start=(midx/2)+rightward, y_start=-right_y,
+                         size_ratio=starsize, thick_ratio=thick_ratio, stretch_ratio=stretch_ratio)
 
     # and then the little star
     small_y = hei*0.05
     small_x = hei*0.09
-    draw_fivesided_star(d, primary_colour[3], secondary_colour,  wid=wid/2, hei=hei, x_start=(midx/2)+small_x, y_start=small_y,
-                        size_ratio=starsize/2, secondary_size=0.475, sw=sw)
+    draw_fivesided_star(d, primary_colour[3], secondary_colour,
+                        wid=wid/2, hei=hei, x_start=(midx/2)+small_x, y_start=small_y,
+                        size_ratio=starsize/2, stretch_ratio=0.475, thick_ratio=thick_ratio)
 
 
 
-def draw_arbitrary_star_trace(d, primary_colour, secondary_colour='none',  num_points=5,
+def draw_arbitrary_star_trace(d, primary_colour, secondary_colour='none',  num_points=5, offset=2,
                         wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-                        size_ratio=1.0, secondary_size=0.58, orientation=VERTICAL, square=True, sw=0):
+                        size_ratio=1.0, secondary_size=0.58, thick_ratio=1.0, orientation=VERTICAL, square=True, sw=0):
     """
     Draw a star of arbitrary points that is the traced out kinda star like a Star of David, with rounded edges
     :param d: Drawing object
@@ -151,8 +195,9 @@ def draw_arbitrary_star_trace(d, primary_colour, secondary_colour='none',  num_p
     :param hei: height of the area we are working with
     :param x_start: the x-coordinate of the upper left corner of the rectangular area that is being drawn into
     :param y_start: the y-coordinate of the upper left corner of the rectangular area that is being drawn into
-    :param size_ratio: size factor
-    :param secondary_size: how spiky the star is. 0.58 for Jewish star of david. 0.5 for regular 5-point star.
+    :param size_ratio: size factor. The radius of the star.
+    :param stretch_ratio: How spiky the star is. 0.58 for Jewish star of david. 0.5 for regular 5-point star.
+    :param thick_ratio: scaling factor for the line width. Default is hei/100.
     :return: the height of the top/bottom lines
     """
     rotateby = angle_offset_for_orientation(orientation)
@@ -165,7 +210,7 @@ def draw_arbitrary_star_trace(d, primary_colour, secondary_colour='none',  num_p
     outer_radius = size_ratio*hei/4
 
     if sw == 0:
-        sw = outer_radius*secondary_size *0.23
+        sw = thick_ratio*hei/100#outer_radius*secondary_size *0.23
 
     ang_offset = rotateby
 
@@ -179,7 +224,7 @@ def draw_arbitrary_star_trace(d, primary_colour, secondary_colour='none',  num_p
             midx -= midx * (wid / hei) / 4
 
         stop1 = get_triangle_coords(outer_radius, arc_width, i, cent_x=midx, cent_y=midy, offset=ang_offset)
-        stop2 = get_triangle_coords(outer_radius, arc_width, i+2, cent_x=midx, cent_y=midy, offset=ang_offset)
+        stop2 = get_triangle_coords(outer_radius, arc_width, i+offset, cent_x=midx, cent_y=midy, offset=ang_offset)
         p.M(*stop1)
         p.L(*stop2)
         d.append(p)
@@ -198,8 +243,9 @@ def draw_pointed_arbitrary_star_trace(d, primary_colour, secondary_colour='none'
     :param hei: height of the area we are working with
     :param x_start: the x-coordinate of the upper left corner of the rectangular area that is being drawn into
     :param y_start: the y-coordinate of the upper left corner of the rectangular area that is being drawn into
-    :param size_ratio: size factor
-    :param secondary_size: how spiky the star is. 0.58 for Jewish star of david. 0.5 for regular 5-point star.
+    :param size_ratio: size factor. The radius of the star.
+    :param stretch_ratio: How spiky the star is. 0.58 for Jewish star of david. 0.5 for regular 5-point star.
+    :param thick_ratio: scaling factor for the line width. Default is hei/100.
     :return: the height of the top/bottom lines
     """
     rotateby = angle_offset_for_orientation(orientation)
@@ -213,7 +259,7 @@ def draw_pointed_arbitrary_star_trace(d, primary_colour, secondary_colour='none'
     inner_radius = outer_radius*0.63
 
     if sw == 0 and secondary_colour != 'none':
-        sw = 2#outer_radius*secondary_size *0.23
+        sw = thick_ratio*(hei/100)#outer_radius*secondary_size *0.23
 
     ang_offset = rotateby
 
@@ -245,8 +291,10 @@ def draw_pointed_arbitrary_star_trace(d, primary_colour, secondary_colour='none'
         d.append(p)
     return sw
 
-def draw_morocco_star(d, primary_colour, secondary_colour='none', wid=UNSPECIFIED, hei=UNSPECIFIED,
-                x_start=0, y_start=0, size_ratio=1.0, secondary_size=0.5, orientation=VERTICAL, sw=0):
+
+def draw_morocco_star(d, primary_colour, secondary_colour='none',
+              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
     """
     Draw a five-pointed star that is traced out like the Morocco star
     :param d: Drawing object
@@ -256,24 +304,78 @@ def draw_morocco_star(d, primary_colour, secondary_colour='none', wid=UNSPECIFIE
     :param hei: height of the area we are working with
     :param x_start: the x-coordinate of the upper left corner of the rectangular area that is being drawn into
     :param y_start: the y-coordinate of the upper left corner of the rectangular area that is being drawn into
-    :param size_ratio: size factor
-    :param secondary_size: how spiky the star is. 0.385 if you want a horizontal line at mid-top
+    :param size_ratio: size factor. The radius of the star.
+    :param stretch_ratio: How spiky the star is. Use 0.385 if you want a horizontal line at mid-top
+    :param thick_ratio: scaling factor for the line width. Default is based on the Moroccan LGBT flag.
     :return: the height of the top/bottom lines
     """
     wid, hei = get_effective_dimensions(d, wid, hei)
 
     outer_radius = size_ratio*hei/4
     inner_radius = outer_radius*0.63
-    if sw == 0:
-        y_start += (outer_radius-inner_radius)*0.25
+    y_start += (outer_radius-inner_radius)*0.25
+    sw = thick_ratio*(hei*0.001)
     return draw_pointed_arbitrary_star_trace(d, primary_colour, secondary_colour=primary_colour, num_points=5,
                                wid=wid, hei=hei, x_start=x_start, y_start=y_start, size_ratio=size_ratio*1,
-                               orientation=orientation, secondary_size=secondary_size, sw=sw)
+                               orientation=orientation, secondary_size=stretch_ratio*0.5, sw=sw)
 
 
 
-def draw_heart(d, primary_colour, secondary_colour='none', wid=UNSPECIFIED, hei=UNSPECIFIED,
-               x_start=0, y_start=0, size_ratio=1, orientation=VERTICAL):
+def draw_star_of_david(d, primary_colour, secondary_colour='none',
+              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
+    """
+    Draw a Star of David. If secondary colour is 'none', do a hollow Star of David
+    like in this Androgynous flag: https://lgbtqia.wiki/wiki/Androgynos#/media/File:Androgynos_(2).png
+    :param d: Drawing object
+    :param primary_colour: the outline of the star
+    :param secondary_colour: the colour used for the inside lines (if any)
+    :param wid: width of the area we are working with
+    :param hei: height of the area we are working with
+    :param x_start: the x-coordinate of the upper left corner of the rectangular area that is being drawn into
+    :param y_start: the y-coordinate of the upper left corner of the rectangular area that is being drawn into
+    :param size_ratio: size factor. The radius of the star.
+    :param stretch_ratio: How spiky the star is. Default is to be a Star of David.
+    :param thick_ratio: scaling factor for the line width. Default is based on the Androgynos flag.
+    :return: stroke width
+    """
+    rotateby = angle_offset_for_orientation(orientation)
+    wid, hei = get_effective_dimensions(d, wid, hei)
+
+    midx = x_start + wid/2
+    midy = y_start + hei/2
+
+    arc_width = 360 / 6
+    outer_radius = 1.29*size_ratio*hei/4
+    inner_radius = outer_radius*0.578*stretch_ratio
+
+    sw = 1.29*thick_ratio*(hei/4)*0.5 *0.175
+
+    ang_offset = rotateby
+
+    linecap = 'round'
+    for i in range(6):
+        stopM = get_triangle_coords(inner_radius, arc_width, i+0.5, cent_x=midx, cent_y=midy, offset=ang_offset)
+        r = draw.Path(stroke=secondary_colour, fill='none', stroke_width=sw, stroke_linecap=linecap)
+        stopQ = get_triangle_coords(inner_radius, arc_width, i+1.5, cent_x=midx, cent_y=midy, offset=ang_offset)
+        r.M(*stopM)
+        r.L(*stopQ)
+        d.append(r)
+    for i in range(6):
+        stop1 = get_triangle_coords(outer_radius, arc_width, i, cent_x=midx, cent_y=midy, offset=ang_offset)
+        stopM = get_triangle_coords(inner_radius, arc_width, i+0.5, cent_x=midx, cent_y=midy, offset=ang_offset)
+        stopP = get_triangle_coords(inner_radius, arc_width, i-0.5, cent_x=midx, cent_y=midy, offset=ang_offset)
+        p = draw.Path(stroke=primary_colour, fill='none', stroke_width=sw, stroke_linecap=linecap)
+        p.M(*stopP)
+        p.L(*stop1)
+        p.L(*stopM)
+        d.append(p)
+    return sw
+
+
+def draw_heart(d, primary_colour, secondary_colour='none',
+              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
     """
     Draw a heart in the centre
     :param d: Drawing object
@@ -283,7 +385,8 @@ def draw_heart(d, primary_colour, secondary_colour='none', wid=UNSPECIFIED, hei=
     :param hei: height of the area we are working with
     :param x_start: the x-coordinate of the upper left corner of the rectangular area that is being drawn into
     :param y_start: the y-coordinate of the upper left corner of the rectangular area that is being drawn into
-    :param size_ratio: size factor
+    :param size_ratio: size factor (radius of heart)
+    :param thick_ratio: scaling factor for the line width (if outline of heart is used). Default is hei/100 if outlining, 0 if not.
     :return: none
     """
     # path traced from https://commons.wikimedia.org/wiki/File:Icons8_flat_like.svg
@@ -336,7 +439,8 @@ def draw_heart(d, primary_colour, secondary_colour='none', wid=UNSPECIFIED, hei=
     if rotateby != 0:
         p = draw.Path(fill=primary_colour, stroke=secondary_colour, transform=f'rotate({rotateby},{midx},{midy})')
     else:
-        p = draw.Path(fill=primary_colour, stroke=secondary_colour)
+        sw = thick_ratio*(hei/100)
+        p = draw.Path(fill=primary_colour, stroke=secondary_colour, stroke_width=sw)
     p.M(x_rightcrest,top_crests) # start from right crest
     p.C(cx_inner_rightcrest,top_crests,cx_righttrough,cy_trough,midx,cy_sidetop) # go ccw to the trough
     p.C(cx_lefttrough,cy_trough,cx_inner_leftcrest,top_crests,x_leftcrest,top_crests) # ccw to left crest
@@ -347,6 +451,8 @@ def draw_heart(d, primary_colour, secondary_colour='none', wid=UNSPECIFIED, hei=
     p.C(rightmost,cy_sidetop,cx_outer_rightcrest,top_crests,x_rightcrest,top_crests) # return to right crest
     p.Z()
     d.append(p)
+
+
 
 
 if __name__ == '__main__':
@@ -360,11 +466,14 @@ if __name__ == '__main__':
 
     d = draw.Drawing(wid, hei)
     pal = ['purple', 'orange', 'black', 'black']
-    draw_horiz_bars(d, ['yellow'])
+    #draw_horiz_bars(d, ['yellow'])
+    androg = ["#0552a8", '#0d7dfe'.upper(), '#fffFFF', '#fffFFF', '#ffff61' , '#FED45b']
+    draw_horiz_bars(d, androg)
     #draw_fivesided_star(d, 'red', y_start=-100, x_start=100, orientation=DIAGONAL)
     #draw_arbitrary_star(d,'red', 'black', num_points=20, secondary_size=0.75, square=False)
-    #draw_arbitrary_star_trace(d, 'red', num_points=5)
-    draw_pointed_arbitrary_star_trace(d, 'red', num_points=5)
+    #draw_arbitrary_star_trace(d, 'red', num_points=6)
+    #draw_pointed_arbitrary_star_trace(d, 'black', num_points=5)
+    draw_star_of_david(d, 'black', )
 
     d.save_svg('drawflags/test2.svg')
 
