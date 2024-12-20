@@ -132,7 +132,7 @@ if __name__ == '__main__':
     d.save_svg(outdir + 'metisintersex.svg')
 
     # example of concentric infinities: Autistic Pride Day flag
-    d = draw.Drawing(500, 300)
+    d = draw.Drawing(500*3, 300*3)
     draw_horiz_bars(d, ['white'])
     draw_concentric_infinities(d, ['#2cad74', 'white', '#ffc65b', 'white', '#e43546'], 'white', size_ratio=0.7)
     d.save_svg(outdir + 'autisticprideday.svg')
@@ -144,14 +144,6 @@ if __name__ == '__main__':
     draw_nautilus(d, nautilus_colours, border_colour=disability_grey)
     d.save_svg(outdir + 'autismspectrum.svg')
 
-    # progress pride flag
-    d = draw.Drawing(500, 300)
-    sw = draw_horiz_bars(d, rainbow_stripes)
-    pile_stripes = [intersex_yellow, 'white', trans_pink, trans_blue, '#784f16', 'black']
-    pile_width = draw_multipile(d, pile_stripes, line_width=sw/2, size_ratio=0.9)
-    draw_transparent_ring(d, intersex_purple, wid=pile_width, size_ratio=0.5, x_start=-0.25 * sw)
-    d.save_svg(outdir + 'progresspride.svg')
-
     # inner triangles: Bissu flag
     d = draw.Drawing(500, 300)
     draw_horiz_bars(d, ['#e01507'])
@@ -161,7 +153,7 @@ if __name__ == '__main__':
     # closeted intersex flag
     d = draw.Drawing(500, 300)
     draw_reverse_diagonal_stripes(d, ['#626eb7', '#c7d6ff'])
-    radius = draw_square(d, 'black', fill_colour=intersex_yellow)
+    radius = draw_square(d, 'black', intersex_yellow)
     draw_diagonal_cut_square(d, 'white')
     draw_closet_symbol(d, intersex_purple, size_ratio=.4)
     d.save_svg(outdir + 'closetedintersex.svg')
@@ -224,7 +216,7 @@ if __name__ == '__main__':
     # triangle example: pink triangle flag
     d = draw.Drawing(500, 300)
     bh = draw_horiz_bars(d, ['black'])
-    draw_triangle(d, '#ff66cc')
+    draw_inverted_triangle(d, '#ff66cc')
     d.save_svg(outdir + 'pink_triangle.svg')
 
     # pocket gender flag

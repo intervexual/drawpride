@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+     width="1500" height="900" viewBox="0 0 1500 900">
+<defs>
+</defs>
+<rect x="0" y="0" width="1500" height="901" fill="#595959" />
+<circle cx="540.0" cy="450.0" r="273.0" stroke="#796098" stroke-width="42.0" fill="none" />
+<circle cx="540.0" cy="450.0" r="231.0" stroke="#bf7998" stroke-width="42.0" fill="none" />
+<circle cx="540.0" cy="450.0" r="189.0" stroke="#796098" stroke-width="42.0" fill="none" />
+<circle cx="540.0" cy="450.0" r="147.0" stroke="#bf7998" stroke-width="42.0" fill="none" />
+<circle cx="960.0" cy="450.0" r="273.0" stroke="#bf7998" stroke-width="42.0" fill="none" />
+<circle cx="960.0" cy="450.0" r="231.0" stroke="#796098" stroke-width="42.0" fill="none" />
+<circle cx="960.0" cy="450.0" r="189.0" stroke="#bf7998" stroke-width="42.0" fill="none" />
+<circle cx="960.0" cy="450.0" r="147.0" stroke="#796098" stroke-width="42.0" fill="none" />
+<path d="M736.4807275181913,203.78805123649607 C881.4007978788036,345.623301413983,819.4232008734338,492.9786405942423,901.9085754123334,537.466487235829" stroke="#595959" stroke-width="42.0" fill="#595959" stroke-linecap="round" />
+<path d="M710.2832971824324,236.61631107162992 C841.2359981283562,357.90291301233793,779.2584011229862,505.25825219259724,878.6720055772669,572.4530821301607" stroke="#796098" stroke-width="42.0" fill="#796098" stroke-linecap="round" />
+<path d="M684.0858668466735,269.4445709067638 C801.0711983779087,370.1825246106929,739.0936013725388,517.5378637909522,855.4354357422002,607.4396770244923" stroke="#bf7998" stroke-width="42.0" fill="#bf7998" stroke-linecap="round" />
+<path d="M657.8884365109147,302.2728307418977 C760.9063986274612,382.4621362090478,698.9288016220912,529.8174753893071,832.1988659071336,642.4262719188239" stroke="#796098" stroke-width="42.0" fill="#796098" stroke-linecap="round" />
+<path d="M631.691006175156,335.1010905770315 C720.7415988770138,394.74174780740276,658.7640018716438,542.097086987662,808.9622960720669,677.4128668131556" stroke="#bf7998" stroke-width="42.0" fill="#bf7998" stroke-linecap="round" />
+<path d="M605.4935758393971,367.9293504121654 C680.5767991265662,407.0213594057577,618.5992021211963,554.376698586017,785.7257262370003,712.3994617074873" stroke="#595959" stroke-width="42.0" fill="#595959" stroke-linecap="round" />
+</svg>

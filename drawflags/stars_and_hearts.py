@@ -392,7 +392,6 @@ def draw_nautstar(d, primary_colour, secondary_colour='none',
     :param thick_ratio: scaling factor for the line width.
     :return: stroke width
     """
-    print(secondary_colour)
     this_wid, this_hei = get_effective_dimensions(d, wid, hei)
     sw = (this_hei/3)/5
     midy = y_start + this_hei/2

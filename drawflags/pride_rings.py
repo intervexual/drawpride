@@ -273,7 +273,7 @@ def draw_bullseye(d, colours, wid=UNSPECIFIED, hei=UNSPECIFIED, size_ratio=1.0):
     draw_ring(d, wid, hei, math.ceil(radius), thickness + fudge, colours[0], 'none')
 
 
-def draw_inner_bullseye(d, colours, wid=UNSPECIFIED, hei=UNSPECIFIED, size_ratio=1.0):
+def draw_inner_bullseye(d, colours, wid=UNSPECIFIED, hei=UNSPECIFIED, stretch_ratio=1.0, size_ratio=1.0, thick_ratio=1.0, x_start=0, y_start=0):
     """
     Draw concentric rings inside the intersex ring (outer ring will always have the standard thickness)
     :param d: Drawing object
@@ -287,19 +287,20 @@ def draw_inner_bullseye(d, colours, wid=UNSPECIFIED, hei=UNSPECIFIED, size_ratio
     width_of_ring *= size_ratio
     radius = (top_of_ring(hei)+(width_of_ring/3))*size_ratio # the radius INSIDE the outer ring
 
-    thickness  = radius/(len(colours)-1)
+    thickness  = radius/(len(colours)-1*stretch_ratio)
     fudge = max(hei/100, 1)
 
     # do the inner one first
-    d.append(draw.Circle(wid/2, hei/2, thickness, fill=colours[-1]))
+    d.append(draw.Circle(wid/2, hei/2, thickness + fudge, fill=colours[-1]))
 
     # outer ring
-    draw_transparent_ring(d, d.width, d.height, colours[0], 'none', size_ratio=size_ratio)
+    draw_transparent_ring(d,  colours[0], 'none', wid=wid, hei=hei, size_ratio=size_ratio)
 
     i = 0
     while i < len(colours) - 1:
-        draw_ring(d, wid, hei, math.ceil(radius - (i + 1) * thickness), thickness + fudge, colours[i + 1], 'none')
+        draw_ring(d, wid, hei, math.ceil(radius - (i - 1*thick_ratio) * thickness), thickness + fudge, colours[i + 1], 'none')
         i += 1
+
 
 
 

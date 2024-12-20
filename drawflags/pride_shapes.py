@@ -1036,9 +1036,9 @@ def draw_ellipse(d, primary_colour, secondary_colour='none',
 
 
 
-def draw_triangle(d, primary_colour, secondary_colour='none',
-              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
+def draw_inverted_triangle(d, primary_colour, secondary_colour='none',
+                           wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                           size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
     """
     Draw an inverted triangle like the pink triangle flag
     :param d: Drawing object
@@ -1061,7 +1061,7 @@ def draw_triangle(d, primary_colour, secondary_colour='none',
     h = hei/79.375
 
     triwidtop = (109.178*w -  23.330*w)*size_ratio
-    triwidhei = (78.977*h - 0.661*h)*size_ratio
+    triwidhei = (78.977*h - 0.661*h)*size_ratio*stretch_ratio
     midx = x_start + wid/2
     midy = y_start + hei/2
     left = midx - triwidtop/2
@@ -1072,6 +1072,52 @@ def draw_triangle(d, primary_colour, secondary_colour='none',
     p = draw.Path(fill=primary_colour, stroke=secondary_colour, stroke_width=sw)
     p.M(left,top).L(right, top).L(midx, bottom).L(left,top).Z()
     d.append(p)
+
+
+def draw_triangle(d, primary_colour, secondary_colour='none',
+              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
+    """
+    Draw a triangle
+    :param d: Drawing object
+    :param primary_colour: the fill of the star
+    :param secondary_colour: the outline of the star
+    :param wid: width of the area we are working with
+    :param hei: height of the area we are working with
+    :param x_start: the x-coordinate of the upper left corner of the rectangular area that is being drawn into
+    :param y_start: the y-coordinate of the upper left corner of the rectangular area that is being drawn into
+    :param size_ratio: size factor
+    :param stretch_ratio: affects the length of the base of the triangle relative to the other two vertices. If set to 1, triangle will be equilateral.
+    :param thick_ratio: scaling factor for the stroke width.
+    :return: the height of the top/bottom lines
+    """
+    angle_offset = angle_offset_for_orientation(orientation)
+    #print('ang offs', angle_offset, orientation)
+    wid, hei = get_effective_dimensions(d, wid, hei)
+
+    midx = x_start + wid/2
+    midy = y_start + hei/2
+
+    radius = size_ratio*hei/4
+
+    if secondary_colour != 'none':
+        sw = thick_ratio*hei/100
+    else:
+        sw = 0
+
+
+    y_top = midy - radius
+    y_base = midy + radius
+    x_top = midx
+    x_left = midx - radius*stretch_ratio
+    x_right = midx + radius*stretch_ratio
+
+    p = draw.Path(fill=primary_colour, stroke=secondary_colour, stroke_width=sw, transform=f'rotate({angle_offset},{midx},{midy})')
+    p.M(x_top, y_top).L(x_left, y_base).L(x_right, y_base).L(x_top, y_top)
+    p.Z()
+    d.append(p)
+    return sw
+
 
 
 def draw_asympile(d, primary_colour, secondary_colour='none',

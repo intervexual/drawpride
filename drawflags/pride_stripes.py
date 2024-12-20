@@ -33,6 +33,7 @@ DIAGONAL = 'D'
 BEND = 'R' # reverse diagonal
 CENTRAL = 'C'
 NEUTRAL = 'N'
+UPSIDE = 'U'
 EMPTY = 'none'
 
 UNSPECIFIED = -1.0
@@ -470,6 +471,8 @@ def angle_offset_for_orientation(orientation_flag):
         orientation_flag = 90 # for five segments, will give a Y shape
     elif HORIZONTAL in str(orientation_flag):
         orientation_flag = 180 # for five segments -< style shape
+    elif UPSIDE in str(orientation_flag):
+        orientation_flag = 0
     elif VERTICAL in str(orientation_flag): # for five segments, will give an upside Y style
         orientation_flag = -90
     elif orientation_flag == DIAGONAL:
@@ -538,15 +541,21 @@ def draw_concentric_circles(d, colours,
     <class 'drawsvg.elements.Circle'>
     """
     wid, hei = get_effective_dimensions(d, wid, hei)
-    centre_x = wid/2
-    centre_y = hei/2
+    centre_x = x_start + wid/2
+    centre_y = y_start + hei/2
 
     radius = (max(wid, hei) /2 )/ len(colours)
+    radius *= size_ratio
     stroke_wid = radius
     for i, colour in enumerate(colours):
-        this_radius = radius*(len(colours)-i) - stroke_wid/2
-        d.append(draw.Circle(centre_x, centre_y, this_radius, stroke=colours[i], stroke_width=stroke_wid))
+        if i == len(colours)-1:
+            fill_colour = colours[i]
+        else:
+            fill_colour = 'none'
+        this_radius = radius*(len(colours)-i) - stroke_wid/2 + radius*stretch_ratio*0.5
+        d.append(draw.Circle(centre_x, centre_y, this_radius, stroke=colours[i], stroke_width=stroke_wid, fill=fill_colour))
     return stroke_wid
+
 
 
 def draw_concentric_ellipses(d, colours,

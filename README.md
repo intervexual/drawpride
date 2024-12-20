@@ -103,8 +103,8 @@ d.save_svg(outdir + 'endosex.svg')
 The standard parameters of a given drawing function (e.g. draw_heart, draw_ellipse, draw_concentric_rectangles, etc) are:
 - `d`: a mutable drawing object that is altered by the function
 - colour is specified by either:
-  - `colours': a list of hex strings
-  - `primary_colour' and (optional) `secondary_colour' (both hex strings)
+  - `colours`: a list of hex strings
+  - `primary_colour` and (optional) `secondary_colour` (both hex strings)
 - and optional parameters:
   - `wid`: the width of the rectangular area in which things will be drawn into (defaults to 100% of the width of `d`'s canvas)
   - `hei`: the height of the rectangular area in which things will be drawn into (default: 100% of `d`'s canvas height)
