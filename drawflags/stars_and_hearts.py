@@ -435,7 +435,7 @@ def draw_therian(d, primary_colour, secondary_colour='none',
 
     d.append(draw.Circle(midx, midy+y_offset, radius, stroke_width=sw, stroke=primary_colour, fill='none'))
     # the triangle
-    draw_arbitrary_star_trace(d, primary_colour, num_points=3, thick_ratio=2.5*thick_ratio, size_ratio=1.2*size_ratio, y_start=y_offset)
+    draw_arbitrary_star_trace(d, primary_colour, num_points=3, thick_ratio=2.5*thick_ratio, size_ratio=1.2*size_ratio, y_start=y_offset+y_start, x_start=x_start)
 
 def draw_otherkin(d, primary_colour, secondary_colour='none',
               wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
@@ -501,7 +501,8 @@ def draw_nonhuman(d, primary_colour, secondary_colour='none',
 
     # triangle in nonhuman flag has a bottom width that is 1/3 canvas width
     # and its base horizontal line is just under the middle stripe so the top of the path aligns with the stripe
-    draw_arbitrary_star_trace(d, primary_colour, num_points=3, thick_ratio=3.5*thick_ratio, size_ratio=1.25*size_ratio, y_start=1.35*y_offset)
+    draw_arbitrary_star_trace(d, primary_colour, num_points=3, thick_ratio=3.5*thick_ratio, size_ratio=1.25*size_ratio,
+                              y_start=1.35*y_offset + y_start, x_start=x_start)
 
     # the ring
     d.append(draw.Circle(midx, midy+y_offset, 1.15*radius, stroke_width=sw, stroke=primary_colour, fill='none'))
@@ -509,7 +510,8 @@ def draw_nonhuman(d, primary_colour, secondary_colour='none',
     # the star is centred in the ring
     # the star is such that its horizontal line meets the triangle
     # the two little triangles from the star going past the main triangle should be full
-    draw_arbitrary_star_trace(d, primary_colour, num_points=7, offset=3, thick_ratio=3.5*thick_ratio, size_ratio=.9*size_ratio, y_start=y_offset)
+    draw_arbitrary_star_trace(d, primary_colour, num_points=7, offset=3, thick_ratio=3.5*thick_ratio, size_ratio=.9*size_ratio,
+                              y_start=y_offset, x_start=x_start)
 
 
 
