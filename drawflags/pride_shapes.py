@@ -1426,6 +1426,82 @@ def draw_diamond(d, primary_colour, secondary_colour='none',
     return diamond_height
 
 
+
+def draw_teardrop(d, primary_colour, secondary_colour='none',
+              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
+    """
+    Draw a teardrop in the centre
+    :param d: Drawing object
+    :param primary_colour: fill colour (string) of the teardrop
+    :param secondary_colour: colour (string) of the outline
+    :param wid: width of the area we are working with
+    :param hei: height of the area we are working with
+    :param x_start: the x-coordinate of the upper left corner of the rectangular area that is being drawn into
+    :param y_start: the y-coordinate of the upper left corner of the rectangular area that is being drawn into
+    :param size_ratio: size factor (radius of teardrop's base circle)
+    :param stretch_ratio: how stretched out the teardrop is
+    :param thick_ratio: scaling factor for the line width (if outline of heart is used). Default is hei/100 if outlining, 0 if not.
+    :return: none
+    """
+    wid, hei = get_effective_dimensions(d, wid, hei)
+    midx = x_start + wid/2
+    midy = y_start + hei/2
+
+    radius = size_ratio*(hei/6)
+    tear_len = radius*stretch_ratio*2.5
+    sw = thick_ratio*(hei/100)
+
+    circ_y = midy+tear_len*0.5
+    #d.append(draw.Circle(midx, circ_y, radius, stroke=secondary_colour, stroke_width=sw, fill=primary_colour))
+
+    cy_bottom_roundness = midy+tear_len*1
+    cy_top_roundness = midy+tear_len*0.6
+    cx_top_roundness = radius
+    tear_top = midy - tear_len*0.5
+    p = draw.Path(stroke=secondary_colour, stroke_width=sw, fill=primary_colour)
+    p.M(midx, tear_top) # start from the top
+    p.Q(midx+cx_top_roundness, cy_top_roundness , midx+radius, circ_y)
+    p.C(midx+radius, cy_bottom_roundness, midx-radius, cy_bottom_roundness, midx-radius, circ_y) # round part at the bottom
+    p.Q(midx-cx_top_roundness, cy_top_roundness, midx, tear_top)
+    d.append(p)
+
+
+def draw_caed(d, primary_colour, secondary_colour='none',
+              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+              size_ratio=1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
+    """
+    Draw the bottom vertical stripes used in the caedsexual, caedromantic, etc flags
+    :param d: Drawing object
+    :param primary_colour: fill colour of the middle bar
+    :param secondary_colour: fill colour of the side bars
+    :param wid: width of the area we are working with
+    :param hei: height of the area we are working with
+    :param x_start: the x-coordinate of the upper left corner of the rectangular area that is being drawn into
+    :param y_start: the y-coordinate of the upper left corner of the rectangular area that is being drawn into
+    :param size_ratio: size factor - radius of the central diamond
+    :param stretch_ratio: how concave to make the middle lines. Set to 0 for a flat line.
+    :param thick_ratio: not currently used
+    :return: radius
+    """
+    wid, hei = get_effective_dimensions(d, wid, hei)
+
+    step_height = size_ratio * (hei / 5)
+    each_wid = stretch_ratio*(wid / 5)
+
+    bottom_left = x_start
+    bottom = y_start + hei
+    side_height = step_height*2
+    mid_left = bottom_left+each_wid*2
+    mid_height = step_height*3
+
+    # side stripes
+    d.append(draw.Rectangle(bottom_left+each_wid, bottom-side_height, each_wid*3, side_height, fill=primary_colour))
+
+    # middle stripe
+    d.append(draw.Rectangle(mid_left, bottom-mid_height, each_wid, mid_height, fill=secondary_colour))
+
+
 if __name__ == '__main__':
     doctest.testmod()
     wid = 500
@@ -1443,10 +1519,12 @@ if __name__ == '__main__':
     d.save_png('drawflags/test.png')
 
     d = draw.Drawing(wid, hei)
-    pal = ['purple', 'orange', 'black', 'black']
-    draw_horiz_bars(d, ['yellow'])
+    pal = ['purple', 'orange', 'black', 'grey', 'red']
+    draw_horiz_bars(d, pal)
     #draw_bipolar(d, 'blue', 'black')
     #draw_fivesided_star(d, 'red', y_start=-100, x_start=100, orientation=DIAGONAL)
     #draw_arbitrary_star(d,'red', 'black', num_points=20, secondary_size=0.75, square=False)
-    draw_bipolar(d, 'black', 'blue')
+    #draw_bipolar(d, 'black', 'blue')
+    #draw_teardrop(d,'white')
+    draw_caed(d, 'green', 'yellow')
     d.save_svg('drawflags/test2.svg')

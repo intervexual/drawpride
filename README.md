@@ -28,6 +28,7 @@ Circular shapes:
 * Solid circles
 * Solid ellipses
 * Concentric ellipses and circles
+* Belt like in the Voidpunk flag
 
 Triangular shapes:
 * Piles (the triangle that goes on the left-hand side of the Demisexual flag)
@@ -36,11 +37,15 @@ Triangular shapes:
 * Inverted triangles like in the Pink Triangle flag
 * Ally A (upside-down chevron)
 * Inner triangles in the style of the Bissu flag
+* The Therian symbol (triangle & circle)
 
 Stars:
 * Five-pointed stars
-* The Southern Cross
+* The five-pointed star with two path lines used in the Outernaut, Varinaut, etc flags
 * Stars of David (both standard and outline-only)
+* The seven-pointed star used for Otherkin flags
+* The Nonhuman Unity symbol
+* The Southern Cross
 * Stars of arbitrary numbers of points, both traced out and filled in
 
 And other possible flag elements:
@@ -49,6 +54,7 @@ And other possible flag elements:
 * X-crosses (like in the Crossdresser flag)
 * Squares (like in the Dyadic and Endosex flags)
 * Half-squares (cut along diagonal, useful for endosex/dyadic flags)
+* The rectangular shape used for the Caed- flags (e.g. Caedsexual, Caedromantic)
 * Rhombi (squares rotated 45 degrees, used in an Altersex flag)
 * Diamonds (rhombi that are squished horizontally)
 * Hearts (like in the Biromantic flag)

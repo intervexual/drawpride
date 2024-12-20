@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+     width="500" height="300" viewBox="0 0 500 300">
+<defs>
+</defs>
+<rect x="0" y="0" width="500" height="101" fill="#7556b3" />
+<rect x="0" y="100.0" width="500" height="101" fill="#6b48ae" />
+<rect x="0" y="200.0" width="500" height="101" fill="#593c90" />
+<circle cx="250.0" cy="153.0" r="105.0" fill="#6b48ae" />
+<path d="M250.0,71.25000000000001 L286.77164689021305,232.35711155473" stroke="#ffFFff" fill="none" stroke-width="6.6" stroke-linecap="round" />
+<path d="M316.26021813916554,103.15923929247234 L213.22835310978695,232.35711155473" stroke="#ffFFff" fill="none" stroke-width="6.6" stroke-linecap="round" />
+<path d="M332.6251405574095,174.85864915279765 L167.37485944259043,174.85864915279762" stroke="#ffFFff" fill="none" stroke-width="6.6" stroke-linecap="round" />
+<path d="M286.77164689021305,232.35711155473 L183.73978186083446,103.15923929247236" stroke="#ffFFff" fill="none" stroke-width="6.6" stroke-linecap="round" />
+<path d="M213.22835310978695,232.35711155473 L249.99999999999997,71.25000000000001" stroke="#ffFFff" fill="none" stroke-width="6.6" stroke-linecap="round" />
+<path d="M167.37485944259043,174.85864915279762 L316.2602181391655,103.15923929247234" stroke="#ffFFff" fill="none" stroke-width="6.6" stroke-linecap="round" />
+<path d="M183.73978186083446,103.15923929247236 L332.6251405574095,174.85864915279768" stroke="#ffFFff" fill="none" stroke-width="6.6" stroke-linecap="round" />
+</svg>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+     width="500" height="300" viewBox="0 0 500 300">
+<defs>
+</defs>
+<rect x="0" y="0" width="500" height="61" fill="#7c8161" />
+<rect x="0" y="60.0" width="500" height="61" fill="#c6c694" />
+<rect x="0" y="120.0" width="500" height="61" fill="#faf5e2" />
+<rect x="0" y="180.0" width="500" height="61" fill="#a34f4f" />
+<rect x="0" y="240.0" width="500" height="61" fill="#752327" />
+<ellipse cx="250.0" cy="150.0" rx="120.65625000000001" ry="109.6875" fill="#faf5e2" stroke="none" stroke-width="0" />
+<path d="M250.0,67.5 L285.7954084771986,224.32993160194957" stroke="#7c8161" fill="none" stroke-width="4.8" stroke-linecap="round" />
+<path d="M314.5010973036125,98.56209134665448 L214.20459152280145,224.32993160194957" stroke="#7c8161" fill="none" stroke-width="4.8" stroke-linecap="round" />
+<path d="M330.43155275500044,168.35797705139595 L169.56844724499956,168.35797705139592" stroke="#7c8161" fill="none" stroke-width="4.8" stroke-linecap="round" />
+<path d="M285.7954084771986,224.32993160194957 L185.49890269638752,98.5620913466545" stroke="#7c8161" fill="none" stroke-width="4.8" stroke-linecap="round" />
+<path d="M214.20459152280145,224.32993160194957 L249.99999999999997,67.5" stroke="#7c8161" fill="none" stroke-width="4.8" stroke-linecap="round" />
+<path d="M169.56844724499956,168.35797705139592 L314.5010973036125,98.56209134665447" stroke="#7c8161" fill="none" stroke-width="4.8" stroke-linecap="round" />
+<path d="M185.49890269638752,98.5620913466545 L330.43155275500044,168.357977051396" stroke="#7c8161" fill="none" stroke-width="4.8" stroke-linecap="round" />
+</svg>

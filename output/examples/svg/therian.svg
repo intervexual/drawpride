@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+     width="500" height="300" viewBox="0 0 500 300">
+<defs>
+</defs>
+<rect x="0" y="0" width="500" height="101" fill="#177b49" />
+<rect x="0" y="100.0" width="500" height="101" fill="#0fa25b" />
+<rect x="0" y="200.0" width="500" height="101" fill="#08c96c" />
+<circle cx="250.0" cy="153.0" r="105.0" fill="#0fa25b" />
+<circle cx="250.0" cy="156.0" r="60.0" stroke-width="7.5" stroke="#ffFFff" fill="none" />
+<path d="M250.0,66.0 L172.05771365940052,201.0" stroke="#ffFFff" fill="none" stroke-width="7.5" stroke-linecap="round" />
+<path d="M327.9422863405995,201.0 L249.99999999999997,66.0" stroke="#ffFFff" fill="none" stroke-width="7.5" stroke-linecap="round" />
+<path d="M172.05771365940052,201.0 L327.9422863405995,201.0" stroke="#ffFFff" fill="none" stroke-width="7.5" stroke-linecap="round" />
+</svg>

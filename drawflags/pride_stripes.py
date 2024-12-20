@@ -839,11 +839,99 @@ def draw_armpit_stripes(d, colours,
     '''
 
 
+def draw_pluralrole(d, colours,
+                             wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                             size_ratio=1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
+    """
+    Draw the template used for Plural Roles like Caretaker and Announcer
+    e.g. https://pluralpedia.org/w/Caretaker
+    :param d: Drawing object
+    :param colours: in the following order: top-left, top-right, bottom-left, bottom-right, middle-left, middle-right
+    :param wid: width of the area we are working with
+    :param hei: height of the area we are working with
+    :param x_start: the x-coordinate of the upper left corner of the rectangular area that is being drawn into
+    :param y_start: the y-coordinate of the upper left corner of the rectangular area that is being drawn into
+    :param size_ratio: size factor - radius of the central diamond
+    :param stretch_ratio: how concave to make the middle lines. Set to 0 for a flat line.
+    :param thick_ratio: not currently used
+    :return: radius
+    """
+    assert len(colours) >= 6, 'pluralrole needs 6 colours' + str(colours)
+    wid, hei = get_effective_dimensions(d, wid, hei)
+    midx = x_start + wid/2
+    midy = y_start + hei/2
+
+    x_end = x_start + wid
+    y_end = y_start + hei
+
+    diamond_radius = size_ratio*hei*(1/3)
+
+    # the outer coordinates of the diamond
+    diamond_left = midx - diamond_radius
+    diamond_right = midx + diamond_radius
+    diamond_top = midy - diamond_radius
+    diamond_bottom = midy + diamond_radius
+
+    # the line sizes
+    sw = hei/15
+    midline_top = midy - sw*0.2*stretch_ratio
+
+    # the coordinate where the outward lines reach the canvas
+    outfac = 4
+    direction = 1
+    outward_left = diamond_left # start from
+    if orientation == HORIZONTAL:
+        outward_left = diamond_right
+        direction = -1
+    x_outward = midx + direction*(outfac - 1) * diamond_radius
+    outward_top = midy - outfac*diamond_radius
+    outward_bottom = midy + outfac*diamond_radius
+
+    # the top left portion
+    p = draw.Path(fill=colours[0])
+    p.M(x_start, y_start)
+    p.L(x_start, midy).L(outward_left, midy).L(x_outward, outward_top).L(x_start, outward_top).Z()
+    d.append(p)
+
+    # top right
+    p = draw.Path(fill=colours[1])
+    p.M(x_end, y_start)
+    p.L(x_end, midy).L(outward_left, midy).L(x_outward, outward_top).L(x_end, outward_top).Z()
+    d.append(p)
+
+    # bottom left
+    p = draw.Path(fill=colours[2])
+    p.M(x_start, y_end)
+    p.L(x_start, midy).L(outward_left, midy).L(x_outward, outward_bottom).L(x_start, outward_bottom).Z()
+    d.append(p)
+
+    # bottom right
+    p = draw.Path(fill=colours[3])
+    p.M(x_end, y_end)
+    p.L(x_end, midy).L(outward_left, midy).L(x_outward, outward_bottom).L(x_end, outward_bottom).Z()
+    d.append(p)
+
+    # middle diamond
+    p = draw.Path(fill=colours[4])
+    p.M(diamond_left, midy)
+    p.L(midx, diamond_top).L(midx, diamond_bottom).L(diamond_left, midy).Z()
+    d.append(p)
+    p = draw.Path(fill=colours[5])
+    p.M(diamond_right, midy)
+    p.L(midx, diamond_top).L(midx, diamond_bottom).L(diamond_right, midy).Z()
+    d.append(p)
+
+    # connector lines
+    d.append(draw.Line(diamond_left, midy, x_start, midline_top, stroke_width=sw, stroke=colours[4], stroke_linecap='square'))
+    d.append(draw.Line(diamond_right, midy, x_end, midline_top, stroke_width=sw, stroke=colours[5], stroke_linecap='square'))
+    return diamond_radius
+
+
 
 
 if __name__ == '__main__':
-    wid = 500
-    hei = 300
+    wid = 800
+    hei = 480
     d = draw.Drawing(wid, hei)
     draw_horiz_bars(d, RAINBOW)
     draw_diagonal_stripes(d, ['none', 'grey', 'red', 'yellow', 'white', 'blue', 'green', 'grey', 'none'], wid=wid/2, hei=hei/2, x_start=wid / 2)
@@ -851,10 +939,12 @@ if __name__ == '__main__':
     d.save_png('drawflags/test.png')
 
     d = draw.Drawing(wid, hei)
-    draw_vert_bars(d,['black'])
+    caretaker = ['#eaba61', '#ffed8e', '#ea9461', '#f9d19a', '#ffEFb8', '#7d5b2a']
+    draw_vert_bars(d,caretaker[:5])
     #draw_chevrons(d, stripes)
     #draw_concentric_rectangles(d, stripes, y_start=50)
-    draw_concentric_tees(d, RAINBOW[:3])
+    #draw_concentric_tees(d, RAINBOW[:3])
+    draw_caeds(d, )
     d.save_png('drawflags/test2.png')
     d.save_svg('drawflags/test.svg')
 

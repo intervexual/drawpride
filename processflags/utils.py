@@ -21,7 +21,9 @@ def get_info_for_line(line_info, headers, keyword):
     """
     assert keyword in headers, keyword + str(line_info) + str(headers)
     index = headers[keyword]
-    return line_info[index]
+    assert len(line_info) > index , str(index) + str(line_info) + str(len(line_info))
+    info = line_info[index]
+    return info
 
 def get_info_for_columns(line_info, headers, keywords):
     """
@@ -174,14 +176,18 @@ def parse_svg_path(s, rounding_precision=3, firstx=0, firsty=0):
         print(cmd)
     print('d.append(p)')
 
-def save_flag(d, name, directory='output/', save_png=True, save_svg=True, show_image=False, suffix=''):
+def save_flag(d, name, directory='output/', save_png=True, save_svg=True, show_image=False, suffix='', prefix='', same_folder=False):
+    # keep same_folder False as the Notebooks are set up that way
     assert directory.endswith('/')
     whether_save = {'png':save_png, 'svg':save_svg}
     saved_to = []
     for filetype in whether_save:
         if whether_save[filetype]:
-            png_loc = directory + filetype + '/'
-            png_name = png_loc + name + suffix + '.' + filetype
+            if same_folder:
+                png_loc = directory
+            else:
+                png_loc = directory + filetype + '/'
+            png_name = png_loc + prefix + name + suffix + '.' + filetype
             if not os.path.exists(png_loc):
                 os.makedirs(png_loc)
             if filetype == 'png':

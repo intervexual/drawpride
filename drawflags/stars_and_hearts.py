@@ -373,6 +373,149 @@ def draw_star_of_david(d, primary_colour, secondary_colour='none',
     return sw
 
 
+
+def draw_nautstar(d, primary_colour, secondary_colour='none',
+              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
+    """
+    Draw a star on a path in the style of the outernaut flag
+    see https://pluralpedia.org/w/File:Outernaut_Flag.png
+    :param d: Drawing object
+    :param primary_colour: the colour used for the lines (it goes first because layer-wise it is underneath the star)
+    :param secondary_colour: the fill of the star
+    :param wid: width of the area we are working with
+    :param hei: height of the area we are working with
+    :param x_start: the x-coordinate of the upper left corner of the rectangular area that is being drawn into
+    :param y_start: the y-coordinate of the upper left corner of the rectangular area that is being drawn into
+    :param size_ratio: size factor. The radius of the star.
+    :param stretch_ratio: How spiky the star is.
+    :param thick_ratio: scaling factor for the line width.
+    :return: stroke width
+    """
+    print(secondary_colour)
+    this_wid, this_hei = get_effective_dimensions(d, wid, hei)
+    sw = (this_hei/3)/5
+    midy = y_start + this_hei/2
+    top_height = midy-sw
+    top_bottom = midy+sw
+    x_end = x_start + this_wid*0.8
+    d.append(draw.Line(x_start, top_height, x_end, top_height, stroke_width=sw, stroke=primary_colour))
+    d.append(draw.Line(x_start, top_bottom, x_end, top_bottom, stroke_width=sw, stroke=primary_colour))
+    #draw_fivesided_star(d, secondary_colour, size_ratio=0.74, orientation=CENTRAL, y_start=hei*5, x_start=-150*wid)
+    draw_fivesided_star(d, secondary_colour, size_ratio=0.74, orientation=CENTRAL, y_start=-this_hei*0.015, x_start=.3*this_wid)
+
+
+def draw_therian(d, primary_colour, secondary_colour='none',
+              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
+    """
+    Draw the therian symbol, optionally in a circle
+    :param d: Drawing object
+    :param primary_colour: the colour used for the lines
+    :param secondary_colour: fill of background circle (if present)
+    :param wid: width of the area we are working with
+    :param hei: height of the area we are working with
+    :param x_start: the x-coordinate of the upper left corner of the rectangular area that is being drawn into
+    :param y_start: the y-coordinate of the upper left corner of the rectangular area that is being drawn into
+    :param size_ratio: size factor. The radius of the star.
+    :param stretch_ratio: How spiky the star is.
+    :param thick_ratio: scaling factor for the line width.
+    :return: stroke width
+    """
+    wid, hei = get_effective_dimensions(d, wid, hei)
+    midx = x_start + wid/2
+    midy = y_start + hei/2
+
+    radius = 1.2*size_ratio*hei/6
+    sw = thick_ratio*2.5*hei/100
+    y_offset = 0.02*hei
+
+    if secondary_colour != 'none':
+        outer_radius = radius*1.75
+        d.append(draw.Circle(midx, midy+y_offset/2, outer_radius, fill=secondary_colour))
+
+    d.append(draw.Circle(midx, midy+y_offset, radius, stroke_width=sw, stroke=primary_colour, fill='none'))
+    # the triangle
+    draw_arbitrary_star_trace(d, primary_colour, num_points=3, thick_ratio=2.5*thick_ratio, size_ratio=1.2*size_ratio, y_start=y_offset)
+
+def draw_otherkin(d, primary_colour, secondary_colour='none',
+              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
+    """
+    Draw the otherkin symbol, optionally in a circle
+    :param d: Drawing object
+    :param primary_colour: the colour used for the lines
+    :param secondary_colour: fill of background circle (if present)
+    :param wid: width of the area we are working with
+    :param hei: height of the area we are working with
+    :param x_start: the x-coordinate of the upper left corner of the rectangular area that is being drawn into
+    :param y_start: the y-coordinate of the upper left corner of the rectangular area that is being drawn into
+    :param size_ratio: size factor. The radius of the star.
+    :param stretch_ratio: How spiky the star is.
+    :param thick_ratio: scaling factor for the line width.
+    :return: stroke width
+    """
+    wid, hei = get_effective_dimensions(d, wid, hei)
+    midx = x_start + wid/2
+    midy = y_start + hei/2
+
+    radius = 1.2*size_ratio*hei/6
+    sw = thick_ratio*2.5*hei/100
+    y_offset = 0.02*hei
+
+    if secondary_colour != 'none':
+        outer_radius = radius*1.75
+        d.append(draw.Circle(midx, midy+y_offset/2, outer_radius, fill=secondary_colour))
+
+    # the star
+    draw_arbitrary_star_trace(d, primary_colour, num_points=7, offset=3, thick_ratio=2.2*thick_ratio, size_ratio=1.13*size_ratio, y_start=y_offset)
+
+
+def draw_nonhuman(d, primary_colour, secondary_colour='none',
+              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
+    """
+    Draw the nonhuman symbol, optionally in a circle
+    :param d: Drawing object
+    :param primary_colour: the colour used for the lines
+    :param secondary_colour: fill of background circle (if present)
+    :param wid: width of the area we are working with
+    :param hei: height of the area we are working with
+    :param x_start: the x-coordinate of the upper left corner of the rectangular area that is being drawn into
+    :param y_start: the y-coordinate of the upper left corner of the rectangular area that is being drawn into
+    :param size_ratio: size factor. The radius of the star.
+    :param stretch_ratio: How spiky the star is.
+    :param thick_ratio: scaling factor for the line width.
+    :return: stroke width
+    """
+    wid, hei = get_effective_dimensions(d, wid, hei)
+    midx = x_start + wid/2
+    midy = y_start + hei/2
+
+    radius = 1.2*size_ratio*hei/6
+    sw = thick_ratio*3.5*hei/100
+    y_offset = 0.02*hei
+
+    if secondary_colour != 'none':
+        outer_radius = radius*1.8
+        d.append(draw.Circle(midx, midy+y_offset, outer_radius, fill=secondary_colour))
+
+    # triangle in nonhuman flag has a bottom width that is 1/3 canvas width
+    # and its base horizontal line is just under the middle stripe so the top of the path aligns with the stripe
+    draw_arbitrary_star_trace(d, primary_colour, num_points=3, thick_ratio=3.5*thick_ratio, size_ratio=1.25*size_ratio, y_start=1.35*y_offset)
+
+    # the ring
+    d.append(draw.Circle(midx, midy+y_offset, 1.15*radius, stroke_width=sw, stroke=primary_colour, fill='none'))
+
+    # the star is centred in the ring
+    # the star is such that its horizontal line meets the triangle
+    # the two little triangles from the star going past the main triangle should be full
+    draw_arbitrary_star_trace(d, primary_colour, num_points=7, offset=3, thick_ratio=3.5*thick_ratio, size_ratio=.9*size_ratio, y_start=y_offset)
+
+
+
+
+
 def draw_heart(d, primary_colour, secondary_colour='none',
               wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
               size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
@@ -455,10 +598,12 @@ def draw_heart(d, primary_colour, secondary_colour='none',
 
 
 
+
+
 if __name__ == '__main__':
     doctest.testmod()
-    wid = 500
-    hei = 300
+    wid = 1200
+    hei = 720
     d = draw.Drawing(wid, hei)
     draw_horiz_bars(d, ['black'])
     draw_southern_cross(d, 'white')
@@ -467,14 +612,16 @@ if __name__ == '__main__':
     d = draw.Drawing(wid, hei)
     pal = ['purple', 'orange', 'black', 'black']
     #draw_horiz_bars(d, ['yellow'])
-    androg = ["#0552a8", '#0d7dfe'.upper(), '#fffFFF', '#fffFFF', '#ffff61' , '#FED45b']
-    draw_horiz_bars(d, androg)
+    #androg = ["#0552a8", '#0d7dfe'.upper(), '#fffFFF', '#fffFFF', '#ffff61' , '#FED45b']
+    #draw_horiz_bars(d, androg)
+    draw_horiz_bars(d, ['brown', 'yellow', 'brown'])
     #draw_fivesided_star(d, 'red', y_start=-100, x_start=100, orientation=DIAGONAL)
     #draw_arbitrary_star(d,'red', 'black', num_points=20, secondary_size=0.75, square=False)
     #draw_arbitrary_star_trace(d, 'red', num_points=6)
     #draw_pointed_arbitrary_star_trace(d, 'black', num_points=5)
-    draw_star_of_david(d, 'black', )
-
+    #draw_star_of_david(d, 'black', )
+    #draw_nautstar(d, 'black', 'blue')
+    draw_nonhuman(d, 'black', 'orange')
     d.save_svg('drawflags/test2.svg')
 
     '''

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+     width="500" height="300" viewBox="0 0 500 300">
+<defs>
+</defs>
+<rect x="0" y="0" width="500" height="74" fill="#a66cFF" />
+<rect x="0" y="72.72727272727273" width="500" height="74" fill="#BCA8ff" />
+<rect x="0" y="145.45454545454547" width="500" height="10" fill="white" />
+<rect x="0" y="154.54545454545456" width="500" height="74" fill="#606060" />
+<rect x="0" y="227.2727272727273" width="500" height="74" fill="#2d2d2d" />
+<path d="M275.72389,105.44491555168703 L301.44778,150.0" stroke="white" fill="none" stroke-width="14.3915625" stroke-linecap="round" />
+<path d="M301.44778,150.0 L275.72389,194.55508444831298" stroke="white" fill="none" stroke-width="14.3915625" stroke-linecap="round" />
+<path d="M275.72389,194.55508444831298 L224.27611000000002,194.55508444831298" stroke="white" fill="none" stroke-width="14.3915625" stroke-linecap="round" />
+<path d="M224.27611000000002,194.55508444831298 L198.55222,150.0" stroke="white" fill="none" stroke-width="14.3915625" stroke-linecap="round" />
+<path d="M198.55222,150.0 L224.27611,105.44491555168705" stroke="white" fill="none" stroke-width="14.3915625" stroke-linecap="round" />
+<path d="M224.27611,105.44491555168705 L275.72389,105.44491555168703" stroke="white" fill="none" stroke-width="14.3915625" stroke-linecap="round" />
+<path d="M224.27611000000002,105.44491555168703 L250.0,60.989999999999995 L275.72389,105.44491555168703" stroke="white" fill="none" stroke-width="14.3915625" stroke-linecap="round" />
+<path d="M275.72389,105.44491555168703 L327.0849211908529,105.495 L301.44778,150.0" stroke="white" fill="none" stroke-width="14.3915625" stroke-linecap="round" />
+<path d="M301.44778,150.0 L327.0849211908529,194.505 L275.72389,194.55508444831298" stroke="white" fill="none" stroke-width="14.3915625" stroke-linecap="round" />
+<path d="M275.72389,194.55508444831298 L250.0,239.01 L224.27611000000002,194.55508444831298" stroke="white" fill="none" stroke-width="14.3915625" stroke-linecap="round" />
+<path d="M224.27611000000002,194.55508444831298 L172.9150788091471,194.505 L198.55222,150.0" stroke="white" fill="none" stroke-width="14.3915625" stroke-linecap="round" />
+<path d="M198.55222,150.0 L172.91507880914713,105.49499999999999 L224.27611,105.44491555168705" stroke="white" fill="none" stroke-width="14.3915625" stroke-linecap="round" />
+</svg>

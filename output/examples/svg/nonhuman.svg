@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+     width="500" height="300" viewBox="0 0 500 300">
+<defs>
+</defs>
+<rect x="0" y="0" width="500" height="101" fill="#167a49" />
+<rect x="0" y="100.0" width="500" height="101" fill="white" />
+<rect x="0" y="200.0" width="500" height="101" fill="#593c8f" />
+<circle cx="250.0" cy="156.0" r="108.0" fill="white" />
+<path d="M250.0,64.35 L168.81011839520886,204.975" stroke="black" fill="none" stroke-width="10.5" stroke-linecap="round" />
+<path d="M331.18988160479114,204.975 L249.99999999999997,64.35" stroke="black" fill="none" stroke-width="10.5" stroke-linecap="round" />
+<path d="M168.81011839520886,204.975 L331.18988160479114,204.975" stroke="black" fill="none" stroke-width="10.5" stroke-linecap="round" />
+<circle cx="250.0" cy="156.0" r="69.0" stroke-width="10.5" stroke="black" fill="none" />
+<path d="M250.0,88.5 L279.2871523904352,216.8153985834133" stroke="black" fill="none" stroke-width="10.5" stroke-linecap="round" />
+<path d="M302.773625066592,113.9144383745355 L220.71284760956485,216.8153985834133" stroke="black" fill="none" stroke-width="10.5" stroke-linecap="round" />
+<path d="M315.8076340722731,171.02016304205122 L184.19236592772688,171.0201630420512" stroke="black" fill="none" stroke-width="10.5" stroke-linecap="round" />
+<path d="M279.2871523904352,216.8153985834133 L197.22637493340798,113.91443837453551" stroke="black" fill="none" stroke-width="10.5" stroke-linecap="round" />
+<path d="M220.71284760956485,216.8153985834133 L250.0,88.5" stroke="black" fill="none" stroke-width="10.5" stroke-linecap="round" />
+<path d="M184.19236592772688,171.0201630420512 L302.773625066592,113.91443837453548" stroke="black" fill="none" stroke-width="10.5" stroke-linecap="round" />
+<path d="M197.22637493340798,113.91443837453551 L315.8076340722731,171.02016304205125" stroke="black" fill="none" stroke-width="10.5" stroke-linecap="round" />
+</svg>
