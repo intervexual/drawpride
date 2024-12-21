@@ -8,4 +8,5 @@
 <path d="M500.0,93.0 L297.35005551444135,444.0" stroke="#FDD70A" fill="none" stroke-width="18.0" stroke-linecap="round" />
 <path d="M702.6499444855586,444.0 L499.99999999999994,93.0" stroke="#FDD70A" fill="none" stroke-width="18.0" stroke-linecap="round" />
 <path d="M297.35005551444135,444.0 L702.6499444855586,444.0" stroke="#FDD70A" fill="none" stroke-width="18.0" stroke-linecap="round" />
+<path d="M464.0,297.0 L464.0,333.0 M464.0,315.0 L536.0,315.0 L536.0,297.0 L536.0,333.0" stroke-width="18.0" fill="none" stroke="#FDD70A" />
 </svg>

@@ -30,7 +30,7 @@ def embed_icon(d, path_to_icon, colours, icondir='icons/', orientation=None,
         for to_replace in changes:
             if changes[to_replace].lower() != to_replace.lower():
                 path_to_icon = change_svg_colour(path_to_icon, changes[to_replace], to_replace, name=name)
-    if orientation == CENTRAL:
+    if orientation == HORIZONTAL:
         add_icon_by_embedding(d, path_to_icon, size_ratio * hei)
     elif orientation == CENTRAL+VERTICAL:
         add_icon_by_embedding(d, path_to_icon, size_ratio * wid)

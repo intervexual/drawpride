@@ -3,7 +3,7 @@ from pride_rings import *
 
 def draw_arbitrary_star(d, primary_colour, secondary_colour='none', num_points=5, square=True,
               wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=0.58, thick_ratio=1.0, orientation=VERTICAL):
+              size_ratio = 1.0, stretch_ratio=0.58, thick_ratio=1.0, orientation=HORIZONTAL):
     """
     Draw a star of arbitrary points
     :param d: Drawing object
@@ -55,7 +55,7 @@ def draw_arbitrary_star(d, primary_colour, secondary_colour='none', num_points=5
 
 def draw_fivesided_star(d, primary_colour, secondary_colour='none',
               wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
     """
     Draw a five-pointed star
     :param d: Drawing object
@@ -77,7 +77,7 @@ def draw_fivesided_star(d, primary_colour, secondary_colour='none',
 
 def draw_sevensided_star(d, primary_colour, secondary_colour='none',
               wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
     """
     Draw a seven pointed star polygon in the style of the morvigender flag
     https://genderqueer-dream.tumblr.com/post/638442638940504064/beyond-mogai-pride-flags-morvivgender-a
@@ -101,7 +101,7 @@ def draw_sevensided_star(d, primary_colour, secondary_colour='none',
 
 def draw_australian_star(d, primary_colour, secondary_colour='none',
                          wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-                         size_ratio=1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
+                         size_ratio=1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
     """
     Draw a seven-pointed star in the style of the Australian flag
     :param d: Drawing object
@@ -124,7 +124,7 @@ def draw_australian_star(d, primary_colour, secondary_colour='none',
 
 def draw_southern_cross(d, primary_colour, secondary_colour='none',
                          wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-                         size_ratio=1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
+                         size_ratio=1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
     """
     Draw the Southern Cross like on the Australian flag
     :param d: Drawing object
@@ -185,7 +185,7 @@ def draw_southern_cross(d, primary_colour, secondary_colour='none',
 
 def draw_arbitrary_star_trace(d, primary_colour, secondary_colour='none',  num_points=5, offset=2,
                         wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-                        size_ratio=1.0, secondary_size=0.58, thick_ratio=1.0, orientation=VERTICAL, square=True, sw=0):
+                        size_ratio=1.0, secondary_size=0.58, thick_ratio=1.0, orientation=HORIZONTAL, square=True, sw=0):
     """
     Draw a star of arbitrary points that is the traced out kinda star like a Star of David, with rounded edges
     :param d: Drawing object
@@ -233,7 +233,7 @@ def draw_arbitrary_star_trace(d, primary_colour, secondary_colour='none',  num_p
 
 def draw_pointed_arbitrary_star_trace(d, primary_colour, secondary_colour='none',  num_points=5,
                         wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-                        size_ratio=1.0, secondary_size=0.58, orientation=VERTICAL, square=True, sw=0):
+                        size_ratio=1.0, secondary_size=0.58, orientation=HORIZONTAL, square=True, sw=0):
     """
     Draw a traced out kind of star, like the Star of David, with pointy points
     :param d: Drawing object
@@ -294,7 +294,7 @@ def draw_pointed_arbitrary_star_trace(d, primary_colour, secondary_colour='none'
 
 def draw_morocco_star(d, primary_colour, secondary_colour='none',
               wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
     """
     Draw a five-pointed star that is traced out like the Morocco star
     :param d: Drawing object
@@ -323,7 +323,7 @@ def draw_morocco_star(d, primary_colour, secondary_colour='none',
 
 def draw_star_of_david(d, primary_colour, secondary_colour='none',
               wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
     """
     Draw a Star of David. If secondary colour is 'none', do a hollow Star of David
     like in this Androgynous flag: https://lgbtqia.wiki/wiki/Androgynos#/media/File:Androgynos_(2).png
@@ -376,7 +376,7 @@ def draw_star_of_david(d, primary_colour, secondary_colour='none',
 
 def draw_nautstar(d, primary_colour, secondary_colour='none',
               wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
     """
     Draw a star on a path in the style of the outernaut flag
     see https://pluralpedia.org/w/File:Outernaut_Flag.png
@@ -401,12 +401,16 @@ def draw_nautstar(d, primary_colour, secondary_colour='none',
     d.append(draw.Line(x_start, top_height, x_end, top_height, stroke_width=sw, stroke=primary_colour))
     d.append(draw.Line(x_start, top_bottom, x_end, top_bottom, stroke_width=sw, stroke=primary_colour))
     #draw_fivesided_star(d, secondary_colour, size_ratio=0.74, orientation=CENTRAL, y_start=hei*5, x_start=-150*wid)
-    draw_fivesided_star(d, secondary_colour, size_ratio=0.74, orientation=CENTRAL, y_start=-this_hei*0.015, x_start=.3*this_wid)
+
+    rotateby = angle_offset_for_orientation(orientation)
+    rotateby += 180 # upside down star
+
+    draw_fivesided_star(d, secondary_colour, size_ratio=0.74, orientation=rotateby, y_start=-this_hei*0.015, x_start=.3*this_wid)
 
 
 def draw_therian(d, primary_colour, secondary_colour='none',
               wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
     """
     Draw the therian symbol, optionally in a circle
     :param d: Drawing object
@@ -436,10 +440,22 @@ def draw_therian(d, primary_colour, secondary_colour='none',
     d.append(draw.Circle(midx, midy+y_offset, radius, stroke_width=sw, stroke=primary_colour, fill='none'))
     # the triangle
     draw_arbitrary_star_trace(d, primary_colour, num_points=3, thick_ratio=2.5*thick_ratio, size_ratio=1.2*size_ratio, y_start=y_offset+y_start, x_start=x_start)
+    # the line in the middle for a theta
+    p = draw.Path(stroke_width=sw, fill='none', stroke=primary_colour)
+    theta_len = sw*4
+    theta_hei = sw*2
+    p.M(midx-theta_len*0.5, midy-theta_hei*0.5)
+    p.L(midx-theta_len*0.5, midy+theta_hei*0.5)
+    p.M(midx-theta_len*0.5, midy)
+    p.L(midx+theta_len*0.5, midy)
+    p.L(midx+theta_len*0.5, midy-theta_hei*0.5)
+    p.L(midx+theta_len*0.5, midy+theta_hei*0.5)
+    d.append(p)
+
 
 def draw_otherkin(d, primary_colour, secondary_colour='none',
               wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
     """
     Draw the otherkin symbol, optionally in a circle
     :param d: Drawing object
@@ -472,7 +488,7 @@ def draw_otherkin(d, primary_colour, secondary_colour='none',
 
 def draw_nonhuman(d, primary_colour, secondary_colour='none',
               wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
     """
     Draw the nonhuman symbol, optionally in a circle
     :param d: Drawing object
@@ -519,7 +535,7 @@ def draw_nonhuman(d, primary_colour, secondary_colour='none',
 
 def draw_heart(d, primary_colour, secondary_colour='none',
               wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
     """
     Draw a heart in the centre
     :param d: Drawing object

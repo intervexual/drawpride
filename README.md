@@ -113,7 +113,15 @@ The standard parameters of a given drawing function (e.g. draw_heart, draw_ellip
   - `size_ratio`: a scaling factor that generally corresponds to the radius (or equivalent) of the object being drawn
   - `stretch_ratio`: a scaling factor that generally affects the convexity of the object being drawn. Not always used.
   - `thick_ratio`: a scaling factor that generally corresponds to the line thickness of the stroke width used to draw a given object (usually an outline of the object). Not always used.
-  - `orientation`: a string which indicates the orientation of the object being drawn ('H' for horizontal, 'V' for vertical, 'D' for diagonal, 'R' for reverse diagonal). Not always used. Currently poorly supported.
+  - `orientation`: a string which indicates the orientation of the object being drawn. Default is always HORIZONTAL.
+    - `HORIZONTAL` ('H'): the default option. ⬆️ Will put a heart in 💜 orientation and a star in ⭐️ orientation.
+    - `UPSIDE` ('U'): 180 degrees of HORIZONTAL. ⬇️ Upside-down heart, upside-down star.
+    - `VERTICAL` ('V'): 90 degrees from HORIZONTAL. ➡️ Will put a heart in the orientation for the tricolour polyamory flag.
+    - `ARROW` ('A'): 180 degrees from VERTICAL. ⬅️
+    - `DIAGONAL` ('D'): -45 degrees from HORIZONTAL. ↖️ Will align with the disability pride flag. Will put a heart in the orientation for the leather flag.
+    - `BEND` ('B'): 180 degrees from DIAGONAL. ↘️
+    - `REVERSE` ('R'): reverse diagonal or 90 degrees from DIAGONAL. ↗️ Used in many anarchist flags. Will put a star in the orientation needed for the boi+boy flag.
+    - `SINISTER` ('S'): 180 degrees from REVERSE. ↙️ Will put a star in the orientation needed for the armpit fetish flag.
 
 Many functions return a number that corresponds to a dimension of the object that was drawn. For example, draw_horiz_bars returns
 the height of the typical horizontal bar. This number can then be used by later function calls to scale other flag elements.

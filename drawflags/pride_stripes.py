@@ -27,13 +27,17 @@ import math
 import doctest
 import numpy as np
 
+# common orientations
 HORIZONTAL = 'H'
-VERTICAL = 'V'
-DIAGONAL = 'D'
-BEND = 'R' # reverse diagonal
-CENTRAL = 'C'
-NEUTRAL = 'N'
-UPSIDE = 'U'
+UPSIDE = 'U' # 180 of horizontal
+VERTICAL = 'V' # 90 from horizontal
+ARROW = 'A' # 180 from vertical
+DIAGONAL = 'D' # like disability pride flag
+BEND = 'B' # 180 of diagonal
+REVERSE = 'R' # reverse diagonal
+SINISTER = 'S' # 180 of reverse diagonal
+CENTRAL = 'C' # central position
+
 EMPTY = 'none'
 
 UNSPECIFIED = -1.0
@@ -41,6 +45,10 @@ UNSPECIFIED = -1.0
 # for convenience in testing
 RAINBOW = ['red', 'orange', 'yellow', 'green', 'blue', 'purple']
 
+
+##################################################
+## Helper functions
+##################################################
 
 def get_effective_dimensions(d, wid, hei):
     """
@@ -58,8 +66,59 @@ def get_effective_dimensions(d, wid, hei):
         hei = d.height
     return wid, hei
 
+def angle_offset_for_orientation(orientation_flag):
+    """
+    Turn orientation string into an angle (in degrees) to offset a starburst/segmented ring/etc
+    :param orientation_flag: one of CENTRAL, HORIZONTAL, DIAGONAL, VERTICAL
+    :return: the angle in degrees to offset with
+    >>> angle_offset_for_orientation(HORIZONTAL)
+    180
+    """
+    if type(orientation_flag) in [int, float]:
+        return orientation_flag
+    elif HORIZONTAL in str(orientation_flag):
+        # want a heart that is the usual direction
+        orientation_flag = -90 # for five segments, will give an upside Y style
+    elif UPSIDE in str(orientation_flag):
+        #  for five segments, will give a Y shape
+        orientation_flag = 90 # upside down heart
+    elif VERTICAL in str(orientation_flag):
+        orientation_flag = 180
+    elif ARROW in str(orientation_flag):
+        orientation_flag = 0
+    elif DIAGONAL in str(orientation_flag):
+        orientation_flag = -45
+    elif BEND in str(orientation_flag):
+        orientation_flag = -45+180
+    elif REVERSE in str(orientation_flag):
+        orientation_flag = 45
+    elif SINISTER in str(orientation_flag):
+        orientation_flag = 45+180
+    else:
+        orientation_flag = 0
+    return orientation_flag
 
-def draw_stripes(d, colours, orientation, wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0, n_bars = EMPTY,
+def get_triangle_coords(rad, arc_width, i, cent_x, cent_y, offset=-90):
+    """
+    Helper function for drawing segmented rings, Seychelles flags, and other polar math
+    :param rad: radius
+    :param arc_width: the arc width of a segment
+    :param i: which segment we're on
+    :param cent_x: the coordinate of the centre (x)
+    :param cent_y: the coordinate of the centre (y)
+    :param offset: angle in degrees of offset from where we start the segmentation
+    :return: coordinates
+    >>> get_triangle_coords(10, 45, 1, 0, -45)
+    (7.0710678118654755, -52.071067811865476)
+    """
+    x = rad * math.cos(math.radians(offset + arc_width * i)) + cent_x
+    y = rad * math.sin(math.radians(offset + arc_width * i)) + cent_y
+    return x, y
+
+##################################################
+
+def draw_stripes(d, colours, orientation, n_bars = EMPTY,
+                 wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
                  size_ratio=1.0, stretch_ratio=1.0, thick_ratio=1.0):
     """
     Wrapper function to draw any given stripes
@@ -76,7 +135,7 @@ def draw_stripes(d, colours, orientation, wid=UNSPECIFIED, hei=UNSPECIFIED, x_st
     STRIPES = {HORIZONTAL:draw_horiz_bars,
                VERTICAL:draw_vert_bars,
                DIAGONAL:draw_diagonal_stripes,
-               BEND:draw_reverse_diagonal_stripes
+               REVERSE:draw_reverse_diagonal_stripes
                }
     return STRIPES[orientation](d, colours, wid=wid, hei=hei, x_start=x_start, y_start=y_start)
 
@@ -113,7 +172,8 @@ def get_relative_sizes(lst):
 
     return new_colours, list(relquants)
 
-def draw_horiz_bars(d, colours, wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0):
+def draw_horiz_bars(d, colours,
+                    wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0):
     """
     Add horizontal bars to the flag
     :param d: Drawing object
@@ -148,7 +208,8 @@ def draw_horiz_bars(d, colours, wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_s
     return stp_hei
 
 
-def draw_vert_bars(d, colours, wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0):
+def draw_vert_bars(d, colours,
+                   wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0):
     """
     Add vertical bars to the flag
     :param d: Drawing object
@@ -183,7 +244,8 @@ def draw_vert_bars(d, colours, wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_st
     return stp_wid
 
 
-def draw_diagonal_stripes(d, colours, wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0.0, y_start=0.0, fudge=2):
+def draw_diagonal_stripes(d, colours, fudge=2,
+                          wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0.0, y_start=0.0):
     """
     Draw diagonal stripes in the style of the Magill Disability Pride Flag
     :param d: Drawing object
@@ -222,7 +284,8 @@ def draw_diagonal_stripes(d, colours, wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=
     return stripe_width
 
 
-def draw_reverse_diagonal_stripes(d, colours, wid=UNSPECIFIED, hei=UNSPECIFIED, offset=2, x_start=0.0, y_start=0.0):
+def draw_reverse_diagonal_stripes(d, colours, offset=2,
+                                  wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0.0, y_start=0.0):
     """
     Draw diagonal stripes, in the mirror image orientation of the Magill Disability Pride Flag
     :param d: Drawing object
@@ -263,7 +326,7 @@ def draw_reverse_diagonal_stripes(d, colours, wid=UNSPECIFIED, hei=UNSPECIFIED, 
 
 def draw_vees(d, colours,
               wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
     """
     Draw concentric Vs in the style of the varsex flag
     :param d: Drawing object
@@ -303,7 +366,7 @@ def draw_vees(d, colours,
 
 def draw_chevrons(d, colours,
                   wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-                  size_ratio=1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
+                  size_ratio=1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
     """
     Draw a series of chevrons with the colours provided by colours
     :param d: Drawing object
@@ -352,7 +415,7 @@ def draw_chevrons(d, colours,
 
 def draw_concentric_rectangles(d, colours,
               wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
     """
     Draw concentric rectangles from the outside to the inside
     :param d: Drawing object
@@ -399,27 +462,12 @@ def draw_concentric_rectangles(d, colours,
     return line_height
 
 
-def get_triangle_coords(rad, arc_width, i, cent_x, cent_y, offset=-90):
-    """
-    Helper function for drawing segmented rings, Seychelles flags, and other polar math
-    :param rad: radius
-    :param arc_width: the arc width of a segment
-    :param i: which segment we're on
-    :param cent_x: the coordinate of the centre (x)
-    :param cent_y: the coordinate of the centre (y)
-    :param offset: angle in degrees of offset from where we start the segmentation
-    :return: coordinates
-    >>> get_triangle_coords(10, 45, 1, 0, -45)
-    (7.0710678118654755, -52.071067811865476)
-    """
-    x = rad * math.cos(math.radians(offset + arc_width * i)) + cent_x
-    y = rad * math.sin(math.radians(offset + arc_width * i)) + cent_y
-    return x, y
+
 
 
 def draw_seychelles(d, colours,
               wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
     """
     Draw stripes like the flag of Seychelles
     :param d: Drawing object
@@ -457,34 +505,12 @@ def draw_seychelles(d, colours,
     return last_height
 
 
-def angle_offset_for_orientation(orientation_flag):
-    """
-    Turn orientation string into an angle (in degrees) to offset a starburst/segmented ring/etc
-    :param orientation_flag: one of CENTRAL, HORIZONTAL, DIAGONAL, VERTICAL
-    :return: the angle in degrees to offset with
-    >>> angle_offset_for_orientation(HORIZONTAL)
-    180
-    """
-    if type(orientation_flag) in [int, float]:
-        return orientation_flag
-    if orientation_flag == CENTRAL:
-        orientation_flag = 90 # for five segments, will give a Y shape
-    elif HORIZONTAL in str(orientation_flag):
-        orientation_flag = 180 # for five segments -< style shape
-    elif UPSIDE in str(orientation_flag):
-        orientation_flag = 0
-    elif VERTICAL in str(orientation_flag): # for five segments, will give an upside Y style
-        orientation_flag = -90
-    elif orientation_flag == DIAGONAL:
-        orientation_flag = -45
-    elif orientation_flag == BEND:
-        orientation_flag = 45
-    else:
-        orientation_flag = 0
-    return orientation_flag
 
 
-def draw_starburst(d, colours, wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0, orientation=VERTICAL):
+
+def draw_starburst(d, colours,
+                   wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                   size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
     """
     Draw stripes as a starburst from the centre
     :param d: Drawing object
@@ -522,7 +548,7 @@ def draw_starburst(d, colours, wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_st
 
 def draw_concentric_circles(d, colours,
                             wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-                            size_ratio=1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
+                            size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
     """
     Draw concentric circles from the outside inward
     :param d: Drawing object
@@ -560,7 +586,7 @@ def draw_concentric_circles(d, colours,
 
 def draw_concentric_ellipses(d, colours,
                              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-                             size_ratio=1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
+                             size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
     """
     Draw concentric circles from the outside inward
     :param d: Drawing object
@@ -595,7 +621,7 @@ def draw_concentric_ellipses(d, colours,
 
 def draw_concentric_beziers(d, colours,
                             wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-                            size_ratio=1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
+                            size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
     """
     Draw concentric bezier curves in the style of the Mental Health flag
     :param d: Drawing object
@@ -646,9 +672,10 @@ def draw_concentric_beziers(d, colours,
     return stroke_wid
 
 
-def draw_concentric_infinities(d, colours, bg_colour,
+def draw_concentric_infinities(d, colours, bg_colour='none',
                              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-                             size_ratio=1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
+                             size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL,
+                             ):
     """
     Draw concentric infinity loops in the style of the Autistic Pride Day logo.
     :param d: drawing object
@@ -667,6 +694,10 @@ def draw_concentric_infinities(d, colours, bg_colour,
     midx = wid/2
     left_centre = midx - total_thickness
     right_centre = midx + total_thickness
+
+    if bg_colour == 'none':
+        bg_colour = colours[0]
+        colours = colours[1:]
 
     each_thickness = total_thickness /(len(colours) + 1)
     greatest_radius = size_ratio*(hei/2) - each_thickness
@@ -710,7 +741,7 @@ def draw_concentric_infinities(d, colours, bg_colour,
 
 def draw_concentric_tees(d, colours,
                              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-                             size_ratio=1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
+                             size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
     """
     Draw concentric circles from the outside inward
     :param d: Drawing object
@@ -763,7 +794,7 @@ def draw_concentric_tees(d, colours,
 
 def draw_ally_stripes(d, colours,
                              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-                             size_ratio=1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
+                             size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
     """
     Draw a chevron/vee in the style of the ally flag, but with stripes!
     :param d: Drawing object
@@ -806,7 +837,7 @@ def draw_ally_stripes(d, colours,
 
 def draw_armpit_stripes(d, colours,
                              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-                             size_ratio=1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
+                             size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
     """
     Draw stripes in the style of the armpit flag
     :param d: Drawing object
@@ -850,7 +881,7 @@ def draw_armpit_stripes(d, colours,
 
 def draw_pluralrole(d, colours,
                              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-                             size_ratio=1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
+                             size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
     """
     Draw the template used for Plural Roles like Caretaker and Announcer
     e.g. https://pluralpedia.org/w/Caretaker
@@ -889,7 +920,7 @@ def draw_pluralrole(d, colours,
     outfac = 4
     direction = 1
     outward_left = diamond_left # start from
-    if orientation == HORIZONTAL:
+    if orientation != HORIZONTAL:
         outward_left = diamond_right
         direction = -1
     x_outward = midx + direction*(outfac - 1) * diamond_radius

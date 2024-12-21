@@ -11,4 +11,5 @@
 <path d="M250.0,66.0 L172.05771365940052,201.0" stroke="#ffFFff" fill="none" stroke-width="7.5" stroke-linecap="round" />
 <path d="M327.9422863405995,201.0 L249.99999999999997,66.0" stroke="#ffFFff" fill="none" stroke-width="7.5" stroke-linecap="round" />
 <path d="M172.05771365940052,201.0 L327.9422863405995,201.0" stroke="#ffFFff" fill="none" stroke-width="7.5" stroke-linecap="round" />
+<path d="M235.0,142.5 L235.0,157.5 M235.0,150.0 L265.0,150.0 L265.0,142.5 L265.0,157.5" stroke-width="7.5" fill="none" stroke="#ffFFff" />
 </svg>

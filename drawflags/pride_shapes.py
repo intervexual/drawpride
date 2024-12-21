@@ -11,7 +11,7 @@ from stars_and_hearts import *
 
 def draw_text(d, text_to_add, primary_colour, secondary_colour='none', name='ch',
               wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
     """
     Add text to the flag
     :param d: Drawing object
@@ -39,7 +39,7 @@ def draw_text(d, text_to_add, primary_colour, secondary_colour='none', name='ch'
 
 def draw_side_bump(d, primary_colour, secondary_colour='none',
               wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
     """
     Add a bump to the left side of a flag like in the perioriented flag
     :param d: Drawing object
@@ -74,7 +74,7 @@ def draw_side_bump(d, primary_colour, secondary_colour='none',
 
 def draw_pile(d, primary_colour, secondary_colour='none',
               wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
     """
     Add a triangle to the left side like in the demisexual flag
     (it's called a pile: https://en.wikipedia.org/wiki/Glossary_of_vexillology )
@@ -108,7 +108,7 @@ def draw_pile(d, primary_colour, secondary_colour='none',
 
 def draw_multipile(d, colours,
               wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
     """
     Add a triangle to the left side like in the demisexual flag
     (it's called a pile: https://en.wikipedia.org/wiki/Glossary_of_vexillology )
@@ -154,7 +154,7 @@ def draw_multipile(d, colours,
 
 def draw_corners(d, primary_colour, secondary_colour='none',
               wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
     """
     Add diagonal corners in the style of the disability pride flag
     :param d: Drawing object
@@ -189,7 +189,7 @@ def draw_corners(d, primary_colour, secondary_colour='none',
 
 def draw_topbottom(d, primary_colour, secondary_colour='none',
               wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
     """
     Add stripes to top and bottom. Used for mashup flags.
     :param d: Drawing object
@@ -223,7 +223,7 @@ def draw_topbottom(d, primary_colour, secondary_colour='none',
 
 def draw_perisex(d, primary_colour, secondary_colour='none',
               wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
     """
     Draws an abstract scale/balance thing with f and m ends
     :param d: drawing image
@@ -279,7 +279,7 @@ def draw_perisex(d, primary_colour, secondary_colour='none',
 
 def draw_rhombus(d, primary_colour, secondary_colour='none',
               wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
     """
     Draw a square on a diagonal
     :param d: Drawing object
@@ -314,7 +314,7 @@ def draw_rhombus(d, primary_colour, secondary_colour='none',
 
 def draw_square(d, primary_colour, secondary_colour='none',
               wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
     """Draw a square in the style of the dyadic/endosex flag.
     :param d: Drawing object
     :param primary_colour: outline colour of the square
@@ -346,7 +346,7 @@ def draw_square(d, primary_colour, secondary_colour='none',
 
 def draw_diagonal_cut_square(d, primary_colour, secondary_colour='none',
               wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
     """Draw half of a square that is cut diagonally, to be superimposed with draw_square
     to produce dyadic/endosex flags.
     :param d: Drawing object
@@ -399,7 +399,7 @@ def draw_diagonal_cut_square(d, primary_colour, secondary_colour='none',
 
 def draw_bissu(d, primary_colour, secondary_colour='none',
               wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
     """
     Draw triangles in the style of the Bissu flag
     :param d: Drawing ojbect
@@ -422,7 +422,7 @@ def draw_bissu(d, primary_colour, secondary_colour='none',
 
 def draw_altersex_symbol(d, primary_colour, secondary_colour='none',
               wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
     '''
     Draw a triangle with a ring
     :param d: Drawing object
@@ -474,7 +474,7 @@ def draw_altersex_symbol(d, primary_colour, secondary_colour='none',
 
 def draw_cross(d, primary_colour, secondary_colour='none',
               wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
     """
     Draw a cross that is, by default, the right size to produce the ipsogender flag
     when combined with a Carpenter ring.
@@ -507,7 +507,7 @@ def draw_cross(d, primary_colour, secondary_colour='none',
 
 def draw_metis_lemniscate(d, primary_colour, secondary_colour='none',
               wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
     """
     Draw an infinity symbol (lemniscate) in the style of the Métis flag.
     :param d: drawing object
@@ -546,6 +546,8 @@ def draw_metis_lemniscate(d, primary_colour, secondary_colour='none',
     d.append(p)
 
 
+
+
 def single_nautilus_segment(d, wid, hei, arr, primary_colour, step_size, border_width=0.0, border_colour ='black'):
     """
     Helper function for draw_nautilus. Draws a single segment.
@@ -572,7 +574,7 @@ def single_nautilus_segment(d, wid, hei, arr, primary_colour, step_size, border_
 
 def draw_nautilus(d, colours,
               wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL,
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL,
               border_colour='black', border_size=0):
     """
     Draw an autistic spectrum nautilus symbol
@@ -605,7 +607,7 @@ def draw_nautilus(d, colours,
     l = start
     a = ang_each / 2
     for i, val in enumerate(coords):
-        inc = 10
+        inc = 10*stretch_ratio*size_ratio
         cp_dist = l + inc
         x0 = -(cp_dist) * math.sin(math.radians(a))
         y0 = -(cp_dist) * math.sin(math.radians(90 - a))
@@ -631,7 +633,7 @@ def draw_nautilus(d, colours,
 
 def draw_closet_symbol(d, primary_colour, secondary_colour='none',
               wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
     """
     Draw a closet symbol, similar in style to the one in isobug's closeted intersex flag
     :param d: Drawing object
@@ -718,7 +720,7 @@ def rubber_helper(line_hei, sw, topln_start_y, topln_start_x, topln_descend_hypo
 
 def draw_rubber_zigzags(d, primary_colour, secondary_colour='none',
               wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
     """
     Draw zigzag stripes in the style of the rubber pride flag.
     :param d: Drawing object
@@ -783,7 +785,7 @@ def draw_rubber_zigzags(d, primary_colour, secondary_colour='none',
 
 def draw_refugeeline(d, primary_colour, secondary_colour='none',
               wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
     """
     Draw a single horizontal line in the style of the refugee flag
     :param d: Drawing object
@@ -808,7 +810,7 @@ def draw_refugeeline(d, primary_colour, secondary_colour='none',
 
 def draw_intersex_ally(d, primary_colour, secondary_colour='none',
               wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
     """
     Draw a chevron/vee in the style of the ally flag
     :param d: Drawing object
@@ -854,7 +856,7 @@ def draw_intersex_ally(d, primary_colour, secondary_colour='none',
 
 def draw_pocketgender_hourglass(d, colours,
               wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
     """
     Draw a straight hourglass type shape seen in the pocket gender flag
     :param d: Drawing object
@@ -902,7 +904,7 @@ def draw_pocketgender_hourglass(d, colours,
 
 def draw_triskelion(d, colours,
               wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
     """
     Draw a triskelion symbol used for BDSM fetish flags.
     Based on: https://commons.wikimedia.org/wiki/File:Dotted_triskelion_(fixed_width).svg
@@ -983,7 +985,7 @@ def draw_triskelion(d, colours,
 
 def draw_circle(d, primary_colour, secondary_colour='none',
               wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
     """
     Draw a solid circle
     :param d: Drawing object
@@ -1009,7 +1011,7 @@ def draw_circle(d, primary_colour, secondary_colour='none',
 
 def draw_ellipse(d, primary_colour, secondary_colour='none',
               wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
     """
     Draw a solid ellipse
     :param d: Drawing object
@@ -1038,7 +1040,7 @@ def draw_ellipse(d, primary_colour, secondary_colour='none',
 
 def draw_inverted_triangle(d, primary_colour, secondary_colour='none',
                            wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-                           size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
+                           size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
     """
     Draw an inverted triangle like the pink triangle flag
     :param d: Drawing object
@@ -1076,7 +1078,7 @@ def draw_inverted_triangle(d, primary_colour, secondary_colour='none',
 
 def draw_triangle(d, primary_colour, secondary_colour='none',
               wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
     """
     Draw a triangle
     :param d: Drawing object
@@ -1091,7 +1093,7 @@ def draw_triangle(d, primary_colour, secondary_colour='none',
     :param thick_ratio: scaling factor for the stroke width.
     :return: the height of the top/bottom lines
     """
-    angle_offset = angle_offset_for_orientation(orientation)
+    angle_offset = angle_offset_for_orientation(orientation) - 90
     #print('ang offs', angle_offset, orientation)
     wid, hei = get_effective_dimensions(d, wid, hei)
 
@@ -1122,7 +1124,7 @@ def draw_triangle(d, primary_colour, secondary_colour='none',
 
 def draw_asympile(d, primary_colour, secondary_colour='none',
               wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
     """
     Draw an asymmetric pile in the style of the tricolour polyamory flag
     :param d: Drawing object
@@ -1161,7 +1163,7 @@ def draw_asympile(d, primary_colour, secondary_colour='none',
 
 def draw_trichevron(d, colours,
               wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
     """
     Draw three chevrons in this style from https://queerflag.tumblr.com/post/151443283619/bizexuals-more-queer-pride-flagsvariations
     :param d: Drawing object
@@ -1208,7 +1210,7 @@ def draw_trichevron(d, colours,
 
 def draw_crossdresser(d, colours,
               wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
     """
     Draw an X in the style of this crossdresser flag: https://flag.library.lgbt/flags/crossdresser/
     :param d: Drawing object
@@ -1268,7 +1270,7 @@ def draw_crossdresser(d, colours,
 
 def draw_equals(d, primary_colour, secondary_colour='none',
               wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
     """
     Draw an equals sign in the style of the horizontal androgyne flag
     :param d: Drawing object
@@ -1308,7 +1310,7 @@ def draw_equals(d, primary_colour, secondary_colour='none',
 
 def draw_bipolar(d, primary_colour, secondary_colour='none',
               wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
     """
     Draw the bipolar symbol
     :param d: Drawing object
@@ -1412,7 +1414,7 @@ def draw_bipolar(d, primary_colour, secondary_colour='none',
 
 def draw_belt(d, primary_colour, secondary_colour='none',
               wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
     # default size should be voidpunk
     wid, hei = get_effective_dimensions(d, wid, hei)
     midx = x_start + wid/2
@@ -1435,7 +1437,7 @@ def draw_belt(d, primary_colour, secondary_colour='none',
 
 def draw_diamond(d, primary_colour, secondary_colour='none',
               wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
     """
     Draw a Diamond, based on the Alderspintellic flag
     from https://www.tumblr.com/revenant-coining/704184782702149633/alderspintellic-an-aldernic-term-for-one-is-or
@@ -1475,7 +1477,7 @@ def draw_diamond(d, primary_colour, secondary_colour='none',
 
 def draw_teardrop(d, primary_colour, secondary_colour='none',
               wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
     """
     Draw a teardrop in the centre
     :param d: Drawing object
@@ -1515,7 +1517,7 @@ def draw_teardrop(d, primary_colour, secondary_colour='none',
 
 def draw_caed(d, primary_colour, secondary_colour='none',
               wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio=1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=VERTICAL):
+              size_ratio=1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
     """
     Draw the bottom vertical stripes used in the caedsexual, caedromantic, etc flags
     :param d: Drawing object
@@ -1572,5 +1574,6 @@ if __name__ == '__main__':
     #draw_arbitrary_star(d,'red', 'black', num_points=20, secondary_size=0.75, square=False)
     #draw_bipolar(d, 'black', 'blue')
     #draw_teardrop(d,'white')
-    draw_caed(d, 'green', 'yellow')
+    #draw_caed(d, 'green', 'yellow')
+    draw_open_lemniscate(d, 'white')
     d.save_svg('drawflags/test2.svg')
