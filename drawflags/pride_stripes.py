@@ -66,13 +66,22 @@ def get_effective_dimensions(d, wid, hei):
         hei = d.height
     return wid, hei
 
+def get_standard_dimensions(d, wid, hei, x_start, y_start):
+    wid, hei = get_effective_dimensions(d, wid, hei)
+    x_mid = x_start + wid*0.5
+    y_mid = y_start + hei*0.5
+    x_end = x_start + wid
+    y_end = y_start + hei
+    return wid, hei, x_mid, y_mid, x_end, y_end
+
+
 def angle_offset_for_orientation(orientation_flag):
     """
     Turn orientation string into an angle (in degrees) to offset a starburst/segmented ring/etc
     :param orientation_flag: one of CENTRAL, HORIZONTAL, DIAGONAL, VERTICAL
     :return: the angle in degrees to offset with
     >>> angle_offset_for_orientation(HORIZONTAL)
-    180
+    -90
     """
     if type(orientation_flag) in [int, float]:
         return orientation_flag
@@ -98,6 +107,37 @@ def angle_offset_for_orientation(orientation_flag):
         orientation_flag = 0
     return orientation_flag
 
+
+def get_primary_axis_length( wid, hei, angle):
+    """
+    Get the most relevant axis width given the orientation
+    :param hei: effective height
+    :param wid: effective width
+    :param orientation: orientation
+    :return:
+    >>> get_primary_axis_length(400, 200, angle_offset_for_orientation(HORIZONTAL))
+    400
+    >>> get_primary_axis_length(200, 500, angle_offset_for_orientation(HORIZONTAL))
+    200
+    >>> get_primary_axis_length(200, 500, angle_offset_for_orientation(UPSIDE))
+    200
+    >>> get_primary_axis_length(200, 500, angle_offset_for_orientation(VERTICAL))
+    500
+    >>> get_primary_axis_length(200, 500, angle_offset_for_orientation(DIAGONAL))
+    538.5164807134504
+    >>> get_primary_axis_length(200, 500, angle_offset_for_orientation(REVERSE))
+    538.5164807134504
+    """
+    if angle in [angle_offset_for_orientation(HORIZONTAL), angle_offset_for_orientation(UPSIDE)]:
+        return wid
+    elif angle in [angle_offset_for_orientation(VERTICAL), angle_offset_for_orientation(ARROW)]:
+        return hei
+    elif angle in [angle_offset_for_orientation(DIAGONAL), angle_offset_for_orientation(REVERSE), angle_offset_for_orientation(BEND), angle_offset_for_orientation(SINISTER)]:
+        return math.sqrt(hei**2 + wid**2) # hypotenuse
+    else:
+        assert False, "unimplemented"
+
+
 def get_triangle_coords(rad, arc_width, i, cent_x, cent_y, offset=-90):
     """
     Helper function for drawing segmented rings, Seychelles flags, and other polar math
@@ -114,30 +154,6 @@ def get_triangle_coords(rad, arc_width, i, cent_x, cent_y, offset=-90):
     x = rad * math.cos(math.radians(offset + arc_width * i)) + cent_x
     y = rad * math.sin(math.radians(offset + arc_width * i)) + cent_y
     return x, y
-
-##################################################
-
-def draw_stripes(d, colours, orientation, n_bars = EMPTY,
-                 wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-                 size_ratio=1.0, stretch_ratio=1.0, thick_ratio=1.0):
-    """
-    Wrapper function to draw any given stripes
-    :param d: Drawing object
-    :param colours: a list of strings of hex codes for the different bars
-    :param wid: width of the area that the bars are being added to
-    :param hei: height of the area that the bars are being added to
-    :param x_start: the x-coordinate to start drawing bars from. Default is zero.
-    :param y_start: the height to start drawing bars from. Default is zero, but if drawing a flag inside another
-    you will want to use this parameter
-    :param size_ratio: not used, just here to make parameterized function calling standardized
-    :return: the width of a stripe
-    """
-    STRIPES = {HORIZONTAL:draw_horiz_bars,
-               VERTICAL:draw_vert_bars,
-               DIAGONAL:draw_diagonal_stripes,
-               REVERSE:draw_reverse_diagonal_stripes
-               }
-    return STRIPES[orientation](d, colours, wid=wid, hei=hei, x_start=x_start, y_start=y_start)
 
 
 def get_relative_sizes(lst):
@@ -172,8 +188,38 @@ def get_relative_sizes(lst):
 
     return new_colours, list(relquants)
 
+
+##################################################
+
+def draw_stripes(d, colours, orientation, n_bars = EMPTY,
+                 wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                 size_ratio=1.0, stretch_ratio=1.0, thick_ratio=1.0):
+    """
+    Wrapper function to draw any given stripes
+    :param d: Drawing object
+    :param colours: a list of strings of hex codes for the different bars
+    :param wid: width of the area that the bars are being added to
+    :param hei: height of the area that the bars are being added to
+    :param x_start: the x-coordinate to start drawing bars from. Default is zero.
+    :param y_start: the height to start drawing bars from. Default is zero, but if drawing a flag inside another
+    you will want to use this parameter
+    :param size_ratio: not used, just here to make parameterized function calling standardized
+    :param thick_ratio: adjusts how much of a stripe's thickness is actually drawn. Useful for if there are gaps between stripes.
+    :return: the width of a stripe
+    """
+    STRIPES = {HORIZONTAL:draw_horiz_bars,
+               VERTICAL:draw_vert_bars,
+               DIAGONAL:draw_diagonal_stripes,
+               REVERSE:draw_reverse_diagonal_stripes
+               }
+    return STRIPES[orientation](d, colours, wid=wid, hei=hei, x_start=x_start, y_start=y_start, thick_ratio=thick_ratio)
+
+
+
+
 def draw_horiz_bars(d, colours,
-                    wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0):
+                    wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                    thick_ratio=1.0, orientation=HORIZONTAL):
     """
     Add horizontal bars to the flag
     :param d: Drawing object
@@ -193,8 +239,9 @@ def draw_horiz_bars(d, colours,
     >>> type(d.elements[0])
     <class 'drawsvg.elements.Rectangle'>
     """
-    wid, hei = get_effective_dimensions(d, wid, hei)
+    wid, hei, x_mid, y_mid, x_end, y_end = get_standard_dimensions(d, wid, hei, x_start, y_start)
     new_colours, rel_sizes = get_relative_sizes(colours)
+    ang_offset = angle_offset_for_orientation(orientation)
 
     fudge =  min(1, hei / 1000) # here to make sure no gaps between stripes on hi res flags
     current_height = y_start
@@ -202,14 +249,19 @@ def draw_horiz_bars(d, colours,
     for i, c in enumerate(new_colours):
         this_height = rel_sizes[i]*hei
         stp_hei = min(this_height, stp_hei)
-        rect = draw.Rectangle(x_start, current_height, wid, math.ceil(this_height + fudge), fill=c)
+        used_height =math.ceil(this_height*thick_ratio + fudge)
+        if orientation != HORIZONTAL:
+            rect = draw.Rectangle(x_start, current_height, wid, used_height, fill=c, transform=f'rotate({ang_offset},{x_mid},{y_mid})')
+        else:
+            rect = draw.Rectangle(x_start, current_height, wid, used_height, fill=c)
         current_height += this_height
         d.append(rect)
     return stp_hei
 
 
 def draw_vert_bars(d, colours,
-                   wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0):
+                   wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                   thick_ratio = 1.0, buffer = 0, orientation = HORIZONTAL):
     """
     Add vertical bars to the flag
     :param d: Drawing object
@@ -229,23 +281,30 @@ def draw_vert_bars(d, colours,
     >>> type(d.elements[0])
     <class 'drawsvg.elements.Rectangle'>
     """
-    wid, hei = get_effective_dimensions(d, wid, hei)
+    wid, hei, x_mid, y_mid, x_end, y_end = get_standard_dimensions(d, wid, hei, x_start, y_start)
     new_colours, rel_sizes = get_relative_sizes(colours)
+    ang_offset = angle_offset_for_orientation(orientation)
 
-    fudge =  min(1, wid / 1000) # here to make sure no gaps between stripes on hi res flags
+    axis_length = get_primary_axis_length(wid, hei, ang_offset)
+    fudge =  min(1, axis_length / 1000) # here to make sure no gaps between stripes on hi res flags
     current_width = x_start
-    stp_wid = wid
+    stp_wid = axis_length
     for i, c in enumerate(new_colours):
-        this_width = rel_sizes[i]*wid
+        this_width = rel_sizes[i]*axis_length
         stp_wid = min(this_width, stp_wid)
-        rect = draw.Rectangle(current_width, y_start, math.ceil(this_width + fudge), hei, fill=c)
+        used_wid = math.ceil(this_width*thick_ratio + fudge)
+        if orientation == HORIZONTAL:
+            rect = draw.Rectangle(current_width, y_start - buffer*stp_wid, used_wid, hei + 2*buffer*stp_wid, fill=c)
+        else:
+            rect = draw.Rectangle(current_width, y_start - buffer*stp_wid, used_wid, hei + 2*buffer*stp_wid, fill=c, transform = f'rotate({ang_offset},{x_mid},{y_mid})')
         current_width += this_width
         d.append(rect)
     return stp_wid
 
 
 def draw_diagonal_stripes(d, colours, fudge=2,
-                          wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0.0, y_start=0.0):
+                          wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0.0, y_start=0.0,
+                          thick_ratio=1.0):
     """
     Draw diagonal stripes in the style of the Magill Disability Pride Flag
     :param d: Drawing object
@@ -285,7 +344,8 @@ def draw_diagonal_stripes(d, colours, fudge=2,
 
 
 def draw_reverse_diagonal_stripes(d, colours, offset=2,
-                                  wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0.0, y_start=0.0):
+                                  wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0.0, y_start=0.0,
+                                  thick_ratio=1.0):
     """
     Draw diagonal stripes, in the mirror image orientation of the Magill Disability Pride Flag
     :param d: Drawing object
@@ -322,6 +382,82 @@ def draw_reverse_diagonal_stripes(d, colours, offset=2,
         p.Z()
         d.append(p)
     return stripe_width
+
+
+def draw_multipile(d, colours,
+              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+    """
+    Draw multiple piles (horizontal chevrons/vees)
+    :param d: drawing object
+    :param colours: list of colours
+    :param wid: width of area being drawn into - the width from the leftmost triangle's left side to the rightmost tip of the last stripe
+    :param hei: height of area being drawn into
+    :param x_start: x coordinate of the upper left corner of the rectangle treated as the canvas
+    :param y_start: y coorditae of that upper left corner
+    :param size_ratio: how many line equivalents are on the left. If set to 1, the first colour is a triangle |>
+    :param stretch_ratio: controls how far out the vees go
+    :param thick_ratio: controls how thich each line is
+    :param orientation: not supported
+    :return: width at thickest part of the first triangle
+    """
+    # draw a multipile
+    wid, hei, x_mid, y_mid, x_end, y_end = get_standard_dimensions(d, wid, hei, x_start, y_start)
+
+    assert len(colours) >= 2, 'multipile needs at least 2 colours'
+    line_width = (wid/len(colours))
+    indentation = line_width * 3 * stretch_ratio
+
+    x_curr_right = x_start
+    x_curr_left = x_curr_right - line_width
+    x_prev_left = x_curr_left - line_width
+
+    # want the first colour to go atop the second one
+    p = draw.Path(fill=colours[1])
+    p.M(x_curr_left, y_start)
+    p.L(x_curr_left + indentation, y_mid)
+    p.L(x_curr_left, y_end)
+    p.L(x_prev_left, y_end)
+    p.L(x_prev_left, y_start).L(x_curr_left, y_start).Z()
+    d.append(p)
+
+    leftmost = min(x_prev_left-line_width, x_start)
+    # first colour is special case as only one side indents
+    p = draw.Path(fill=colours[0])
+    p.M(x_prev_left, y_start)
+    p.L(x_prev_left + indentation, y_mid)
+    p.L(x_prev_left, y_end)
+    p.L(leftmost, y_end)
+    p.L(leftmost, y_start)
+    p.L(x_prev_left, y_start).Z() # it does not indent
+    d.append(p)
+
+    # the third colour by default should come out of the upper left corner
+    if len(colours) > 2:
+        p = draw.Path(fill=colours[2])
+        p.M(x_curr_right, y_start)
+        p.L(x_curr_right + indentation, y_mid)
+        p.L(x_curr_right, y_end)
+        p.L(x_curr_left, y_end)
+        p.L(x_curr_left + indentation, y_mid)
+        p.L(x_curr_left, y_start).Z()
+        d.append(p)
+
+    i = 3
+    while i < len(colours):
+        x_curr_left += line_width
+        x_curr_right += line_width
+        p = draw.Path(fill=colours[i])
+        p.M(x_curr_right, y_start)
+        p.L(x_curr_right + indentation, y_mid)
+        p.L(x_curr_right, y_end)
+        p.L(x_curr_left, y_end)
+        p.L(x_curr_left + indentation, y_mid)
+        p.L(x_curr_left, y_start).Z()
+        d.append(p)
+        i += 1
+
+    return None
 
 
 def draw_vees(d, colours,
@@ -970,22 +1106,28 @@ def draw_pluralrole(d, colours,
 
 
 if __name__ == '__main__':
-    wid = 800
-    hei = 480
+    wid = 660
+    hei = 361
     d = draw.Drawing(wid, hei)
-    draw_horiz_bars(d, RAINBOW)
-    draw_diagonal_stripes(d, ['none', 'grey', 'red', 'yellow', 'white', 'blue', 'green', 'grey', 'none'], wid=wid/2, hei=hei/2, x_start=wid / 2)
-    draw_vees(d, RAINBOW)
+    draw_horiz_bars(d, ['white'])
+    #draw_horiz_bars(d, RAINBOW)
+    #draw_diagonal_stripes(d, ['none', 'grey', 'red', 'yellow', 'white', 'blue', 'green', 'grey', 'none'], wid=wid/2, hei=hei/2, x_start=wid / 2)
+    #draw_vees(d, RAINBOW)
+    #draw_multipile(d, RAINBOW, size_ratio=1, stretch_ratio=1)
     d.save_png('drawflags/test.png')
 
     d = draw.Drawing(wid, hei)
     caretaker = ['#eaba61', '#ffed8e', '#ea9461', '#f9d19a', '#ffEFb8', '#7d5b2a']
-    draw_vert_bars(d,caretaker[:5])
+    draw_horiz_bars(d, ['white'])
+    #draw_vert_bars(d,caretaker[:5])
     #draw_chevrons(d, stripes)
     #draw_concentric_rectangles(d, stripes, y_start=50)
     #draw_concentric_tees(d, RAINBOW[:3])
-    draw_caeds(d, )
-    d.save_png('drawflags/test2.png')
-    d.save_svg('drawflags/test.svg')
+    #draw_caeds(d, )
+    #draw_multipile(d, RAINBOW, size_ratio=1, stretch_ratio=1, thick_ratio=2)
+    #d.save_png('drawflags/test2.png')
+    draw_horiz_bars(d, RAINBOW, thick_ratio=1, orientation=HORIZONTAL)
+    draw_multipile(d, ['red', 'blue', 'black'], wid=0.3*d.width)
+    d.save_svg('drawflags/test2.svg')
 
     doctest.testmod()

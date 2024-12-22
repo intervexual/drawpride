@@ -3,8 +3,8 @@
      width="500" height="300" viewBox="0 0 500 300">
 <defs>
 </defs>
-<rect x="0" y="0" width="251" height="300" fill="#FFB1CB" />
-<rect x="250.0" y="0" width="251" height="300" fill="#01A6EA" />
+<rect x="0" y="0.0" width="251" height="300.0" fill="#FFB1CB" />
+<rect x="250.0" y="0.0" width="251" height="300.0" fill="#01A6EA" />
 <path d="M166.66666666666669,-3.75 L250.0,103.75 L333.3333333333333,-3.75 Z" fill="black" stroke="black" stroke-width="3.75" />
 <path d="M166.66666666666669,303.75 L250.0,196.25 L333.3333333333333,303.75 Z" fill="#A649A4" stroke="black" stroke-width="3.75" />
 <path d="M250.0,196.25 L288.5416666666667,150.0 L250.0,103.75 L211.45833333333334,150.0 Z" fill="#FFCC10" stroke="black" stroke-width="3.75" />

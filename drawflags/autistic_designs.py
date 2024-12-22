@@ -111,3 +111,13 @@ for bg in horiz_stripe_options:
             filelocations = save_flag(d, filename, outdir, same_folder=True, show_image=to_show)
 
 
+### Intersex male
+d = draw.Drawing(500 * 2, 300 * 2)
+draw_horiz_bars(d, [intersex_yellow])
+embed_icon(d, 'gendersex/mars.svg', {'#000000':intersex_purple}, size_ratio=.9)
+filelocations = save_flag(d, 'intersex_man', outdir, same_folder=True, show_image=to_show)
+
+d = draw.Drawing(500 * 2, 300 * 2)
+draw_horiz_bars(d, [intersex_yellow])
+embed_icon(d, 'gendersex/Iconoir_male.svg', {'#000000':intersex_purple}, size_ratio=1)
+filelocations = save_flag(d, 'intersex_male', outdir, same_folder=True, show_image=to_show)

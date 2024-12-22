@@ -106,50 +106,6 @@ def draw_pile(d, primary_colour, secondary_colour='none',
     d.append(p)
 
 
-def draw_multipile(d, colours,
-              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
-    """
-    Add a triangle to the left side like in the demisexual flag
-    (it's called a pile: https://en.wikipedia.org/wiki/Glossary_of_vexillology )
-    :param d: Drawing object
-    :param primary_colour: fill of the pile (str hex code)
-    :param wid: width of the area we are working with
-    :param hei: height of the area we are working with
-    :param size_ratio: used to scale the size (width) of the pile
-    :return: the width of the leftmost pile
-    >>> d = draw.Drawing(500, 300)
-    >>> draw_pile(d, RAINBOW[0])
-    >>> len(d.elements) == 1 and d.elements[-1].args['fill'] == RAINBOW[0]
-    True
-    >>> type(d.elements[0])
-    <class 'drawsvg.elements.Path'>
-    """
-    wid, hei = get_effective_dimensions(d, wid, hei)
-
-    line_width = thick_ratio*wid/(len(colours)+2) # +2 because the chevron goes out by two
-    piles = []
-    first_width = None
-    for i, primary_colour in enumerate(colours):
-        x_offset = i*line_width + x_start
-        rightmost = x_offset + line_width*3*size_ratio
-
-        leftmost = x_offset
-        topmost = 0
-        p = draw.Path(fill=primary_colour)
-        p.M(leftmost, topmost)
-        p.L(rightmost, hei / 2)
-        p.L(leftmost, hei)
-        p.L(x_start, hei).L(x_start, topmost)
-        p.L(leftmost, topmost).Z()
-        piles.append(p)
-        if not first_width:
-            first_width = rightmost
-
-    # add them in reverse order
-    for p in reversed(piles):
-        d.append(p)
-    return first_width
 
 
 def draw_corners(d, primary_colour, secondary_colour='none',
