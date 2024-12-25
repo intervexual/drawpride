@@ -6,8 +6,7 @@ draw_square is unlike the others in this file
 """
 import drawsvg
 
-from stars_and_hearts import *
-
+from multicolour_shapes import *
 
 def draw_text(d, text_to_add, primary_colour, secondary_colour='none', name='ch',
               wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
@@ -268,6 +267,46 @@ def draw_rhombus(d, primary_colour, secondary_colour='none',
     d.append(p)
 
 
+def draw_hemirhombus(d, primary_colour, secondary_colour='none',
+              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+    """
+    Draw a half a square on a diagonal
+    :param d: Drawing object
+    :param primary_colour: the colour to fill the rhombus with
+    :param secondary_colour: outline colour of rhombus
+    :param wid: width of the area we are working with
+    :param hei: height of the area we are working with
+    :param size_ratio: size factor (radius)
+    :param stretch_ratio: horizontal stretching to make diamonds
+    :param thick_ratio: scaling factor for the stroke width of the outline
+    :return: none
+    >>> d = draw.Drawing(500, 300)
+    >>> draw_rhombus(d, RAINBOW[0])
+    >>> len(d.elements) == 1 and d.elements[-1].args['stroke'] == RAINBOW[0]
+    True
+    >>> type(d.elements[0])
+    <class 'drawsvg.elements.Path'>
+    """
+    wid, hei = get_effective_dimensions(d, wid, hei)
+    sw = thick_ratio* hei / 10
+    p = draw.Path(fill=primary_colour)
+    radius_perc = 0.25 # by default have it take up 1/4 of the height
+    y_radius = hei * radius_perc * size_ratio
+    x_radius = y_radius*stretch_ratio
+    mx, my = wid/2, hei/2
+    p.M(mx, my-y_radius)
+    p.L(mx+x_radius, my)
+    p.L(mx-x_radius, my).Z()
+    d.append(p)
+
+    p = draw.Path(fill=secondary_colour)
+    p.M(mx, my+y_radius)
+    p.L(mx+x_radius, my)
+    p.L(mx-x_radius, my).Z()
+    d.append(p)
+
+
 def draw_square(d, primary_colour, secondary_colour='none',
               wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
               size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
@@ -504,87 +543,7 @@ def draw_metis_lemniscate(d, primary_colour, secondary_colour='none',
 
 
 
-def single_nautilus_segment(d, wid, hei, arr, primary_colour, step_size, border_width=0.0, border_colour ='black'):
-    """
-    Helper function for draw_nautilus. Draws a single segment.
-    :param d: Drawing object
-    :param wid: width of area the entire nautilus is being drawn into
-    :param hei: height of the area the entire nautilus is being drawn into
-    :param arr: array of coordinates
-    :param primary_colour: colour to fill the nautilus segment with
-    :param step_size: the "width" of the segment
-    :param border_width: width in pixels of the border
-    :param border_colour:
-    :return:
-    """
-    mx = step_size + wid / 2
-    my = 2*step_size + hei / 2
 
-    p = draw.Path(stroke=border_colour, fill=primary_colour, stroke_width=border_width)
-    d.append(p.M(mx, my))
-    d.append(p.L(mx+arr[0], my+arr[1]))
-    d.append(p.Q(mx+arr[2], my+arr[3], mx+arr[4], my+arr[5]))
-    d.append(p.L(mx, my))
-    d.append(p.Z())
-
-
-def draw_nautilus(d, colours,
-              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL,
-              border_colour='black', border_size=0):
-    """
-    Draw an autistic spectrum nautilus symbol
-    :param d: Drawing object
-    :param colours: the colours of the segments, first one will be the largest
-    :param wid: width of area the symbol is being added to
-    :param hei: height of the area the symbol is being added to
-    :param size_ratio: scaling factor
-    :param is_horizontal: vertical or horizontal?
-    :return: none
-    """
-    is_horizontal = orientation == HORIZONTAL
-    wid, hei = get_effective_dimensions(d, wid, hei)
-    height_perc = (120 / 300)*size_ratio
-    border_width = 5*size_ratio*border_size
-    ang_each = 360 / len(colours)
-    coords = []
-    a = 0
-    start = height_perc*hei#120*height_scale
-    step_size = start/12 * 8/len(colours) #10
-    l = start
-    for i in range(len(colours) + 1):
-        x0 = -l * math.sin(math.radians(a))
-        y0 = -l * math.sin(math.radians(90 - a))
-        coords.append(tuple([x0, y0, a]))
-        a += ang_each
-        l -= step_size
-
-    controls = []
-    l = start
-    a = ang_each / 2
-    for i, val in enumerate(coords):
-        inc = 10*stretch_ratio*size_ratio
-        cp_dist = l + inc
-        x0 = -(cp_dist) * math.sin(math.radians(a))
-        y0 = -(cp_dist) * math.sin(math.radians(90 - a))
-        controls.append(tuple([x0, y0]))
-        l -= step_size
-        a += ang_each
-
-    # draw out each segment
-    for i, l in enumerate(colours):
-        fill = colours[i]
-
-        x0 = coords[i][0]
-        y0 = coords[i][1]
-        x1 = coords[i + 1][0]
-        y1 = coords[i + 1][1]
-        # by default have it vertical
-        if is_horizontal:
-            trigged = [ y0, x0,  controls[i][1], controls[i][0],  y1, x1]
-        else:
-            trigged = [x0, y0, controls[i][0], controls[i][1], x1, y1]
-        single_nautilus_segment(d, wid, hei, trigged, fill, step_size, border_width=border_width, border_colour=border_colour)
 
 
 def draw_closet_symbol(d, primary_colour, secondary_colour='none',
@@ -810,134 +769,6 @@ def draw_intersex_ally(d, primary_colour, secondary_colour='none',
     return r
 
 
-def draw_pocketgender_hourglass(d, colours,
-              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
-    """
-    Draw a straight hourglass type shape seen in the pocket gender flag
-    :param d: Drawing object
-    :param colours: in order: top fill, middle fill, bottom fill, (optional) stroke colour
-    :param wid: width of the area we are working with
-    :param hei: height of the area we are working with
-    :param x_start: the x-coordinate of the upper left corner of the rectangular area that is being drawn into
-    :param y_start: the y-coordinate of the upper left corner of the rectangular area that is being drawn into
-    :param size_ratio: size factor
-    :return: none
-    """
-    wid, hei = get_effective_dimensions(d, wid, hei)
-    strokecolour = 'none'
-    if len(colours) > 3:
-        strokecolour = colours[3]
-    sw = hei/80
-
-    midx = x_start + wid/2
-    midy = y_start + hei/2
-
-    bigtri_wid = wid/3
-    left = x_start + (wid/2) - (bigtri_wid/2)
-    right = x_start + (wid/2) + (bigtri_wid/2)
-    top = y_start
-    bottom = y_start + hei
-    # at first I thought the triangles were equilateral, but they are *not*
-    bigtri_hei = (hei/3)+sw #(hei/wid)*(zig_wid/2) # (wid/6)/(bigtri_wid+(wid/6))
-
-    gap = (hei - bigtri_hei*2)/2
-    minitri_wid = (gap)*(wid/6)/(hei/3)
-
-    # break it into three paths: top
-    p = draw.Path(fill=colours[0], stroke=strokecolour, stroke_width=sw)
-    p.M(left, top-sw).L(midx, y_start+bigtri_hei).L(right, top-sw).Z()
-    d.append(p)
-    # bottom
-    p = draw.Path(fill=colours[2], stroke=strokecolour, stroke_width=sw)
-    p.M(left, bottom+sw).L(midx, bottom-bigtri_hei).L(right, bottom+sw).Z()
-    d.append(p)
-    # middle
-    p = draw.Path(fill=colours[1], stroke=strokecolour, stroke_width=sw)
-    p.M(midx, bottom-bigtri_hei).L(midx+minitri_wid, midy).L(midx, y_start+bigtri_hei).L(midx-minitri_wid, midy).Z()
-    d.append(p)
-
-
-def draw_triskelion(d, colours,
-              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
-    """
-    Draw a triskelion symbol used for BDSM fetish flags.
-    Based on: https://commons.wikimedia.org/wiki/File:Dotted_triskelion_(fixed_width).svg
-    :param d: Drawing object
-    :param colours: in order: tracing colour, (optional) fill colour, (optional) dot colour
-    :param wid: width of the area we are working with
-    :param hei: height of the area we are working with
-    :param x_start: the x-coordinate of the upper left corner of the rectangular area that is being drawn into
-    :param y_start: the y-coordinate of the upper left corner of the rectangular area that is being drawn into
-    :param size_ratio: size factor (radius)
-    :param stretch_ratio: scaling factor for the radii of the inner dots
-    :param thick_ratio: scaling factor for the stroke width inside the triskelion
-    :return: none
-    """
-    wid, hei = get_effective_dimensions(d, wid, hei)
-
-    #w = wid/3619.2151
-    h = size_ratio*hei/3619.2151
-    w = h
-
-    x_start += (wid/2) - 1357.0*w
-    y_start += (hei/2) - 1366.0*h
-
-    # x coordinates
-    x1 = x_start + 1366.0 * w
-    x2 = x_start + 507.0 * w
-    x3 = x_start + 498.0 * w
-    # y coordinates
-    y1 = y_start + 71.0 * h # was 77
-    y2 = y_start + 71.0 * h # smallest
-    y3 = y_start + 1372.0 * h
-
-    # x coordinates
-    x6 = x_start + 233.0 * w
-    x7 = x_start + 660.0 * w
-    x8 = x_start + 1784.0 * w
-    x_cent = x_start + 1357.0 * w
-    x10 = x_start + 1782.0 * w
-    x11 = x_start + 2919.0 * w
-    x12 = x_start + 2485.0 * w
-    # y coordinates
-    y6 = y_start + 2008.0 * h
-    y7 = y_start + 2747.0 * h
-    y8 = y_start + 2105.0 * h
-    y_cent = y_start + 1366.0 * h
-    y10 = y_start + 619.0 * h
-    y11 = y_start + 1263.0 * h
-    y12 = y_start + 2004.0 * h
-
-    sw=thick_ratio*hei/20
-    pathcolour = colours[0]
-    circlebg = 'none'
-    if len(colours) > 1:
-        circlebg = colours[1]
-    if len(colours) > 2:
-        dotcolour = colours[2]
-    else:
-        dotcolour = pathcolour
-
-    rad = (y_cent - y2) # 1 overshoots and 0.5 undershoots
-    d.append(draw.Circle(x_cent, y_cent, rad, stroke_width=sw, fill=circlebg, stroke=pathcolour))
-
-    p = draw.Path(stroke=pathcolour, fill='none', stroke_width=sw)
-    p.M(x1, y1) # upper C
-    p.C(x2, y2, x3, y3, x_cent, y_cent)
-    p.M(x6, y6) # the two lower C shapes
-    p.C(x7, y7, x8, y8, x_cent, y_cent)
-    p.C(x10, y10, x11, y11, x12, y12)
-    d.append(p)
-
-    minirad = stretch_ratio*rad/6
-    bottomlevel = y_cent+rad/4 # is this actually correct?
-    xoffs = rad/2 # is this actually correct?
-    d.append(draw.Circle(x_cent, y_cent-rad/2, minirad,  fill=dotcolour))
-    d.append(draw.Circle(x_cent+xoffs, bottomlevel, minirad,  fill=dotcolour))
-    d.append(draw.Circle(x_cent-xoffs, bottomlevel, minirad,  fill=dotcolour))
-
 
 def draw_circle(d, primary_colour, secondary_colour='none',
               wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
@@ -1117,113 +948,6 @@ def draw_asympile(d, primary_colour, secondary_colour='none',
     d.append(p)
 
 
-def draw_trichevron(d, colours,
-              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
-    """
-    Draw three chevrons in this style from https://queerflag.tumblr.com/post/151443283619/bizexuals-more-queer-pride-flagsvariations
-    :param d: Drawing object
-    :param colours: in order: top chevron, (optional) middle chevron, (optional) bottom chevron.
-                If two colours are provided, they are used for top & bottom and the middle area is transparent.
-                If one colour is provided, it is used for top & bottom and the middle area is transparent.
-    :param wid: width of the area we are working with
-    :param hei: height of the area we are working with
-    :param x_start: the x-coordinate of the upper left corner of the rectangular area that is being drawn into
-    :param y_start: the y-coordinate of the upper left corner of the rectangular area that is being drawn into
-    :param size_ratio: size factor
-    :return: the height of the top/bottom chevrons
-    """
-    base_sw = d.height/6
-    # top chevron
-    heights = [base_sw, base_sw/2, base_sw]
-    start_height = base_sw
-    mid_height = base_sw*2.5
-    mid_bottom = mid_height
-
-    if len(colours) > 2:
-        colours_in_use = colours.copy()
-    elif len(colours) == 2:
-        colours_in_use = [colours[0], 'none', colours[1]]
-    else: #if len(colours) == 1:
-        colours_in_use = [colours[0], 'none', colours[0]]
-
-    for i in range(3):
-        sw = heights[i]
-        mid_bottom += sw
-        if type(colours_in_use[i]) == str:
-            p = draw.Path(fill=colours_in_use[i])
-        else:
-            p = draw.Path(fill=colours_in_use[i].hex)
-        p.M(0, start_height)
-        p.L(d.width/2, mid_height).L(d.width, start_height) # top
-        p.L(d.width, start_height+sw) #go down
-        p.L(d.width/2, mid_bottom).L(0, start_height+sw).Z()
-        d.append(p)
-        start_height += sw
-        mid_height = mid_bottom
-    return base_sw
-
-
-def draw_crossdresser(d, colours,
-              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
-    """
-    Draw an X in the style of this crossdresser flag: https://flag.library.lgbt/flags/crossdresser/
-    :param d: Drawing object
-    :param colours: in order top background, bottom background
-    :param wid: width of the area we are working with
-    :param hei: height of the area we are working with
-    :param x_start: the x-coordinate of the upper left corner of the rectangular area that is being drawn into
-    :param y_start: the y-coordinate of the upper left corner of the rectangular area that is being drawn into
-    :param size_ratio: size factor
-    :return: the height of the top/bottom chevrons
-    """
-    if len(colours) == 1:
-        colours.append('none')
-
-    wid, hei = get_effective_dimensions(d, wid, hei)
-    midx = x_start + wid/2
-    midy = y_start + hei/2
-
-    draw_horiz_bars(d, colours, wid=wid, hei=hei, x_start=x_start, y_start=y_start)
-
-    line_wid = wid/8
-    line_hei = line_wid*(hei/wid)
-
-    top = y_start
-    bottom = y_start+hei
-    leftmost = x_start
-    rightmost = x_start + wid
-
-    p = draw.Path(fill=colours[0])
-    p.M(leftmost, bottom)
-    p.L(leftmost, bottom-line_hei)
-    p.L(midx-line_wid, midy)
-    p.L(midx+line_wid, midy)
-    p.L(rightmost, bottom-line_hei)
-    p.L(rightmost, bottom) # bottom right corner
-    p.L(rightmost-line_wid, bottom) # double back
-    p.L(midx, midy+line_hei)
-    p.L(x_start+line_wid, bottom)
-    p.L(x_start+line_wid, bottom)
-    p.Z()
-    d.append(p)
-
-    p = draw.Path(fill=colours[1])
-    p.M(leftmost, top)
-    p.L(leftmost, top+line_hei)
-    p.L(midx-line_wid, midy)
-    p.L(midx+line_wid, midy)
-    p.L(rightmost, top+line_hei)
-    p.L(rightmost, top) # bottom right corner
-    p.L(rightmost-line_wid, top) # double back
-    p.L(midx, midy-line_hei)
-    p.L(x_start+line_wid, top)
-    p.L(x_start+line_wid, top)
-    p.Z()
-    d.append(p)
-
-
 def draw_equals(d, primary_colour, secondary_colour='none',
               wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
               size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
@@ -1391,6 +1115,40 @@ def draw_belt(d, primary_colour, secondary_colour='none',
     return belt_thickness
 
 
+def draw_utrinque(d, primary_colour, secondary_colour='none',
+              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+    """
+    Draw the utrinque symbol
+    :param d:
+    :param primary_colour:
+    :param secondary_colour:
+    :param wid:
+    :param hei:
+    :param x_start:
+    :param y_start:
+    :param size_ratio:
+    :param stretch_ratio:
+    :param thick_ratio:
+    :param orientation:
+    :return:
+    """
+    wid, hei, x_mid, y_mid, x_end, y_end = get_standard_dimensions(d, wid, hei, x_start, y_start)
+    sw = thick_ratio*(hei/8)
+    edge_heights = size_ratio*(hei/5)
+    edge_lengths = stretch_ratio*(wid/4)
+    y_top = y_start + edge_heights
+    y_bottom = y_start + hei - edge_heights
+    x_bottom = x_start + edge_lengths
+    x_top = x_start + wid - edge_lengths
+    p = draw.Path(stroke=primary_colour, stroke_width=sw, fill='none')
+    p.M(x_start, y_bottom)
+    p.L(x_bottom, y_bottom)
+    p.L(x_top, y_top)
+    p.L(x_end, y_top)
+    d.append(p)
+
+
 def draw_diamond(d, primary_colour, secondary_colour='none',
               wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
               size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
@@ -1506,6 +1264,176 @@ def draw_caed(d, primary_colour, secondary_colour='none',
     d.append(draw.Rectangle(mid_left, bottom-mid_height, each_wid, mid_height, fill=secondary_colour))
 
 
+def draw_open_linear_infinity(d, primary_colour, secondary_colour='none',
+              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+    """
+    Draw an infinity symbol that is of consistent line thickness and partly open.
+    Based on the infinity from Noun Project #7281819 by Elin Erkani
+    :param d:
+    :param primary_colour:
+    :param secondary_colour:
+    :param wid:
+    :param hei:
+    :param x_start:
+    :param y_start:
+    :param size_ratio:
+    :param stretch_ratio:
+    :param thick_ratio:
+    :param orientation:
+    :return:
+    """
+    wid, hei, x_mid, y_mid, x_end, y_end = get_standard_dimensions(d, wid, hei, x_start, y_start)
+
+    # based on noun-infinity-7281819.svg Created by Elin Erkani
+    w = wid/110
+    h = stretch_ratio* hei/110
+
+    # x coordinates
+    butt_width = 5*w
+    dist_bw_butts = (64-46)*w
+    x_right_inner_butt = x_mid+dist_bw_butts/2#x_start + 64.0 * w
+    x_left_inner_butt = x_mid-dist_bw_butts/2 #x_start + 46.0 * w
+    x_left_outer_butt = x_left_inner_butt + butt_width #x_start + 51.0 * w
+    x_right_outer_butt = x_right_inner_butt - butt_width # x_start + 59.0 * w
+
+    width_bw_cshapes = (80-30)*w
+    x_right_cshape_opening = x_mid + width_bw_cshapes/2 #x_start + 80.0 * w
+    x_left_cshape_opening = x_mid - width_bw_cshapes/2 #x_start + 30.0 * w
+
+    x_inner_cshape_upper = x_start + 90.0 * w
+    x_left_inner_cshape_bottom = x_start + 20.0 * w
+
+    x_right_midliner = x_start + 54.0 * w
+    x_left_midliner = x_start + 57.0 * w
+
+    x_left_cshape_outer = x_start + 14.0 * w
+    x_right_cshape_outer = x_start + 96.0 * w
+
+    # x control points
+    cx_outerwid = (109-1)*w
+    cx_leftmost = x_mid-cx_outerwid/2#x_start + 1.0 * w
+    cx_rightmost = x_mid+cx_outerwid/2#x_start + 109.0 * w
+
+    cx_cshape_inner = cx_outerwid - 20*w #(99-11)*w
+    x17 = x_mid-cx_cshape_inner/2 #x_start + 11.0 * w
+    x6 = x_mid+cx_cshape_inner/2 #x_start + 99.0 * w
+
+    x30 = x_start + 17.0 * w
+    x5 = x_start + 93.0 * w
+
+    x20 = x_start + 18.0 * w
+    x45 = x_start + 92.0 * w
+
+    x33 = x_start + 22.0 * w
+    x8 = x_start + 88.0 * w
+
+    x21 = x_start + 24.0 * w
+    x46 = x_start + 86.0 * w
+
+    x34 = x_start + 26.0 * w
+    x9 = x_start + 84.0 * w
+
+    x28 = x_start + 36.0 * w
+    cx_right_bw_butt_and_shape = x_start + 74.0 * w
+
+    x23 = x_start + 38.0 * w
+    x48 = x_start + 72.0 * w
+
+    x15 = x_start + 40.0 * w
+    x11 = x_start + 71.0 * w
+
+    cx_buttward_dist = 4*w
+    cx_left_buttward = x_left_inner_butt - cx_buttward_dist #x_start + 42.0 * w
+    cx_right_buttward = x_right_inner_butt + cx_buttward_dist #x_start + 68.0 * w
+
+    x14 = x_start + 48.0 * w
+    x39 = x_start + 63.0 * w
+
+    dist_bw_holes = butt_width*2 # (60-50)*w # 10
+    cx_left_hole_mid = x_mid - dist_bw_holes/2 # x_start + 50.0 * w
+    cx_right_hole_mid = x_mid + dist_bw_holes/2 #x_start + 60.0 * w
+
+    # y coordinates
+    inf_height = (77-33)*h # 44
+    path_height = 16*h
+    cshape_height = (70-40)*h #30
+
+    y_top = y_mid - inf_height*.5 #y_start + 33.0 * h
+    y_bottom = y_mid + inf_height*0.5 #y_start + 77.0 * h
+
+    y_outer_side_top = y_mid - cshape_height/2#y_start + 40.0 * h
+    y_outer_bottom_right = y_mid + cshape_height/2 #y_start + 70.0 * h
+
+    hole_inner_height = inf_height - path_height #(69-41)*h
+    y_top_inner_hole = y_mid - hole_inner_height/2#y_start + 41.0 * h
+    y_bottom_inner_hole = y_mid + hole_inner_height/2 #y_start + 69.0 * h
+
+    y_inner_uppish = cshape_height*(2/3) #(65-45)*h # 20
+    y_left_outer_butt = y_mid - y_inner_uppish/2#y_start + 45.0 * h
+    y_right_outer_butt = y_mid + y_inner_uppish/2 #y_start + 65.0 * h
+
+    y_butt_inner = path_height/2 #(59-51)*h # 8
+    y_butt_inner_left = y_mid - y_butt_inner/2#y_start + 51.0 * h
+    y_butt_inner_right = y_mid + y_butt_inner/2 #y_start + 59.0 * h
+
+    y_midportion = cshape_height/2 # (62-47-1)*h #15
+    y_right_midliner = y_mid + y_midportion/2#y_start + 62.0 * h
+    y_left_midliner = y_mid - y_midportion/2#y_start + 47.0 * h
+
+    # paired control points
+    cy_highest = (74-36)*h
+    cy_high = y_mid - 0.5*cy_highest #y_start + 36.0 * h
+    cy_low = y_mid + 0.5*cy_highest #y_start + 74.0 * h
+
+    cy1 = (71-39)*h
+    y24 = y_mid - cy1/2#y_start + 39.0 * h
+    y49 = y_mid + cy1/2 #y_start + 71.0 * h
+
+    cy2 = (67-43)*h
+    y8 = y_mid - cy2/2 # y_start + 43.0 * h
+    y33 = y_mid + cy2/2 # y_start + 67.0 * h
+
+    cy3 = (64-46)*h
+    y27 = y_mid - cy3/2 #y_start + 46.0 * h
+    y2 = y_mid + cy3/2 #y_start + 64.0 * h
+
+    cy4 = (57-53)*h
+    y18 = y_mid - cy4/2 #y_start + 53.0 * h
+    y43 = y_mid + cy4/2 #y_start + 57.0 * h
+
+    cy5 = (56-54)*h
+    y6 = y_mid -cy5/2 #y_start + 54.0 * h
+    y31 = y_mid + cy5/2 #y_start + 56.0 * h
+
+    #y_mid = y_mid # y_start + 55.0 * h
+    #y14 = y_bottom_inner_hole # y_start + 68.0 * h
+
+    sw = hei/100
+    p = draw.Path(stroke=secondary_colour, stroke_width=sw, fill=primary_colour, transform=f'translate(0, {hei}) scale(1,-1)') #transform=f'rotate(180,{x_mid},{y_mid})')
+    p.M(x_right_inner_butt, y_butt_inner_right)
+    p.C(cx_right_buttward, y2, cx_right_bw_butt_and_shape, y_bottom_inner_hole, x_right_cshape_opening, y_bottom_inner_hole) # middish bottom right
+    p.C(x5, y_bottom_inner_hole, x6, y6, x_inner_cshape_upper, y_left_outer_butt) # right C
+    p.C(x8, y8, x9, y_top_inner_hole, x_right_cshape_opening, y_top_inner_hole) # right C
+    p.C(x11, y_top_inner_hole, cx_right_hole_mid, y_mid, x_right_midliner, y_right_midliner)
+    p.C(x14, y_bottom_inner_hole, x15, y_bottom, x_left_cshape_opening, y_bottom)
+    p.C(x17, y_bottom, cx_leftmost, y18, x_left_cshape_outer, y_outer_side_top)
+    p.C(x20, cy_high, x21, y_top, x_left_cshape_opening, y_top)
+    p.C(x23, y_top, x_left_inner_butt, y24, x_left_outer_butt, y_left_outer_butt)
+    p.L(x_left_inner_butt, y_butt_inner_left) # the other butt
+    p.C(cx_left_buttward, y27, x28, y_top_inner_hole, x_left_cshape_opening, y_top_inner_hole) # now going back around the outside
+    p.C(x30, y_top_inner_hole, x17, y31, x_left_inner_cshape_bottom, y_right_outer_butt)
+    p.C(x33, y33, x34, y_bottom_inner_hole, x_left_cshape_opening, y_bottom_inner_hole)
+    p.C(x15, y_bottom_inner_hole, cx_left_hole_mid, y_mid, x_left_midliner, y_left_midliner)
+    p.C(x39, y_top_inner_hole, x11, y_top, x_right_cshape_opening, y_top)
+    p.C(x6, y_top, cx_rightmost, y43, x_right_cshape_outer, y_outer_bottom_right)
+    p.C(x45, cy_low, x46, y_bottom, x_right_cshape_opening, y_bottom)
+    p.C(x48, y_bottom, x_right_inner_butt, y49, x_right_outer_butt, y_right_outer_butt)
+    p.L(x_right_inner_butt, y_butt_inner_right).Z()
+    d.append(p)
+
+
+
 if __name__ == '__main__':
     doctest.testmod()
     wid = 500
@@ -1531,5 +1459,5 @@ if __name__ == '__main__':
     #draw_bipolar(d, 'black', 'blue')
     #draw_teardrop(d,'white')
     #draw_caed(d, 'green', 'yellow')
-    draw_open_lemniscate(d, 'white')
+    #draw_open_lemniscate(d, 'white')
     d.save_svg('drawflags/test2.svg')

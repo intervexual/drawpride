@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+     width="500" height="300" viewBox="0 0 500 300">
+<defs>
+</defs>
+<rect x="0" y="0" width="500" height="301" fill="white" />
+<path d="M0,0 L50.0,0 L250.0,120.0 L250.0,150.0 L200.0,150.0 L0,30.0 Z" fill="#5b5b5b" />
+<path d="M500,0 L450.0,0 L250.0,120.0 L250.0,150.0 L300.0,150.0 L500,30.0 Z" fill="#8b20e2" />
+<path d="M0,300 L50.0,300 L250.0,180.0 L250.0,150.0 L200.0,150.0 L0,270.0 Z" fill="#ffd800" />
+<path d="M500,300 L450.0,300 L250.0,180.0 L250.0,150.0 L300.0,150.0 L500,270.0 Z" fill="black" />
+</svg>

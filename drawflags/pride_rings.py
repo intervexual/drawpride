@@ -242,7 +242,9 @@ def draw_concentric_rings(d, colours, wid=UNSPECIFIED, hei=UNSPECIFIED,
 
 
 
-def draw_bullseye(d, colours, wid=UNSPECIFIED, hei=UNSPECIFIED, size_ratio=1.0):
+def draw_bullseye(d, colours,
+              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
     """
     Draw concentric rings inside the intersex ring. All ring widths will be the same.
     :param d: Drawing object
@@ -273,7 +275,9 @@ def draw_bullseye(d, colours, wid=UNSPECIFIED, hei=UNSPECIFIED, size_ratio=1.0):
     draw_ring(d, wid, hei, math.ceil(radius), thickness + fudge, colours[0], 'none')
 
 
-def draw_inner_bullseye(d, colours, wid=UNSPECIFIED, hei=UNSPECIFIED, stretch_ratio=1.0, size_ratio=1.0, thick_ratio=1.0, x_start=0, y_start=0):
+def draw_inner_bullseye(d, colours,
+                        wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                        size_ratio=1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
     """
     Draw concentric rings inside the intersex ring (outer ring will always have the standard thickness)
     :param d: Drawing object

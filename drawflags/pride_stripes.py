@@ -775,22 +775,42 @@ def draw_concentric_beziers(d, colours,
     >>> type(d.elements[0])
     <class 'drawsvg.elements.Circle'>
     """
+    print('CONC', orientation)
     wid, hei = get_effective_dimensions(d, wid, hei)
-    right = x_start
-    bottom = y_start+hei
+
+    if orientation == UPSIDE:
+        x_begin = x_start + wid
+        x_direc = -1
+        y_begin = y_start
+        y_direc = 1
+    elif orientation == ARROW:
+        x_begin = x_start + wid
+        x_direc = -1
+        y_begin = y_start+hei
+        y_direc = -1
+    elif orientation == VERTICAL:
+        x_begin = x_start
+        x_direc = 1
+        y_begin = y_start
+        y_direc = 1
+    else:
+        x_begin = x_start
+        x_direc = 1
+        y_begin = y_start + hei
+        y_direc = -1
 
     hypotenuse = math.sqrt( wid**2 + hei**2)
     stroke_wid = hypotenuse / len(colours)
 
     paths = []
     for i, colour in enumerate(colours):
-        x = right+(stroke_wid/2) + i*stroke_wid
-        y = bottom-(stroke_wid/2) - i*stroke_wid
+        x = x_begin + x_direc*(stroke_wid/2) + x_direc*i*stroke_wid
+        y = y_begin + y_direc*(stroke_wid/2) + y_direc*i*stroke_wid
 
         p = draw.Path(stroke_width=stroke_wid, stroke=colour, fill=colour)
-        p.M(x, bottom)
-        p.Q(x, y, right, y) # draw the curve
-        p.L(right, bottom).L(x, bottom).Z() # close the curve so there's no gaps in colour between stripes
+        p.M(x, y_begin)
+        p.Q(x, y, x_begin, y) # draw the curve
+        p.L(x_begin, y_begin).L(x, y_begin).Z() # close the curve so there's no gaps in colour between stripes
         paths.append(p)
 
     # add the stripes in reversed order to the drawing object so the outer stripes are the bottom layers
@@ -1015,6 +1035,31 @@ def draw_armpit_stripes(d, colours,
     '''
 
 
+def draw_buddhist(d, colours,
+                             wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                             size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+    """
+    Draw stripes like in the buddhist flag
+    :param d: Drawing object
+    :param colours:
+    :param wid: width of the area we are working with
+    :param hei: height of the area we are working with
+    :param x_start: the x-coordinate of the upper left corner of the rectangular area that is being drawn into
+    :param y_start: the y-coordinate of the upper left corner of the rectangular area that is being drawn into
+    :param size_ratio: size factor (not used)
+    :param stretch_ratio: how much space for the vertical lines
+    :param thick_ratio: not currently used
+    :return: radius
+    """
+    wid, hei = get_effective_dimensions(d, wid, hei)
+    #changed_wid = 0.5*wid*stretch_ratio*(len(colours)-1)/len(colours)
+    n = len(colours)
+    changed_wid = wid*((n-1)/n)
+    draw_horiz_bars(d, colours, wid=wid, hei=hei, x_start=x_start, y_start=y_start, thick_ratio=thick_ratio)
+    draw_vert_bars(d, colours, wid=changed_wid, hei=hei, x_start=x_start, y_start=y_start, thick_ratio=thick_ratio)
+    return changed_wid
+
+
 def draw_pluralrole(d, colours,
                              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
                              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
@@ -1103,6 +1148,55 @@ def draw_pluralrole(d, colours,
     return diamond_radius
 
 
+def draw_concentric_exes(d, colours,
+              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+    """
+    Draw concentric Xs in the style of the Quasigender flags
+    :param d: Drawing object
+    :param colours: left to right top to bottom (there should be four)
+    :param wid: width of the area we are working with
+    :param hei: height of the area we are working with
+    :param x_start: the x-coordinate of the upper left corner of the rectangular area that is being drawn into
+    :param y_start: the y-coordinate of the upper left corner of the rectangular area that is being drawn into
+    :param size_ratio: size factor: how much of the width the lines take up
+    :param stretch_ratio: how much more width the lines are at bottom than top
+    :param thick_ratio: changes the height of the upper part
+    :return: the height of the top part
+    """
+    wid, hei, x_mid, y_mid, x_end, y_end = get_standard_dimensions(d, wid, hei, x_start, y_start)
+
+    effec_hei = stretch_ratio*thick_ratio*hei/2
+    base_line_height = effec_hei / len(colours)
+
+    effec_wid = thick_ratio*wid/2
+    base_line_width = effec_wid / len(colours)
+
+    d.append(draw.Rectangle(x_start, y_start, wid, hei, fill=colours[0]))
+
+    n = len(colours) - 1
+    for i in range(len(colours)-1):
+        line_width = base_line_width*(n-i)
+        line_height = base_line_height*(n-i)
+        p = draw.Path(fill=colours[i+1])
+        p.M(x_start, y_start)
+        p.L(x_start + line_width, y_start)
+        p.L(x_mid, y_mid-line_height)
+        p.L(x_end - line_width, y_start)
+        p.L(x_end, y_start) # upper right corner
+        p.L(x_end, y_start + line_height)
+        p.L(x_mid + line_width, y_mid)
+        p.L(x_end, y_end-line_height)
+        p.L(x_end, y_end) # lower right corner
+        p.L(x_end - line_width, y_end)
+        p.L(x_mid, y_mid + line_height)
+        p.L(x_start + line_width, y_end)
+        p.L(x_start, y_end) # lower left corner
+        p.L(x_start, y_end - line_height)
+        p.L(x_mid - line_width, y_mid)
+        p.L(x_start, y_start + line_height).Z()
+        d.append(p)
+
 
 
 if __name__ == '__main__':
@@ -1126,8 +1220,9 @@ if __name__ == '__main__':
     #draw_caeds(d, )
     #draw_multipile(d, RAINBOW, size_ratio=1, stretch_ratio=1, thick_ratio=2)
     #d.save_png('drawflags/test2.png')
-    draw_horiz_bars(d, RAINBOW, thick_ratio=1, orientation=HORIZONTAL)
-    draw_multipile(d, ['red', 'blue', 'black'], wid=0.3*d.width)
+    #draw_horiz_bars(d, RAINBOW, thick_ratio=1, orientation=HORIZONTAL)
+    #draw_multipile(d, ['red', 'blue', 'black'], wid=0.3*d.width)
+    draw_concentric_exes(d, RAINBOW[:4], thick_ratio=1.2)
     d.save_svg('drawflags/test2.svg')
 
     doctest.testmod()

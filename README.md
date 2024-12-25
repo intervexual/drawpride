@@ -17,8 +17,8 @@ Stripes:
 * Concentric bézier curves in the style of the Mental Health Flag
 * Concentric infinity symbols in the style of the Autistic Pride Day logo
 * Concentric vees in the style of the varsex flag
-* Concentric tees in the style of the tgirl/tboy flags
 * Concentric rectangles in the style of the kymenic flags
+* Combining horizontal & vertical lines in the style of the Buddhist flag
 
 Circular shapes:
 * Standard Carpenter intersex flag ring
@@ -48,10 +48,15 @@ Stars:
 * The Southern Cross
 * Stars of arbitrary numbers of points, both traced out and filled in
 
-And other possible flag elements:
-* Text (e.g. the original Polyamory flag)
+Crosses and Xs:
 * Crosses (like in the Ipsogender flag)
 * X-crosses (like in the Crossdresser flag)
+* 4-part X (like in the X-Gender flag)
+* Concentric Xs (like in the Quasigender flags)
+* Concentric Ts (like in the Tgirl flag)
+
+And other possible flag elements:
+* Text (e.g. the original Polyamory flag)
 * Squares (like in the Dyadic and Endosex flags)
 * Half-squares (cut along diagonal, useful for endosex/dyadic flags)
 * The rectangular shape used for the Caed- flags (e.g. Caedsexual, Caedromantic)
@@ -62,14 +67,17 @@ And other possible flag elements:
 * The Rubber Zigzag
 * BDSM Triskelion
 * Armpit Fetish stripe shape
+* Longhair Fetish shape
 * The Pocketgender Flag
 * Closet symbols
 * Perisex symbols
 * Altersex symbols
 * Autism spectrum nautilus symbols
+* Open infinity symbols
 * Métis lemniscates
 * Equals symbols like in the alternate Androgyne flag
 * The Bipolar Flag
+* The Utrinque Zigzag
 
 ## Examples of use
 A Jupyter notebook of examples is available in this directory ([examples.ipynb](https://github.com/intervexual/drawpride/blob/main/examples.ipynb)).
@@ -122,6 +130,8 @@ The standard parameters of a given drawing function (e.g. draw_heart, draw_ellip
     - `BEND` ('B'): 180 degrees from DIAGONAL. ↘️
     - `REVERSE` ('R'): reverse diagonal or 90 degrees from DIAGONAL. ↗️ Used in many anarchist flags. Will put a star in the orientation needed for the boi+boy flag.
     - `SINISTER` ('S'): 180 degrees from REVERSE. ↙️ Will put a star in the orientation needed for the armpit fetish flag.
+
+Or in order around a circle (clockwise): HORIZONTAL ⬆️, REVERSE ↗️, VERTICAL ➡️, BEND ↘️, UPSIDE ⬇️, SINISTER ↙️, ARROW ⬅️, DIAGONAL ↖️.
 
 Many functions return a number that corresponds to a dimension of the object that was drawn. For example, draw_horiz_bars returns
 the height of the typical horizontal bar. This number can then be used by later function calls to scale other flag elements.

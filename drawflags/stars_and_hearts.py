@@ -1,6 +1,5 @@
 from pride_rings import *
 
-
 def draw_arbitrary_star(d, primary_colour, secondary_colour='none', num_points=5, square=True,
               wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
               size_ratio = 1.0, stretch_ratio=0.58, thick_ratio=1.0, orientation=HORIZONTAL):

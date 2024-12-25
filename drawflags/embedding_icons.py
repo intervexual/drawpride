@@ -30,15 +30,10 @@ def embed_icon(d, path_to_icon, colours, icondir='icons/', orientation=None,
         for to_replace in changes:
             if changes[to_replace].lower() != to_replace.lower():
                 path_to_icon = change_svg_colour(path_to_icon, changes[to_replace], to_replace, name=name)
-    if orientation == HORIZONTAL:
-        add_icon_by_embedding(d, path_to_icon, size_ratio * hei)
-    elif orientation == CENTRAL+VERTICAL:
-        add_icon_by_embedding(d, path_to_icon, size_ratio * wid)
-    else:
-        add_icon_by_embedding(d, path_to_icon, size_ratio*hei, wid=wid, hei=hei)
+    add_icon_by_embedding(d, path_to_icon, size_ratio*hei, wid=wid, hei=hei, x_start=x_start, y_start=y_start)
 
 
-def add_icon_by_embedding(d, path_to_icon, icon_hei, wid=UNSPECIFIED, hei=UNSPECIFIED):
+def add_icon_by_embedding(d, path_to_icon, icon_hei, wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0):
     """
     Embed an icon into the flag. Note that svgs produced this way will not be accepted on Wikimedia Commons.
     :param d: Drawing object
@@ -51,7 +46,9 @@ def add_icon_by_embedding(d, path_to_icon, icon_hei, wid=UNSPECIFIED, hei=UNSPEC
     wid, hei = get_effective_dimensions(d, wid, hei)
 
     icon_wid = icon_hei  # assumes a square input svg!!!
-    d.append(draw.Image((wid / 2) - icon_wid / 2, (hei / 2) - icon_hei / 2,
+    xpos = x_start + (wid / 2) - icon_wid / 2
+    ypos = y_start + (hei / 2) - icon_hei / 2
+    d.append(draw.Image(xpos, ypos,
                         icon_wid, icon_hei, path_to_icon, embed=True, dominant_baseline='middle'))
 
 
