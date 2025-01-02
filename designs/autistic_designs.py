@@ -16,18 +16,17 @@ rainbow_stripes = ['#E40303', '#FF8C00', '#FFED00', '#008026', '#24408E', '#7329
 to_show = False
 outdir = 'output/intervex/'
 
-
-############################### CONCENTRIC INFINITY DESIGNS
+# canvas size - change if you want a different aspect ratio
 h, w = 500*2, 300*2
 
+############################### CONCENTRIC INFINITY DESIGNS
+
 # ideas for stripes
-#apd_colours = ['#2cad74', 'white', '#ffc65b', 'white', '#e43546']
 roylg_colours = ['#2cad74', '#98d570', '#ffc65b',  '#f68249', '#e43546']
 mad_colours = ['#796098', '#bf7998', '#796098', '#bf7998']
 disabled_colours = [disability_grey] + disability_stripes + [disability_grey]
 stripe_options = {'roylg':roylg_colours, 'mad':mad_colours,
-                  'disabled':disabled_colours, 'lgbt':rainbow_stripes, 'trans':trans_stripes} # 'apd':apd_colours,
-
+                  'disabled':disabled_colours, 'lgbt':rainbow_stripes, 'trans':trans_stripes}
 
 # ideas for backgrounds
 bg_options = {'white':'white', 'whitish':'#f7f7f7', 'disgrey':disability_grey}
@@ -39,7 +38,6 @@ for bg in bg_options:
         draw_concentric_infinities(d, stripe_options[stripe_scheme], bg_options[bg], size_ratio=0.7)
         filename = f'autistic_concentric_{stripe_scheme}_on_{bg}'
         filelocations = save_flag(d, filename, outdir, same_folder=True, show_image=to_show)
-
 
 
 ############################### ICON ON A WHITE(ISH) BACKGROUND DESIGNS
@@ -70,7 +68,6 @@ for bg in bg_options:
             if d.height == d.width:
                 sr = 2.3
                 size *= 0.9
-
             icon_options[icon_name](d, spectrum_rainbow, stretch_ratio=sr, size_ratio=size)
         filename = f'plain_{icon_name}_on_{bg}'
         filelocations = save_flag(d, filename, outdir, same_folder=True, show_image=to_show)
@@ -119,21 +116,3 @@ for bg in horiz_stripe_options:
             filelocations = save_flag(d, filename, outdir, same_folder=True, show_image=to_show)
 
 
-### Intersex male
-d = draw.Drawing(500 * 2, 300 * 2)
-draw_horiz_bars(d, [intersex_yellow])
-embed_icon(d, 'gendersex/mars.svg', {'#000000':intersex_purple}, size_ratio=.9)
-filelocations = save_flag(d, 'intersex_man', outdir, same_folder=True, show_image=to_show)
-
-d = draw.Drawing(500 * 2, 300 * 2)
-draw_horiz_bars(d, [intersex_yellow])
-embed_icon(d, 'gendersex/Iconoir_male.svg', {'#000000':intersex_purple}, size_ratio=1)
-filelocations = save_flag(d, 'intersex_male', outdir, same_folder=True, show_image=to_show)
-
-# DSPS
-d = draw.Drawing(500 * 2, 300 * 2)
-draw_horiz_bars(d, [ 'white'])
-draw_segmented_ring(d, ['#262569', '#6d49b3', '#0fa4de', '#fcd84e'],  size_ratio=2.75)
-draw_segmented_ring(d, ['white', 'white'],  size_ratio=1.7, orientation=DIAGONAL)
-draw_segmented_ring(d, ['#262569', '#6d49b3', '#0fa4de', '#fcd84e'],  size_ratio=1, orientation=DIAGONAL)
-filelocations = save_flag(d, 'dsps', outdir, same_folder=True, show_image=to_show)
