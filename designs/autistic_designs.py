@@ -1,4 +1,5 @@
 import sys
+
 sys.path.insert(0, 'processflags/')
 from utils import *
 
@@ -17,6 +18,7 @@ outdir = 'output/intervex/'
 
 
 ############################### CONCENTRIC INFINITY DESIGNS
+h, w = 500*2, 300*2
 
 # ideas for stripes
 #apd_colours = ['#2cad74', 'white', '#ffc65b', 'white', '#e43546']
@@ -32,7 +34,7 @@ bg_options = {'white':'white', 'whitish':'#f7f7f7', 'disgrey':disability_grey}
 
 for bg in bg_options:
     for stripe_scheme in stripe_options:
-        d = draw.Drawing(500 * 2, 300 * 2)
+        d = draw.Drawing(h, w)
         draw_horiz_bars(d, [ bg_options[bg] ])
         draw_concentric_infinities(d, stripe_options[stripe_scheme], bg_options[bg], size_ratio=0.7)
         filename = f'autistic_concentric_{stripe_scheme}_on_{bg}'
@@ -58,12 +60,18 @@ sizes = {'aufinity':0.99,
 
 for bg in bg_options:
     for icon_name in icon_options:
-        d = draw.Drawing(500 * 2, 300 * 2)
+        d = draw.Drawing(h, w)
         draw_horiz_bars(d, [ bg_options[bg] ])
+        size = sizes[icon_name]
         if type(icon_options[icon_name]) == str:
-            embed_icon(d, icon_options[icon_name], {}, size_ratio=sizes[icon_name])
+            embed_icon(d, icon_options[icon_name], {}, size_ratio=size)
         else:
-            icon_options[icon_name](d, spectrum_rainbow, stretch_ratio=2.25, size_ratio=sizes[icon_name])
+            sr = 2.25
+            if d.height == d.width:
+                sr = 2.3
+                size *= 0.9
+
+            icon_options[icon_name](d, spectrum_rainbow, stretch_ratio=sr, size_ratio=size)
         filename = f'plain_{icon_name}_on_{bg}'
         filelocations = save_flag(d, filename, outdir, same_folder=True, show_image=to_show)
 
@@ -72,7 +80,7 @@ for bg in bg_options:
 
 for icon_name in icon_options:
     if 'ADHD' not in icon_name:
-        d = draw.Drawing(500 * 2, 300 * 2)
+        d = draw.Drawing(h, w)
         draw_diagonal_stripes(d, ['#2cad74', '#98d570'] + ['#ffc65b']*6 + ['#f68249', '#e43546'])
         scaling = 0.9
         if 'infinity' in icon_name:
@@ -96,7 +104,7 @@ horiz_stripe_options = {'teal':['#243444',  '#3dcec1', '#eae186', 'white',  '#ea
 for bg in horiz_stripe_options:
     for icon_name in icon_options:
         if 'ADHD' not in icon_name:
-            d = draw.Drawing(500 * 2, 300 * 2)
+            d = draw.Drawing(h, w)
             draw_horiz_bars(d, horiz_stripe_options[bg])
             draw_circle(d, 'white', size_ratio=0.6)
             scaling = 0.4
@@ -121,3 +129,11 @@ d = draw.Drawing(500 * 2, 300 * 2)
 draw_horiz_bars(d, [intersex_yellow])
 embed_icon(d, 'gendersex/Iconoir_male.svg', {'#000000':intersex_purple}, size_ratio=1)
 filelocations = save_flag(d, 'intersex_male', outdir, same_folder=True, show_image=to_show)
+
+# DSPS
+d = draw.Drawing(500 * 2, 300 * 2)
+draw_horiz_bars(d, [ 'white'])
+draw_segmented_ring(d, ['#262569', '#6d49b3', '#0fa4de', '#fcd84e'],  size_ratio=2.75)
+draw_segmented_ring(d, ['white', 'white'],  size_ratio=1.7, orientation=DIAGONAL)
+draw_segmented_ring(d, ['#262569', '#6d49b3', '#0fa4de', '#fcd84e'],  size_ratio=1, orientation=DIAGONAL)
+filelocations = save_flag(d, 'dsps', outdir, same_folder=True, show_image=to_show)

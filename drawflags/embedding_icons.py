@@ -43,11 +43,11 @@ def add_icon_by_embedding(d, path_to_icon, icon_hei, wid=UNSPECIFIED, hei=UNSPEC
     :param hei: height that makes up the area that is being drawn into (in pixels)
     :return: none
     """
-    wid, hei = get_effective_dimensions(d, wid, hei)
+    wid, hei, x_mid, y_mid, x_end, y_end = get_standard_dimensions(d, wid, hei, x_start, y_start)
 
     icon_wid = icon_hei  # assumes a square input svg!!!
-    xpos = x_start + (wid / 2) - icon_wid / 2
-    ypos = y_start + (hei / 2) - icon_hei / 2
+    xpos = x_mid - icon_wid / 2
+    ypos = y_mid - icon_hei / 2
     d.append(draw.Image(xpos, ypos,
                         icon_wid, icon_hei, path_to_icon, embed=True, dominant_baseline='middle'))
 

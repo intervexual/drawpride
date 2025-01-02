@@ -444,6 +444,8 @@ def draw_x_gender(d, colours,
 
 
 
+
+
 if __name__ == '__main__':
     doctest.testmod()
     wid = 1200

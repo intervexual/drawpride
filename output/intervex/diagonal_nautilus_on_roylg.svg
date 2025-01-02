@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+     width="1000" height="600" viewBox="0 0 1000 600">
+<defs>
+</defs>
+<path d="M-1000.0,0.0 L0.0,600.0 L202.0,600.0 L-798.0,0.0 L-798.0,0.0 Z" fill="#2cad74" />
+<path d="M-800.0,0.0 L200.0,600.0 L402.0,600.0 L-598.0,0.0 L-598.0,0.0 Z" fill="#98d570" />
+<path d="M-600.0,0.0 L400.0,600.0 L602.0,600.0 L-398.0,0.0 L-398.0,0.0 Z" fill="#ffc65b" />
+<path d="M-400.0,0.0 L600.0,600.0 L802.0,600.0 L-198.0,0.0 L-198.0,0.0 Z" fill="#ffc65b" />
+<path d="M-200.0,0.0 L800.0,600.0 L1002.0,600.0 L2.0,0.0 L2.0,0.0 Z" fill="#ffc65b" />
+<path d="M0.0,0.0 L1000.0,600.0 L1202.0,600.0 L202.0,0.0 L202.0,0.0 Z" fill="#ffc65b" />
+<path d="M200.0,0.0 L1200.0,600.0 L1402.0,600.0 L402.0,0.0 L402.0,0.0 Z" fill="#ffc65b" />
+<path d="M400.0,0.0 L1400.0,600.0 L1602.0,600.0 L602.0,0.0 L602.0,0.0 Z" fill="#ffc65b" />
+<path d="M600.0,0.0 L1600.0,600.0 L1802.0,600.0 L802.0,0.0 L802.0,0.0 Z" fill="#f68249" />
+<path d="M800.0,0.0 L1800.0,600.0 L2002.0,600.0 L1002.0,0.0 L1002.0,0.0 Z" fill="#e43546" />
+<path d="M520.0,340.0 L250.0,340.0 Q242.49702292416146,238.99717642413844,328.4888892202555,179.3030975783652 L520.0,340.0 Z" stroke="black" fill="#cf7280" stroke-width="0.0" id="d0" />
+<use xlink:href="#d0" />
+<use xlink:href="#d0" />
+<use xlink:href="#d0" />
+<use xlink:href="#d0" />
+<path d="M520.0,340.0 L328.4888892202555,179.3030975783652 Q382.34375,101.57238102059674,480.060919136606,113.49421680719215 L520.0,340.0 Z" stroke="black" fill="#dfa87c" stroke-width="0.0" id="d1" />
+<use xlink:href="#d1" />
+<use xlink:href="#d1" />
+<use xlink:href="#d1" />
+<use xlink:href="#d1" />
+<path d="M520.0,340.0 L480.060919136606,113.49421680719215 Q564.3345503605882,88.56627055907063,625.0,158.13466520526788 L520.0,340.0 Z" stroke="black" fill="#eede77" stroke-width="0.0" id="d2" />
+<use xlink:href="#d2" />
+<use xlink:href="#d2" />
+<use xlink:href="#d2" />
+<use xlink:href="#d2" />
+<path d="M520.0,340.0 L625.0,158.13466520526788 Q700.2598330214345,188.7440405956362,698.5415979493225,275.01617276812294 L520.0,340.0 Z" stroke="black" fill="#95c77a" stroke-width="0.0" id="d3" />
+<use xlink:href="#d3" />
+<use xlink:href="#d3" />
+<use xlink:href="#d3" />
+<use xlink:href="#d3" />
+<path d="M520.0,340.0 L698.5415979493225,275.01617276812294 Q735.3125,340.0,679.7477455336044,398.14342436536367 L520.0,340.0 Z" stroke="black" fill="#3bb07d" stroke-width="0.0" id="d4" />
+<use xlink:href="#d4" />
+<use xlink:href="#d4" />
+<use xlink:href="#d4" />
+<use xlink:href="#d4" />
+<path d="M520.0,340.0 L679.7477455336044,398.14342436536367 Q669.6180552966754,465.5444550169022,595.0,469.90381056766574 L520.0,340.0 Z" stroke="black" fill="#5bb9af" stroke-width="0.0" id="d5" />
+<use xlink:href="#d5" />
+<use xlink:href="#d5" />
+<use xlink:href="#d5" />
+<use xlink:href="#d5" />
+<path d="M520.0,340.0 L595.0,469.90381056766574 Q550.4426961472337,512.6491091999527,497.425736903299,468.02500789158705 L520.0,340.0 Z" stroke="black" fill="#7bc2e0" stroke-width="0.0" id="d6" />
+<use xlink:href="#d6" />
+<use xlink:href="#d6" />
+<use xlink:href="#d6" />
+<use xlink:href="#d6" />
+<path d="M520.0,340.0 L497.425736903299,468.02500789158705 Q442.34375,474.50457052527065,435.73511125691243,410.7066370655194 L520.0,340.0 Z" stroke="black" fill="#97a7c0" stroke-width="0.0" id="d7" />
+<use xlink:href="#d7" />
+<use xlink:href="#d7" />
+<use xlink:href="#d7" />
+<use xlink:href="#d7" />
+<path d="M520.0,340.0 L435.73511125691243,410.7066370655194 Q392.84784224990676,386.2796006437545,430.0,340.0 L520.0,340.0 Z" stroke="black" fill="#b38da0" stroke-width="0.0" id="d8" />
+<use xlink:href="#d8" />
+<use xlink:href="#d8" />
+<use xlink:href="#d8" />
+<use xlink:href="#d8" />
+</svg>

@@ -775,7 +775,7 @@ def draw_concentric_beziers(d, colours,
     >>> type(d.elements[0])
     <class 'drawsvg.elements.Circle'>
     """
-    print('CONC', orientation)
+    #print('CONC', orientation)
     wid, hei = get_effective_dimensions(d, wid, hei)
 
     if orientation == UPSIDE:

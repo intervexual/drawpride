@@ -612,8 +612,32 @@ def draw_heart(d, primary_colour, secondary_colour='none',
     d.append(p)
 
 
-
-
+def draw_semihearts(d, primary_colour, secondary_colour='none',
+              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+    """
+    Draw a heart in the centre
+    :param d: Drawing object
+    :param primary_colour: fill colour (string) of the heart
+    :param secondary_colour: colour (string) of the outline of the heart
+    :param wid: width of the area we are working with
+    :param hei: height of the area we are working with
+    :param x_start: the x-coordinate of the upper left corner of the rectangular area that is being drawn into
+    :param y_start: the y-coordinate of the upper left corner of the rectangular area that is being drawn into
+    :param size_ratio: size factor (radius of heart)
+    :param thick_ratio: scaling factor for the line width (if outline of heart is used). Default is hei/100 if outlining, 0 if not.
+    :return: none
+    """
+    size_ratio *= 2/3
+    draw_heart(d, primary_colour, wid=wid, hei=hei, x_start=x_start, y_start=y_start,
+               size_ratio=size_ratio, stretch_ratio=stretch_ratio, thick_ratio=thick_ratio, orientation=orientation)
+    wid, hei = get_effective_dimensions(d, wid, hei)
+    new_y_start = y_start + -0.01*hei
+    stretch_ratio *= 0.66
+    draw_heart(d, secondary_colour,
+                wid = wid, hei = hei, x_start = x_start, y_start = new_y_start,
+                size_ratio = stretch_ratio*size_ratio, stretch_ratio = stretch_ratio,
+               thick_ratio = thick_ratio, orientation = orientation)
 
 
 if __name__ == '__main__':
@@ -630,14 +654,17 @@ if __name__ == '__main__':
     #draw_horiz_bars(d, ['yellow'])
     #androg = ["#0552a8", '#0d7dfe'.upper(), '#fffFFF', '#fffFFF', '#ffff61' , '#FED45b']
     #draw_horiz_bars(d, androg)
-    draw_horiz_bars(d, ['brown', 'yellow', 'brown'])
+    draw_horiz_bars(d, ['white'])
     #draw_fivesided_star(d, 'red', y_start=-100, x_start=100, orientation=DIAGONAL)
     #draw_arbitrary_star(d,'red', 'black', num_points=20, secondary_size=0.75, square=False)
     #draw_arbitrary_star_trace(d, 'red', num_points=6)
     #draw_pointed_arbitrary_star_trace(d, 'black', num_points=5)
     #draw_star_of_david(d, 'black', )
     #draw_nautstar(d, 'black', 'blue')
-    draw_nonhuman(d, 'black', 'orange')
+    #draw_nonhuman(d, 'black', 'orange')
+    #draw_heart(d, 'purple')
+    #draw_heart(d, 'blue', size_ratio=0.66, y_start=-0.05*d.height)
+    draw_semihearts(d, 'purple', 'blue')
     d.save_svg('drawflags/test2.svg')
 
     '''

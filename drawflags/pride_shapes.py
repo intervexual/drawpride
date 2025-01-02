@@ -1433,6 +1433,298 @@ def draw_open_linear_infinity(d, primary_colour, secondary_colour='none',
     d.append(p)
 
 
+def draw_attraction_stance(d, primary_colour, secondary_colour='none',
+              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+    """
+    Draw the side panel used in the romance/sex/etc favourable/repulsed/etc flags
+    :param d: Drawing object
+    :param primary_colour: fill colour of the side bar
+    :param secondary_colour: optional second fill colour of side bar
+    :param wid: width of the area we are working with
+    :param hei: height of the area we are working with
+    :param x_start: the x-coordinate of the upper left corner of the rectangular area that is being drawn into
+    :param y_start: the y-coordinate of the upper left corner of the rectangular area that is being drawn into
+    :param size_ratio: size factor - radius of the ring
+    :param stretch_ratio: affects how wide the side panel is
+    :param thick_ratio: affects how thick the ring is
+    :return: radius
+    """
+    wid, hei, x_mid, y_mid, x_end, y_end = get_standard_dimensions(d, wid, hei, x_start, y_start)
+    radius = size_ratio*hei/4
+    sw = thick_ratio*radius/4
+    x_ring = y_start + stretch_ratio*wid/3
+
+    circ = draw.Circle(x_ring, y_mid, radius, fill='none', stroke=primary_colour, stroke_width=sw)
+    d.append(circ)
+
+    p = draw.Path(fill=primary_colour)
+    p.M(x_start, y_start)
+    p.L(x_start, y_end)
+    p.L(x_ring, y_end)
+    p.L(x_ring, y_end-radius)
+    p.Q(x_ring-radius, y_mid+radius, x_ring-radius, y_mid)
+    p.Q(x_ring-radius, y_mid-radius, x_ring, y_mid-radius)
+    p.L(x_ring, y_start)
+    p.L(x_start, y_start).Z()
+    d.append(p)
+
+    if secondary_colour != 'none':
+        rec = draw.Rectangle(x_start, y_mid, wid, hei / 2, fill=secondary_colour)
+        clip = draw.ClipPath()
+        clip.append(rec)
+        circ = draw.Circle(x_ring, y_mid, radius, fill='none', stroke=secondary_colour, stroke_width=sw, clip_path=clip)
+        d.append(circ)
+
+        # Note: learn how to use Use/Group/etc to avoid copying this code
+        p = draw.Path(fill=secondary_colour, clip_path=clip)
+        p.M(x_start, y_start)
+        p.L(x_start, y_end)
+        p.L(x_ring, y_end)
+        p.L(x_ring, y_end-radius)
+        p.Q(x_ring-radius, y_mid+radius, x_ring-radius, y_mid)
+        p.Q(x_ring-radius, y_mid-radius, x_ring, y_mid-radius)
+        p.L(x_ring, y_start)
+        p.L(x_start, y_start).Z()
+        d.append(p)
+    return x_ring
+
+
+def draw_attraction_favourable(d, primary_colour, secondary_colour='none',
+              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+    """
+    Draw the side panel used in the romance/sex/etc favourable/repulsed/etc flags
+    :param d: Drawing object
+    :param primary_colour: fill colour of the side bar
+    :param secondary_colour: colour of the cross
+    :param wid: width of the area we are working with
+    :param hei: height of the area we are working with
+    :param x_start: the x-coordinate of the upper left corner of the rectangular area that is being drawn into
+    :param y_start: the y-coordinate of the upper left corner of the rectangular area that is being drawn into
+    :param size_ratio: size factor - radius of the ring
+    :param stretch_ratio: affects how wide the side panel is
+    :param thick_ratio: affects how thick the ring is
+    :return: radius
+    """
+    wid, hei, x_mid, y_mid, x_end, y_end = get_standard_dimensions(d, wid, hei, x_start, y_start)
+    x_ring = draw_attraction_stance(d, primary_colour, secondary_colour='none',
+              wid=wid, hei=hei, x_start=x_start, y_start=y_start,
+              size_ratio = size_ratio, stretch_ratio=stretch_ratio, thick_ratio=thick_ratio, orientation=orientation)
+    draw_cross(d, secondary_colour, x_start=-x_ring*0.5, size_ratio=0.6, thick_ratio=1.75)
+
+
+def draw_attraction_indifferent(d, primary_colour, secondary_colour='none',
+              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+    """
+    Draw the side panel used in the romance/sex/etc favourable/repulsed/etc flags
+    :param d: Drawing object
+    :param primary_colour: fill colour of the side bar
+    :param secondary_colour: colour of the cross
+    :param wid: width of the area we are working with
+    :param hei: height of the area we are working with
+    :param x_start: the x-coordinate of the upper left corner of the rectangular area that is being drawn into
+    :param y_start: the y-coordinate of the upper left corner of the rectangular area that is being drawn into
+    :param size_ratio: size factor - radius of the ring
+    :param stretch_ratio: affects how wide the side panel is
+    :param thick_ratio: affects how thick the ring is
+    :return: radius
+    """
+    wid, hei, x_mid, y_mid, x_end, y_end = get_standard_dimensions(d, wid, hei, x_start, y_start)
+    x_ring = draw_attraction_stance(d, primary_colour, secondary_colour='none',
+              wid=wid, hei=hei, x_start=x_start, y_start=y_start,
+              size_ratio = size_ratio, stretch_ratio=stretch_ratio, thick_ratio=thick_ratio, orientation=orientation)
+    draw_transparent_ring(d, secondary_colour, x_start=-x_ring*0.5, size_ratio=0.58, thick_ratio=.75)
+
+
+def draw_attraction_repulsed(d, primary_colour, secondary_colour='none',
+              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+    """
+    Draw the side panel used in the romance/sex/etc favourable/repulsed/etc flags
+    :param d: Drawing object
+    :param primary_colour: fill colour of the side bar
+    :param secondary_colour: colour of the cross
+    :param wid: width of the area we are working with
+    :param hei: height of the area we are working with
+    :param x_start: the x-coordinate of the upper left corner of the rectangular area that is being drawn into
+    :param y_start: the y-coordinate of the upper left corner of the rectangular area that is being drawn into
+    :param size_ratio: size factor - radius of the ring
+    :param stretch_ratio: affects how wide the side panel is
+    :param thick_ratio: affects how thick the ring is
+    :return: radius
+    """
+    wid, hei, x_mid, y_mid, x_end, y_end = get_standard_dimensions(d, wid, hei, x_start, y_start)
+    x_ring = draw_attraction_stance(d, primary_colour, secondary_colour='none',
+              wid=wid, hei=hei, x_start=x_start, y_start=y_start,
+              size_ratio = size_ratio, stretch_ratio=stretch_ratio, thick_ratio=thick_ratio, orientation=orientation)
+    radius = size_ratio*hei/4
+    minus_wid = stretch_ratio*radius*0.55
+    sw = thick_ratio*radius*.3
+    d.append(draw.Rectangle(x_ring-minus_wid, y_mid-sw*0.5, minus_wid*2, sw, fill=secondary_colour))
+
+def draw_tilde(d, primary_colour, secondary_colour='none',
+              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0, radius_ratio=1.0,
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+    """
+    Draw the side panel used in the romance/sex/etc favourable/repulsed/etc flags
+    :param d: Drawing object
+    :param primary_colour: fill colour of the side bar
+    :param secondary_colour: colour of the cross
+    :param wid: width of the area we are working with
+    :param hei: height of the area we are working with
+    :param x_start: the x-coordinate of the upper left corner of the rectangular area that is being drawn into
+    :param y_start: the y-coordinate of the upper left corner of the rectangular area that is being drawn into
+    :param size_ratio: changes how tall the tilde is
+    :param stretch_ratio: changes how wide the tips are
+    :param thick_ratio: changes how curvy (and in turn how thick) the tilde is
+    :return: radius
+    """
+    wid, hei, x_mid, y_mid, x_end, y_end = get_standard_dimensions(d, wid, hei, x_start, y_start)
+
+    tot_wid = size_ratio*wid/4
+    tip_wid = stretch_ratio*(tot_wid/6)
+    curve_wid = tot_wid/2
+
+    leftmost = x_mid - tot_wid
+    left_inner = leftmost + tip_wid
+    left_up_curve = x_mid - curve_wid
+    right_down_curve = x_mid + curve_wid
+    rightmost = x_mid + tot_wid
+    right_inner = rightmost - tip_wid
+
+    tot_hei = radius_ratio*hei/8
+    bottom = y_mid + tot_hei
+    top = y_mid - tot_hei
+
+    cx_wid = tip_wid/3
+    cy_hei = tot_hei/4
+
+    cy_upper = top - thick_ratio*cy_hei*1.5
+    cy_bottom = bottom + thick_ratio*cy_hei*1.5
+
+    p = draw.Path(fill=primary_colour)
+    p.M(leftmost, bottom)
+    p.L(left_inner, bottom)
+    p.C(left_up_curve-cx_wid, cy_upper, x_mid-2*cx_wid, bottom+cy_hei, right_down_curve, bottom)
+    p.C(right_inner, bottom-0.5*cy_hei, rightmost-cx_wid, bottom-2*cy_hei,  rightmost, top)
+    p.L(right_inner, top)
+    p.C(right_down_curve+cx_wid, cy_bottom, x_mid+2*cx_wid, top-cy_hei, left_up_curve, top)
+    p.C(left_inner, top+0.5*cy_hei, leftmost+cx_wid, top+2*cy_hei,  leftmost, bottom)
+    p.Z()
+    d.append(p)
+    return tot_hei
+
+
+def draw_attraction_averse(d, primary_colour, secondary_colour='none',
+                                    wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                                    size_ratio=1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+    """
+    Draw the side panel used in the romance/sex/etc favourable/repulsed/etc flags
+    :param d: Drawing object
+    :param primary_colour: fill colour of the side bar
+    :param secondary_colour: colour of the cross
+    :param wid: width of the area we are working with
+    :param hei: height of the area we are working with
+    :param x_start: the x-coordinate of the upper left corner of the rectangular area that is being drawn into
+    :param y_start: the y-coordinate of the upper left corner of the rectangular area that is being drawn into
+    :param size_ratio: size factor - radius of the ring
+    :param stretch_ratio: affects how wide the side panel is
+    :param thick_ratio: affects how thick the ring is
+    :return: radius
+    """
+    wid, hei, x_mid, y_mid, x_end, y_end = get_standard_dimensions(d, wid, hei, x_start, y_start)
+    x_ring = draw_attraction_stance(d, primary_colour, secondary_colour='none',
+                                    wid=wid, hei=hei, x_start=x_start, y_start=y_start,
+                                    size_ratio=size_ratio, stretch_ratio=stretch_ratio, thick_ratio=thick_ratio,
+                                    orientation=orientation)
+    draw_tilde(d, secondary_colour, x_start=-x_ring * 0.5, size_ratio=0.4, thick_ratio=.5, radius_ratio=0.4)
+
+
+def draw_oscillator(d, primary_colour, secondary_colour='none',
+                    wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0, radius_ratio=1.0,
+                    size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+
+    wid, hei, x_mid, y_mid, x_end, y_end = get_standard_dimensions(d, wid, hei, x_start, y_start)
+
+    tot_wid = radius_ratio*wid/4
+    rightmost = x_mid + tot_wid
+    leftmost = x_mid - tot_wid
+
+    crest_dist = tot_wid*0.25
+    right_crest = x_mid + crest_dist
+    left_crest = x_mid - crest_dist
+
+    tot_hei = size_ratio*hei/5
+    top = y_mid - tot_hei
+    bottom = y_mid + tot_hei
+
+    sw = thick_ratio*hei/10
+
+    y_stretch = tot_hei*4.55*stretch_ratio #5
+    cy_top = y_mid - y_stretch
+    cy_bottom = y_mid + y_stretch
+
+    p = draw.Path(fill='none', stroke=primary_colour, stroke_width=sw) #stroke_linecap='round'
+    p.M(leftmost, top)
+    p.C(left_crest, cy_bottom, right_crest, cy_top , rightmost, bottom)
+    d.append(p)
+
+
+def draw_attraction_ambivalent(d, primary_colour, secondary_colour='none',
+                               wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                               size_ratio=1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+    """
+    Draw the side panel used in the romance/sex/etc favourable/repulsed/etc flags
+    :param d: Drawing object
+    :param primary_colour: fill colour of the side bar
+    :param secondary_colour: colour of the cross
+    :param wid: width of the area we are working with
+    :param hei: height of the area we are working with
+    :param x_start: the x-coordinate of the upper left corner of the rectangular area that is being drawn into
+    :param y_start: the y-coordinate of the upper left corner of the rectangular area that is being drawn into
+    :param size_ratio: size factor - radius of the ring
+    :param stretch_ratio: affects how wide the side panel is
+    :param thick_ratio: affects how thick the ring is
+    :return: radius
+    """
+    wid, hei, x_mid, y_mid, x_end, y_end = get_standard_dimensions(d, wid, hei, x_start, y_start)
+    x_ring = draw_attraction_stance(d, primary_colour, secondary_colour='none',
+                                    wid=wid, hei=hei, x_start=x_start, y_start=y_start,
+                                    size_ratio=size_ratio, stretch_ratio=stretch_ratio, thick_ratio=thick_ratio,
+                                    orientation=orientation)
+    height_diff = hei/18
+    draw_tilde(d, secondary_colour, x_start=-x_ring * 0.5, size_ratio=0.4, thick_ratio=.5, radius_ratio=0.4, y_start=y_start-height_diff)
+    draw_tilde(d, secondary_colour, x_start=-x_ring * 0.5, size_ratio=0.4, thick_ratio=.5, radius_ratio=0.4, y_start=y_start+height_diff)
+
+
+def draw_attraction_oscillating(d, primary_colour, secondary_colour='none',
+                               wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                               size_ratio=1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+    """
+    Draw the side panel used in the romance/sex/etc favourable/repulsed/etc flags
+    :param d: Drawing object
+    :param primary_colour: fill colour of the side bar
+    :param secondary_colour: colour of the cross
+    :param wid: width of the area we are working with
+    :param hei: height of the area we are working with
+    :param x_start: the x-coordinate of the upper left corner of the rectangular area that is being drawn into
+    :param y_start: the y-coordinate of the upper left corner of the rectangular area that is being drawn into
+    :param size_ratio: size factor - radius of the ring
+    :param stretch_ratio: affects how wide the side panel is
+    :param thick_ratio: affects how thick the ring is
+    :return: radius
+    """
+    wid, hei, x_mid, y_mid, x_end, y_end = get_standard_dimensions(d, wid, hei, x_start, y_start)
+    x_ring = draw_attraction_stance(d, primary_colour, secondary_colour='none',
+                                    wid=wid, hei=hei, x_start=x_start, y_start=y_start,
+                                    size_ratio=size_ratio, stretch_ratio=stretch_ratio, thick_ratio=thick_ratio,
+                                    orientation=orientation)
+    height_diff = hei/18
+    draw_oscillator(d, secondary_colour, x_start=-x_ring * 0.5, size_ratio=0.45, thick_ratio=.4, radius_ratio=0.35)
+
+
 
 if __name__ == '__main__':
     doctest.testmod()
@@ -1447,8 +1739,10 @@ if __name__ == '__main__':
     draw_diagonal_cut_square(d, 'green', size_ratio=1.8)
     draw_altersex_symbol(d, 'red', 'pink', size_ratio=0.1)
     '''
-    draw_diamond(d, 'white', 'red')
-    d.save_png('drawflags/test.png')
+    #draw_diamond(d, 'white', 'red')
+    #draw_tilde(d, 'white')
+    draw_oscillator(d, 'white')
+    d.save_svg('drawflags/test.svg')
 
     d = draw.Drawing(wid, hei)
     pal = ['purple', 'orange', 'black', 'grey', 'red']

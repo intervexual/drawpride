@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+     width="1000" height="600" viewBox="0 0 1000 600">
+<defs>
+</defs>
+<rect x="0" y="0" width="1000" height="87" fill="#2cad74" />
+<rect x="0" y="85.71428571428571" width="1000" height="87" fill="#98d570" />
+<rect x="0" y="171.42857142857142" width="1000" height="87" fill="#ffc65b" />
+<rect x="0" y="257.1428571428571" width="1000" height="87" fill="white" />
+<rect x="0" y="342.85714285714283" width="1000" height="87" fill="#ffc65b" />
+<rect x="0" y="428.57142857142856" width="1000" height="87" fill="#f68249" />
+<rect x="0" y="514.2857142857142" width="1000" height="87" fill="#e43546" />
+<circle cx="500.0" cy="300.0" r="175.5" fill="white" stroke="none" stroke-width="0" />
+<path d="M508.8888888888889,317.77777777777777 L388.8888888888889,317.77777777777777 Q385.55423241073845,272.8876339662838,423.7728396534469,246.3569322570512 L508.8888888888889,317.77777777777777 Z" stroke="black" fill="#cf7280" stroke-width="0.0" id="d0" />
+<use xlink:href="#d0" />
+<use xlink:href="#d0" />
+<use xlink:href="#d0" />
+<use xlink:href="#d0" />
+<path d="M508.8888888888889,317.77777777777777 L423.7728396534469,246.3569322570512 Q447.70833333333337,211.8099471202652,491.13818628293603,217.1085408031965 L508.8888888888889,317.77777777777777 Z" stroke="black" fill="#dfa87c" stroke-width="0.0" id="d1" />
+<use xlink:href="#d1" />
+<use xlink:href="#d1" />
+<use xlink:href="#d1" />
+<use xlink:href="#d1" />
+<path d="M508.8888888888889,317.77777777777777 L491.13818628293603,217.1085408031965 Q528.5931334935948,206.02945358180915,555.5555555555555,236.94874009123015 L508.8888888888889,317.77777777777777 Z" stroke="black" fill="#eede77" stroke-width="0.0" id="d2" />
+<use xlink:href="#d2" />
+<use xlink:href="#d2" />
+<use xlink:href="#d2" />
+<use xlink:href="#d2" />
+<path d="M508.8888888888889,317.77777777777777 L555.5555555555555,236.94874009123015 Q589.0043702317487,250.55290693139386,588.2407101996989,288.8960767858324 L508.8888888888889,317.77777777777777 Z" stroke="black" fill="#95c77a" stroke-width="0.0" id="d3" />
+<use xlink:href="#d3" />
+<use xlink:href="#d3" />
+<use xlink:href="#d3" />
+<use xlink:href="#d3" />
+<path d="M508.8888888888889,317.77777777777777 L588.2407101996989,288.8960767858324 Q604.5833333333334,317.77777777777777,579.8878869038242,343.6192997179394 L508.8888888888889,317.77777777777777 Z" stroke="black" fill="#3bb07d" stroke-width="0.0" id="d4" />
+<use xlink:href="#d4" />
+<use xlink:href="#d4" />
+<use xlink:href="#d4" />
+<use xlink:href="#d4" />
+<path d="M508.8888888888889,317.77777777777777 L579.8878869038242,343.6192997179394 Q575.385802354078,373.5753133408454,542.2222222222223,375.5128046967403 L508.8888888888889,317.77777777777777 Z" stroke="black" fill="#5bb9af" stroke-width="0.0" id="d5" />
+<use xlink:href="#d5" />
+<use xlink:href="#d5" />
+<use xlink:href="#d5" />
+<use xlink:href="#d5" />
+<path d="M508.8888888888889,317.77777777777777 L542.2222222222223,375.5128046967403 Q522.4189760654373,394.510715199979,498.8558830681329,374.6777812851498 L508.8888888888889,317.77777777777777 Z" stroke="black" fill="#7bc2e0" stroke-width="0.0" id="d6" />
+<use xlink:href="#d6" />
+<use xlink:href="#d6" />
+<use xlink:href="#d6" />
+<use xlink:href="#d6" />
+<path d="M508.8888888888889,317.77777777777777 L498.8558830681329,374.6777812851498 Q474.375,377.55758690012027,471.4378272252944,349.2029498068975 L508.8888888888889,317.77777777777777 Z" stroke="black" fill="#97a7c0" stroke-width="0.0" id="d7" />
+<use xlink:href="#d7" />
+<use xlink:href="#d7" />
+<use xlink:href="#d7" />
+<use xlink:href="#d7" />
+<path d="M508.8888888888889,317.77777777777777 L471.4378272252944,349.2029498068975 Q452.37681877773633,338.34648917500203,468.8888888888889,317.77777777777777 L508.8888888888889,317.77777777777777 Z" stroke="black" fill="#b38da0" stroke-width="0.0" id="d8" />
+<use xlink:href="#d8" />
+<use xlink:href="#d8" />
+<use xlink:href="#d8" />
+<use xlink:href="#d8" />
+</svg>
