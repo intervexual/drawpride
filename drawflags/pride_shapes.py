@@ -105,6 +105,89 @@ def draw_pile(d, primary_colour, secondary_colour='none',
     d.append(p)
 
 
+def draw_pall(d, primary_colour, secondary_colour='none',
+              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+    """
+    Add a pall like the South African flag
+    https://en.wikipedia.org/wiki/Pall_(heraldry)
+    :param d: Drawing object
+    :param primary_colour: fill of the pile (str hex code)
+    :param secondary_colour: outline of the pile (str hex code)
+    :param wid: width of the area we are working with
+    :param hei: height of the area we are working with
+    :param size_ratio: used to scale the size (width) of the pile
+    :return: none
+    >>> d = draw.Drawing(500, 300)
+    >>> draw_pall(d, RAINBOW[0])
+    >>> len(d.elements) == 1 and d.elements[-1].args['fill'] == RAINBOW[0]
+    True
+    >>> type(d.elements[0])
+    <class 'drawsvg.elements.Path'>
+    """
+    wid, hei, x_mid, y_mid, x_end, y_end = get_standard_dimensions(d, wid, hei, x_start, y_start)
+
+    sw = thick_ratio*hei/5.25
+    outline_ratio = sw * 1.75 * size_ratio
+
+    top_x = x_start
+    top_y = y_start
+    bottom_y = y_end
+    join_x = x_mid - (sw/2)*stretch_ratio
+
+    if secondary_colour != 'none':
+        p = draw.Path(stroke=secondary_colour, stroke_width=outline_ratio, fill='none')
+        p.M(top_x, top_y)
+        p.L(join_x, y_mid)
+        p.L(x_end, y_mid)
+        p.M(top_x, bottom_y)
+        p.L(join_x, y_mid)
+        d.append(p)
+
+    p = draw.Path(stroke=primary_colour, stroke_width=sw, fill='none')
+    p.M(top_x, top_y)
+    p.L(join_x, y_mid)
+    p.L(x_end, y_mid)
+    p.M(top_x, bottom_y)
+    p.L(join_x, y_mid)
+    d.append(p)
+
+
+def draw_attraction_arrow(d, primary_colour, secondary_colour='none',
+              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+    wid, hei, x_mid, y_mid, x_end, y_end = get_standard_dimensions(d, wid, hei, x_start, y_start)
+
+
+    # the path under it
+    sw = hei / 18
+
+    arrow_wid = sw
+    arrow_hei = sw
+
+    horiz_gap = sw*2
+
+    line_width = (wid/3) - horiz_gap*2
+    x_left = x_mid - line_width/2
+    x_right = x_mid + line_width/2
+    y_arrow = (2/3)*hei + arrow_hei
+
+
+    if secondary_colour == 'none':
+        sc = primary_colour
+    else:
+        sc = secondary_colour
+    p = draw.Path(stroke=sc, stroke_width=sw, fill='none', stroke_linecap='round', stroke_linejoin='bevel')
+    p.M(x_left, y_arrow)
+    p.L(x_right, y_arrow)
+    p.L(x_right-arrow_wid, y_arrow+arrow_hei)
+    p.M(x_right, y_arrow)
+    p.L(x_right-arrow_wid, y_arrow-arrow_hei)
+    d.append(p)
+
+    #d.append(draw.Circle(x_left+sw-sw/10, y_arrow, sw*1.45, fill=sc))
+
+    draw_heart(d, primary_colour, wid=wid/3, size_ratio=0.5, y_start=-arrow_hei, x_start=wid/3)
 
 
 def draw_corners(d, primary_colour, secondary_colour='none',
@@ -542,8 +625,37 @@ def draw_metis_lemniscate(d, primary_colour, secondary_colour='none',
 
 
 
+def draw_chonky_infinity(d, primary_colour, secondary_colour='none',
+              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
 
+    wid, hei = get_effective_dimensions(d, wid, hei)
+    mid_x = (wid / 2) + x_start
+    mid_y = (hei / 2) + y_start
 
+    stroke_wid = (24/300)*hei*thick_ratio
+
+    p = draw.Path(stroke=primary_colour, fill='none', stroke_width=stroke_wid)
+
+    mid_wid = wid / 8
+    c_wid = wid / 6
+    mid_hei = hei / 6
+
+    # the left C shape
+    x_c_end = mid_x - mid_wid
+    x_c_cx = x_c_end - c_wid
+    y_c_top = mid_y - mid_hei
+    y_c_bottom = mid_y + mid_hei
+    p.M(x_c_end, y_c_top)
+    p.C(x_c_cx, y_c_top, x_c_cx, y_c_bottom, x_c_end, y_c_bottom)
+
+    # the right C shape
+    x_u_end = mid_x + mid_wid
+    x_u_cx = x_u_end + c_wid
+    p.M(x_u_end, y_c_top)
+    p.C(x_u_cx, y_c_top, x_u_cx, y_c_bottom, x_u_end, y_c_bottom)
+
+    d.append(p)
 
 
 def draw_closet_symbol(d, primary_colour, secondary_colour='none',
@@ -1453,7 +1565,7 @@ def draw_attraction_stance(d, primary_colour, secondary_colour='none',
     wid, hei, x_mid, y_mid, x_end, y_end = get_standard_dimensions(d, wid, hei, x_start, y_start)
     radius = size_ratio*hei/4
     sw = thick_ratio*radius/4
-    x_ring = y_start + stretch_ratio*wid/3
+    x_ring = x_start + stretch_ratio*wid/3
 
     circ = draw.Circle(x_ring, y_mid, radius, fill='none', stroke=primary_colour, stroke_width=sw)
     d.append(circ)
@@ -1490,6 +1602,45 @@ def draw_attraction_stance(d, primary_colour, secondary_colour='none',
     return x_ring
 
 
+def draw_attraction_outline(d, primary_colour, secondary_colour='none',
+              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+    """
+    Draw an outline of the attraction stance shape
+    :param d:
+    :param primary_colour:
+    :param secondary_colour:
+    :param wid:
+    :param hei:
+    :param x_start:
+    :param y_start:
+    :param size_ratio:
+    :param stretch_ratio:
+    :param thick_ratio:
+    :param orientation:
+    :return:
+    """
+    wid, hei, x_mid, y_mid, x_end, y_end = get_standard_dimensions(d, wid, hei, x_start, y_start)
+    radius = size_ratio*hei/4
+    x_ring = x_start + stretch_ratio*wid/3
+
+    outline_width = thick_ratio*radius/3
+
+    circ = draw.Circle(x_ring, y_mid, radius+outline_width*0.4, fill='none', stroke=primary_colour, stroke_width=outline_width)
+    d.append(circ)
+
+    p = draw.Path(stroke=primary_colour, stroke_width=outline_width)
+    p.M(x_ring, y_end) # start from bottom
+    '''
+    p.L(x_ring, y_end-radius)
+    p.Q(x_ring-radius, y_mid+radius, x_ring-radius, y_mid)
+    p.Q(x_ring-radius, y_mid-radius, x_ring, y_mid-radius)
+    '''
+    p.L(x_ring, y_start)
+    #p.L(x_start, y_start)
+    d.append(p)
+
+
 def draw_attraction_favourable(d, primary_colour, secondary_colour='none',
               wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
               size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
@@ -1514,6 +1665,30 @@ def draw_attraction_favourable(d, primary_colour, secondary_colour='none',
     draw_cross(d, secondary_colour, x_start=-x_ring*0.5, size_ratio=0.6, thick_ratio=1.75)
 
 
+def draw_attraction_heart(d, primary_colour, secondary_colour='none',
+              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+    """
+    Draw the side panel used in the romance/sex/etc favourable/repulsed/etc flags
+    :param d: Drawing object
+    :param primary_colour: fill colour of the side bar
+    :param secondary_colour: colour of the cross
+    :param wid: width of the area we are working with
+    :param hei: height of the area we are working with
+    :param x_start: the x-coordinate of the upper left corner of the rectangular area that is being drawn into
+    :param y_start: the y-coordinate of the upper left corner of the rectangular area that is being drawn into
+    :param size_ratio: size factor - radius of the ring
+    :param stretch_ratio: affects how wide the side panel is
+    :param thick_ratio: affects how thick the ring is
+    :return: radius
+    """
+    wid, hei, x_mid, y_mid, x_end, y_end = get_standard_dimensions(d, wid, hei, x_start, y_start)
+    x_ring = draw_attraction_stance(d, primary_colour, secondary_colour='none',
+              wid=wid, hei=hei, x_start=x_start, y_start=y_start,
+              size_ratio = size_ratio, stretch_ratio=stretch_ratio, thick_ratio=thick_ratio, orientation=orientation)
+    draw_heart(d, secondary_colour, x_start=-x_ring*0.5, size_ratio=0.4, thick_ratio=1.75)
+
+
 def draw_attraction_indifferent(d, primary_colour, secondary_colour='none',
               wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
               size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
@@ -1536,7 +1711,7 @@ def draw_attraction_indifferent(d, primary_colour, secondary_colour='none',
               wid=wid, hei=hei, x_start=x_start, y_start=y_start,
               size_ratio = size_ratio, stretch_ratio=stretch_ratio, thick_ratio=thick_ratio, orientation=orientation)
     draw_transparent_ring(d, secondary_colour, x_start=-x_ring*0.5, size_ratio=0.58, thick_ratio=.75)
-
+    return x_ring
 
 def draw_attraction_repulsed(d, primary_colour, secondary_colour='none',
               wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
@@ -1741,7 +1916,8 @@ if __name__ == '__main__':
     '''
     #draw_diamond(d, 'white', 'red')
     #draw_tilde(d, 'white')
-    draw_oscillator(d, 'white')
+    #draw_oscillator(d, 'white')
+    draw_chonky_infinity(d, 'red')
     d.save_svg('drawflags/test.svg')
 
     d = draw.Drawing(wid, hei)
@@ -1754,4 +1930,6 @@ if __name__ == '__main__':
     #draw_teardrop(d,'white')
     #draw_caed(d, 'green', 'yellow')
     #draw_open_lemniscate(d, 'white')
+    #draw_pall(d, 'white', 'yellow')
+    draw_attraction_heart(d, 'yellow', 'green')
     d.save_svg('drawflags/test2.svg')

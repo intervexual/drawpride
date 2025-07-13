@@ -882,16 +882,19 @@ def draw_concentric_infinities(d, colours, bg_colour='none',
         upper_left = get_triangle_coords(this_outer_radius, arcshare, 0, left_centre, midy, upper_angle)
         lower_right = get_triangle_coords(this_inner_radius, arcshare, 0, right_centre, midy, lower_angle)
 
-        angle_dist_for_control_pts = -17
+        angle_dist_for_control_pts = -20
         other_side_radius = greatest_radius - (i-2)*each_thickness
         cx1 = get_triangle_coords(other_side_radius, arcshare, 0, left_centre, midy, 0+angle_dist_for_control_pts) #upper_angle) #-90+45+15+15)
         next_outer_radius = this_inner_radius + each_thickness
-        cx2 = get_triangle_coords(next_outer_radius, arcshare, 0, right_centre, midy, 180+angle_dist_for_control_pts) #lower_angle)#-60+90-15)
+        lower_angle_dist_for_control_pts = -20 -5-2
+        cx2 = get_triangle_coords(next_outer_radius, arcshare, 0, right_centre, midy, 180+lower_angle_dist_for_control_pts) #lower_angle)#-60+90-15)
 
         # wavy lines between them
         p = draw.Path(stroke=colour, stroke_width=each_thickness, fill=colour, stroke_linecap='round')
         p.M(*upper_left)
         p.C(*cx1, *cx2, *lower_right)
+        p.C(*cx2, *cx1, *upper_left).Z() # weird clipping if left unclosed
+        # alternative is to set fill to 'none' but then there is tiny gaps between stripes sometimes
         d.append(p)
 
 

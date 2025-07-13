@@ -443,6 +443,13 @@ def draw_x_gender(d, colours,
     d.append(p)
 
 
+def draw_lines(d, colours,
+              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+              size_ratio=1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+    siding = ['none']*4
+    new_colours = siding + colours + siding
+    draw_stripes(d, new_colours, orientation=orientation, wid=wid, hei=hei, x_start=x_start, y_start=y_start,
+                 size_ratio=size_ratio, stretch_ratio=stretch_ratio, thick_ratio=thick_ratio)
 
 
 
