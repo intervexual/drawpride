@@ -10,7 +10,8 @@ from multicolour_shapes import *
 
 def draw_text(d, text_to_add, primary_colour, secondary_colour='none', name='ch',
               wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+              size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+              orientation=HORIZONTAL):
     """
     Add text to the flag
     :param d: Drawing object
@@ -37,8 +38,9 @@ def draw_text(d, text_to_add, primary_colour, secondary_colour='none', name='ch'
 
 
 def draw_side_bump(d, primary_colour, secondary_colour='none',
-              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+                   wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                   size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+                   orientation=HORIZONTAL):
     """
     Add a bump to the left side of a flag like in the perioriented flag
     :param d: Drawing object
@@ -73,7 +75,8 @@ def draw_side_bump(d, primary_colour, secondary_colour='none',
 
 def draw_pile(d, primary_colour, secondary_colour='none',
               wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+              size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+              orientation=HORIZONTAL):
     """
     Add a triangle to the left side like in the demisexual flag
     (it's called a pile: https://en.wikipedia.org/wiki/Glossary_of_vexillology )
@@ -107,7 +110,8 @@ def draw_pile(d, primary_colour, secondary_colour='none',
 
 def draw_pall(d, primary_colour, secondary_colour='none',
               wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+              size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+              orientation=HORIZONTAL):
     """
     Add a pall like the South African flag
     https://en.wikipedia.org/wiki/Pall_(heraldry)
@@ -154,10 +158,10 @@ def draw_pall(d, primary_colour, secondary_colour='none',
 
 
 def draw_attraction_arrow(d, primary_colour, secondary_colour='none',
-              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+                          wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                          size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+                          orientation=HORIZONTAL):
     wid, hei, x_mid, y_mid, x_end, y_end = get_standard_dimensions(d, wid, hei, x_start, y_start)
-
 
     # the path under it
     sw = hei / 18
@@ -191,8 +195,9 @@ def draw_attraction_arrow(d, primary_colour, secondary_colour='none',
 
 
 def draw_corners(d, primary_colour, secondary_colour='none',
-              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+                 wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                 size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+                 orientation=HORIZONTAL):
     """
     Add diagonal corners in the style of the disability pride flag
     :param d: Drawing object
@@ -226,8 +231,9 @@ def draw_corners(d, primary_colour, secondary_colour='none',
 
 
 def draw_topbottom(d, primary_colour, secondary_colour='none',
-              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+                   wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                   size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+                   orientation=HORIZONTAL):
     """
     Add stripes to top and bottom. Used for mashup flags.
     :param d: Drawing object
@@ -260,8 +266,9 @@ def draw_topbottom(d, primary_colour, secondary_colour='none',
 
 
 def draw_perisex(d, primary_colour, secondary_colour='none',
-              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+                 wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                 size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+                 orientation=HORIZONTAL):
     """
     Draws an abstract scale/balance thing with f and m ends
     :param d: drawing image
@@ -316,8 +323,9 @@ def draw_perisex(d, primary_colour, secondary_colour='none',
 
 
 def draw_rhombus(d, primary_colour, secondary_colour='none',
-              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+                 wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                 size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+                 orientation=HORIZONTAL):
     """
     Draw a square on a diagonal
     :param d: Drawing object
@@ -351,8 +359,9 @@ def draw_rhombus(d, primary_colour, secondary_colour='none',
 
 
 def draw_hemirhombus(d, primary_colour, secondary_colour='none',
-              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+                     wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                     size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+                     orientation=HORIZONTAL):
     """
     Draw a half a square on a diagonal
     :param d: Drawing object
@@ -391,8 +400,9 @@ def draw_hemirhombus(d, primary_colour, secondary_colour='none',
 
 
 def draw_square(d, primary_colour, secondary_colour='none',
-              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+                wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+                orientation=HORIZONTAL):
     """Draw a square in the style of the dyadic/endosex flag.
     :param d: Drawing object
     :param primary_colour: outline colour of the square
@@ -423,8 +433,9 @@ def draw_square(d, primary_colour, secondary_colour='none',
 
 
 def draw_diagonal_cut_square(d, primary_colour, secondary_colour='none',
-              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+                             wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                             size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+                             orientation=HORIZONTAL):
     """Draw half of a square that is cut diagonally, to be superimposed with draw_square
     to produce dyadic/endosex flags.
     :param d: Drawing object
@@ -476,8 +487,9 @@ def draw_diagonal_cut_square(d, primary_colour, secondary_colour='none',
 
 
 def draw_bissu(d, primary_colour, secondary_colour='none',
-              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+               wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+               size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+               orientation=HORIZONTAL):
     """
     Draw triangles in the style of the Bissu flag
     :param d: Drawing ojbect
@@ -499,8 +511,9 @@ def draw_bissu(d, primary_colour, secondary_colour='none',
 
 
 def draw_altersex_symbol(d, primary_colour, secondary_colour='none',
-              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+                         wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                         size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+                         orientation=HORIZONTAL):
     '''
     Draw a triangle with a ring
     :param d: Drawing object
@@ -551,8 +564,9 @@ def draw_altersex_symbol(d, primary_colour, secondary_colour='none',
 
 
 def draw_cross(d, primary_colour, secondary_colour='none',
-              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+               wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+               size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+               orientation=HORIZONTAL):
     """
     Draw a cross that is, by default, the right size to produce the ipsogender flag
     when combined with a Carpenter ring.
@@ -584,8 +598,9 @@ def draw_cross(d, primary_colour, secondary_colour='none',
 
 
 def draw_metis_lemniscate(d, primary_colour, secondary_colour='none',
-              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+                          wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                          size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+                          orientation=HORIZONTAL):
     """
     Draw an infinity symbol (lemniscate) in the style of the Métis flag.
     :param d: drawing object
@@ -626,8 +641,9 @@ def draw_metis_lemniscate(d, primary_colour, secondary_colour='none',
 
 
 def draw_chonky_infinity(d, primary_colour, secondary_colour='none',
-              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+                         wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                         size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+                         orientation=HORIZONTAL):
 
     wid, hei = get_effective_dimensions(d, wid, hei)
     mid_x = (wid / 2) + x_start
@@ -659,8 +675,9 @@ def draw_chonky_infinity(d, primary_colour, secondary_colour='none',
 
 
 def draw_closet_symbol(d, primary_colour, secondary_colour='none',
-              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+                       wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                       size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+                       orientation=HORIZONTAL):
     """
     Draw a closet symbol, similar in style to the one in isobug's closeted intersex flag
     :param d: Drawing object
@@ -746,8 +763,9 @@ def rubber_helper(line_hei, sw, topln_start_y, topln_start_x, topln_descend_hypo
 
 
 def draw_rubber_zigzags(d, primary_colour, secondary_colour='none',
-              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+                        wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                        size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+                        orientation=HORIZONTAL):
     """
     Draw zigzag stripes in the style of the rubber pride flag.
     :param d: Drawing object
@@ -811,8 +829,9 @@ def draw_rubber_zigzags(d, primary_colour, secondary_colour='none',
 
 
 def draw_refugeeline(d, primary_colour, secondary_colour='none',
-              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+                     wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                     size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+                     orientation=HORIZONTAL):
     """
     Draw a single horizontal line in the style of the refugee flag
     :param d: Drawing object
@@ -836,8 +855,9 @@ def draw_refugeeline(d, primary_colour, secondary_colour='none',
 
 
 def draw_intersex_ally(d, primary_colour, secondary_colour='none',
-              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+                       wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                       size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+                       orientation=HORIZONTAL):
     """
     Draw a chevron/vee in the style of the ally flag
     :param d: Drawing object
@@ -883,8 +903,9 @@ def draw_intersex_ally(d, primary_colour, secondary_colour='none',
 
 
 def draw_circle(d, primary_colour, secondary_colour='none',
-              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+                wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+                orientation=HORIZONTAL):
     """
     Draw a solid circle
     :param d: Drawing object
@@ -909,8 +930,9 @@ def draw_circle(d, primary_colour, secondary_colour='none',
 
 
 def draw_ellipse(d, primary_colour, secondary_colour='none',
-              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+                 wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                 size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+                 orientation=HORIZONTAL):
     """
     Draw a solid ellipse
     :param d: Drawing object
@@ -939,7 +961,8 @@ def draw_ellipse(d, primary_colour, secondary_colour='none',
 
 def draw_inverted_triangle(d, primary_colour, secondary_colour='none',
                            wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-                           size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+                           size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+                           orientation=HORIZONTAL):
     """
     Draw an inverted triangle like the pink triangle flag
     :param d: Drawing object
@@ -976,8 +999,9 @@ def draw_inverted_triangle(d, primary_colour, secondary_colour='none',
 
 
 def draw_triangle(d, primary_colour, secondary_colour='none',
-              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+                  wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                  size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+                  orientation=HORIZONTAL):
     """
     Draw a triangle
     :param d: Drawing object
@@ -1022,8 +1046,9 @@ def draw_triangle(d, primary_colour, secondary_colour='none',
 
 
 def draw_asympile(d, primary_colour, secondary_colour='none',
-              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+                  wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                  size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+                  orientation=HORIZONTAL):
     """
     Draw an asymmetric pile in the style of the tricolour polyamory flag
     :param d: Drawing object
@@ -1061,8 +1086,9 @@ def draw_asympile(d, primary_colour, secondary_colour='none',
 
 
 def draw_equals(d, primary_colour, secondary_colour='none',
-              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+                wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+                orientation=HORIZONTAL):
     """
     Draw an equals sign in the style of the horizontal androgyne flag
     :param d: Drawing object
@@ -1101,8 +1127,9 @@ def draw_equals(d, primary_colour, secondary_colour='none',
 
 
 def draw_bipolar(d, primary_colour, secondary_colour='none',
-              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+                 wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                 size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+                 orientation=HORIZONTAL):
     """
     Draw the bipolar symbol
     :param d: Drawing object
@@ -1206,7 +1233,8 @@ def draw_bipolar(d, primary_colour, secondary_colour='none',
 
 def draw_belt(d, primary_colour, secondary_colour='none',
               wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+              size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+              orientation=HORIZONTAL):
     # default size should be voidpunk
     wid, hei = get_effective_dimensions(d, wid, hei)
     midx = x_start + wid/2
@@ -1228,8 +1256,9 @@ def draw_belt(d, primary_colour, secondary_colour='none',
 
 
 def draw_utrinque(d, primary_colour, secondary_colour='none',
-              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+                  wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                  size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+                  orientation=HORIZONTAL):
     """
     Draw the utrinque symbol
     :param d:
@@ -1262,8 +1291,9 @@ def draw_utrinque(d, primary_colour, secondary_colour='none',
 
 
 def draw_diamond(d, primary_colour, secondary_colour='none',
-              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+                 wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                 size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+                 orientation=HORIZONTAL):
     """
     Draw a Diamond, based on the Alderspintellic flag
     from https://www.tumblr.com/revenant-coining/704184782702149633/alderspintellic-an-aldernic-term-for-one-is-or
@@ -1302,8 +1332,9 @@ def draw_diamond(d, primary_colour, secondary_colour='none',
 
 
 def draw_teardrop(d, primary_colour, secondary_colour='none',
-              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+                  wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                  size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+                  orientation=HORIZONTAL):
     """
     Draw a teardrop in the centre
     :param d: Drawing object
@@ -1343,7 +1374,8 @@ def draw_teardrop(d, primary_colour, secondary_colour='none',
 
 def draw_caed(d, primary_colour, secondary_colour='none',
               wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio=1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+              size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+              orientation=HORIZONTAL):
     """
     Draw the bottom vertical stripes used in the caedsexual, caedromantic, etc flags
     :param d: Drawing object
@@ -1377,8 +1409,9 @@ def draw_caed(d, primary_colour, secondary_colour='none',
 
 
 def draw_open_linear_infinity(d, primary_colour, secondary_colour='none',
-              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+                              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                              size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+                              orientation=HORIZONTAL):
     """
     Draw an infinity symbol that is of consistent line thickness and partly open.
     Based on the infinity from Noun Project #7281819 by Elin Erkani
@@ -1545,9 +1578,88 @@ def draw_open_linear_infinity(d, primary_colour, secondary_colour='none',
     d.append(p)
 
 
+def draw_simple_infinity(d, primary_colour, secondary_colour='none',
+                         wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                         size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+                         orientation=HORIZONTAL):
+    """
+    Draw an infinity symbol that is of consistent line thickness and partly open.
+    :param d: Drawing object
+    :param primary_colour: stroke colour
+    :param secondary_colour: fill colour
+    :param wid: width of the area we are working with
+    :param hei: height of the area we are working with
+    :param x_start: the x-coordinate of the upper left corner of the rectangular area that is being drawn into
+    :param y_start: the y-coordinate of the upper left corner of the rectangular area that is being drawn into
+    :param size_ratio: size factor - radius of the arc segments used on the two sides
+    :param stretch_ratio: adjusts how much of a gap there is in the crossover
+    :param thick_ratio: adjusts line thickness
+    :param orientation: not used
+    :return:
+    """
+    # basic shape
+    wid, hei, x_mid, y_mid, x_end, y_end = get_standard_dimensions(d, wid, hei, x_start, y_start)
+
+    sw = size_ratio*thick_ratio*hei/8
+
+    # the size of the X area between the C and reverse C
+    cross_wid = size_ratio*wid/6
+    x_c_left_mid = x_mid - cross_wid
+    x_c_right_mid = x_mid + cross_wid
+
+    # middle rectangle
+    rect_wid = stretch_ratio*cross_wid/3
+    rect_hei = rect_wid
+    x_rect_left = x_mid - rect_wid
+    x_rect_right = x_mid + rect_wid
+    y_rect_top = y_mid - rect_hei
+    y_rect_bottom = y_mid + rect_hei
+
+    c_hei = size_ratio*hei/4
+    y_c_top = y_mid - c_hei
+    y_c_bottom = y_mid + c_hei
+
+    c_wid = cross_wid#size_ratio*wid/6
+    x_c_left_end = x_c_left_mid - c_wid
+    x_c_right_end = x_c_right_mid + c_wid
+
+    '''
+    p = draw.Path(stroke=secondary_colour, stroke_width=sw, fill='none')
+    # reference rectangle
+    p.M(x_rect_right, y_rect_top)
+    p.L(x_rect_right, y_rect_bottom)
+    p.L(x_rect_left, y_rect_bottom)
+    p.L(x_rect_left, y_rect_top)
+    p.L(x_rect_right, y_rect_top).Z()
+    d.append(p)
+    '''
+
+    p = draw.Path(stroke=primary_colour, stroke_width=sw, fill=secondary_colour)
+    # start at the reference rectangle
+    p.M(x_rect_left, y_rect_bottom)
+
+    # the left C, bottom to top
+    p.C( x_rect_left-sw/2, y_rect_bottom+sw/2, (x_c_left_mid+x_rect_left)/2, (y_rect_bottom+2*y_c_bottom)/3 , x_c_left_mid, y_c_bottom)
+    p.A(c_wid, c_hei, rot=90, large_arc=1, sweep=1, ex=x_c_left_mid, ey=y_c_top)
+
+    # the cross-over
+    p.C( (x_c_left_mid+x_rect_left)/2, (y_rect_top+2*y_c_top)/3,  x_rect_left-sw/2, y_rect_top-sw/2, x_rect_left, y_rect_top )
+    p.L(x_rect_right, y_rect_bottom)
+    p.C( x_rect_right+sw/2, y_rect_bottom+sw/2, (x_c_right_mid+x_rect_right)/2, (y_rect_bottom+2*y_c_bottom)/3 , x_c_right_mid, y_c_bottom)
+
+    # the right C, bottom to top
+    p.A(c_wid, c_hei, rot=90, large_arc=1, sweep=0, ex=x_c_right_mid, ey=y_c_top)
+
+    # and the curve back to the rectangle
+    p.C( (x_c_right_mid+x_rect_right)/2, (y_rect_top+2*y_c_top)/3, x_rect_right+sw/2, y_rect_top-sw/2, x_rect_right, y_rect_top)
+
+    d.append(p)
+
+
 def draw_attraction_stance(d, primary_colour, secondary_colour='none',
-              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+                           wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                           size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+                           orientation=HORIZONTAL):
     """
     Draw the side panel used in the romance/sex/etc favourable/repulsed/etc flags
     :param d: Drawing object
@@ -1603,8 +1715,9 @@ def draw_attraction_stance(d, primary_colour, secondary_colour='none',
 
 
 def draw_attraction_outline(d, primary_colour, secondary_colour='none',
-              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+                            wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                            size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+                            orientation=HORIZONTAL):
     """
     Draw an outline of the attraction stance shape
     :param d:
@@ -1642,8 +1755,9 @@ def draw_attraction_outline(d, primary_colour, secondary_colour='none',
 
 
 def draw_attraction_favourable(d, primary_colour, secondary_colour='none',
-              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+                               wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                               size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+                               orientation=HORIZONTAL):
     """
     Draw the side panel used in the romance/sex/etc favourable/repulsed/etc flags
     :param d: Drawing object
@@ -1666,8 +1780,9 @@ def draw_attraction_favourable(d, primary_colour, secondary_colour='none',
 
 
 def draw_attraction_heart(d, primary_colour, secondary_colour='none',
-              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+                          wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                          size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+                          orientation=HORIZONTAL):
     """
     Draw the side panel used in the romance/sex/etc favourable/repulsed/etc flags
     :param d: Drawing object
@@ -1690,8 +1805,9 @@ def draw_attraction_heart(d, primary_colour, secondary_colour='none',
 
 
 def draw_attraction_indifferent(d, primary_colour, secondary_colour='none',
-              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+                                wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                                size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+                                orientation=HORIZONTAL):
     """
     Draw the side panel used in the romance/sex/etc favourable/repulsed/etc flags
     :param d: Drawing object
@@ -1713,9 +1829,11 @@ def draw_attraction_indifferent(d, primary_colour, secondary_colour='none',
     draw_transparent_ring(d, secondary_colour, x_start=-x_ring*0.5, size_ratio=0.58, thick_ratio=.75)
     return x_ring
 
+
 def draw_attraction_repulsed(d, primary_colour, secondary_colour='none',
-              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+                             wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                             size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+                             orientation=HORIZONTAL):
     """
     Draw the side panel used in the romance/sex/etc favourable/repulsed/etc flags
     :param d: Drawing object
@@ -1739,9 +1857,11 @@ def draw_attraction_repulsed(d, primary_colour, secondary_colour='none',
     sw = thick_ratio*radius*.3
     d.append(draw.Rectangle(x_ring-minus_wid, y_mid-sw*0.5, minus_wid*2, sw, fill=secondary_colour))
 
+
 def draw_tilde(d, primary_colour, secondary_colour='none',
-              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0, radius_ratio=1.0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+               wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+               size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+               orientation=HORIZONTAL):
     """
     Draw the side panel used in the romance/sex/etc favourable/repulsed/etc flags
     :param d: Drawing object
@@ -1793,8 +1913,9 @@ def draw_tilde(d, primary_colour, secondary_colour='none',
 
 
 def draw_attraction_averse(d, primary_colour, secondary_colour='none',
-                                    wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-                                    size_ratio=1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+                           wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                           size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+                           orientation=HORIZONTAL):
     """
     Draw the side panel used in the romance/sex/etc favourable/repulsed/etc flags
     :param d: Drawing object
@@ -1818,8 +1939,9 @@ def draw_attraction_averse(d, primary_colour, secondary_colour='none',
 
 
 def draw_oscillator(d, primary_colour, secondary_colour='none',
-                    wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0, radius_ratio=1.0,
-                    size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+                    wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                    size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+                    orientation=HORIZONTAL):
 
     wid, hei, x_mid, y_mid, x_end, y_end = get_standard_dimensions(d, wid, hei, x_start, y_start)
 
@@ -1849,7 +1971,8 @@ def draw_oscillator(d, primary_colour, secondary_colour='none',
 
 def draw_attraction_ambivalent(d, primary_colour, secondary_colour='none',
                                wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-                               size_ratio=1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+                               size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+                               orientation=HORIZONTAL):
     """
     Draw the side panel used in the romance/sex/etc favourable/repulsed/etc flags
     :param d: Drawing object
@@ -1870,13 +1993,14 @@ def draw_attraction_ambivalent(d, primary_colour, secondary_colour='none',
                                     size_ratio=size_ratio, stretch_ratio=stretch_ratio, thick_ratio=thick_ratio,
                                     orientation=orientation)
     height_diff = hei/18
-    draw_tilde(d, secondary_colour, x_start=-x_ring * 0.5, size_ratio=0.4, thick_ratio=.5, radius_ratio=0.4, y_start=y_start-height_diff)
-    draw_tilde(d, secondary_colour, x_start=-x_ring * 0.5, size_ratio=0.4, thick_ratio=.5, radius_ratio=0.4, y_start=y_start+height_diff)
+    draw_tilde(d, secondary_colour, x_start=-x_ring * 0.5, size_ratio=0.4, thick_ratio=.5, stretch_ratio=0.4, y_start=y_start-height_diff)
+    draw_tilde(d, secondary_colour, x_start=-x_ring * 0.5, size_ratio=0.4, thick_ratio=.5, stretch_ratio=0.4, y_start=y_start+height_diff)
 
 
 def draw_attraction_oscillating(d, primary_colour, secondary_colour='none',
-                               wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-                               size_ratio=1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+                                wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                                size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+                                orientation=HORIZONTAL):
     """
     Draw the side panel used in the romance/sex/etc favourable/repulsed/etc flags
     :param d: Drawing object
@@ -1897,8 +2021,54 @@ def draw_attraction_oscillating(d, primary_colour, secondary_colour='none',
                                     size_ratio=size_ratio, stretch_ratio=stretch_ratio, thick_ratio=thick_ratio,
                                     orientation=orientation)
     height_diff = hei/18
-    draw_oscillator(d, secondary_colour, x_start=-x_ring * 0.5, size_ratio=0.45, thick_ratio=.4, radius_ratio=0.35)
+    draw_oscillator(d, secondary_colour, x_start=-x_ring * 0.5, size_ratio=0.45, thick_ratio=.4, stretch_ratio=0.35)
 
+
+def draw_squircle(d, primary_colour, secondary_colour='none',
+                  wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                  size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+                  orientation=HORIZONTAL):
+    """
+    Draw a squircle (intermediate between square and circle)
+    :param d: Drawing object
+    :param primary_colour: stroke colour
+    :param secondary_colour: fill colour
+    :param wid: width of the area we are working with
+    :param hei: height of the area we are working with
+    :param x_start: the x-coordinate of the upper left corner of the rectangular area that is being drawn into
+    :param y_start: the y-coordinate of the upper left corner of the rectangular area that is being drawn into
+    :param size_ratio: size factor - radius of the arc segments used on the two sides
+    :param stretch_ratio: adjusts how much of a gap there is in the crossover
+    :param thick_ratio: adjusts line thickness
+    :param orientation: not used
+    :return:
+    """
+    # basic shape
+    wid, hei, x_mid, y_mid, x_end, y_end = get_standard_dimensions(d, wid, hei, x_start, y_start)
+    sw = size_ratio*thick_ratio*hei/10
+
+    radius = size_ratio*hei/4
+    top = y_mid - radius
+    bottom = y_mid + radius
+    left = x_mid - radius
+    right = x_mid + radius
+
+    ctrl_radius = radius*stretch_ratio
+    c_top = y_mid - ctrl_radius
+    c_bottom = y_mid + ctrl_radius
+    c_left = x_mid - ctrl_radius
+    c_right = x_mid + ctrl_radius
+
+    p = draw.Path(stroke=primary_colour, stroke_width=sw, fill=secondary_colour)
+    # start at the reference rectangle
+    p.M( x_mid, top)
+    p.Q( c_right, c_top, right, y_mid)
+    p.Q( c_right, c_bottom, x_mid, bottom)
+    p.Q( c_left, c_bottom, left, y_mid)
+    p.Q( c_left, c_top , x_mid, top).Z()
+
+    d.append(p)
+    return radius
 
 
 if __name__ == '__main__':
@@ -1917,7 +2087,8 @@ if __name__ == '__main__':
     #draw_diamond(d, 'white', 'red')
     #draw_tilde(d, 'white')
     #draw_oscillator(d, 'white')
-    draw_chonky_infinity(d, 'red')
+    #draw_chonky_infinity(d, 'red')
+    draw_squircle(d, 'yellow', 'red')
     d.save_svg('drawflags/test.svg')
 
     d = draw.Drawing(wid, hei)

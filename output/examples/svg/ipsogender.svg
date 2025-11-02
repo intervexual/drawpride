@@ -6,5 +6,5 @@
 <rect x="0" y="0" width="500" height="301" fill="#7A01AA" />
 <rect x="238.0" y="75.0" width="24.0" height="150.0" fill="#FDD70A" />
 <rect x="175.0" y="138.0" width="150.0" height="24.0" fill="#FDD70A" />
-<circle cx="250.0" cy="150.0" r="75.0" fill="none" stroke-width="24.0" stroke="#FDD70A" fill-opacity="1" />
+<circle cx="250.0" cy="150.0" r="75.0" fill="none" stroke-width="24.0" stroke="#FDD70A" fill-opacity="1.0" />
 </svg>

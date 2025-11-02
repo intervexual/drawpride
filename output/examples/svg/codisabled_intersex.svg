@@ -9,6 +9,6 @@
 <circle cx="250.0" cy="150.0" r="83" fill="none" stroke-width="10.6" stroke="#E8E8E8" fill-opacity="0" />
 <circle cx="250.0" cy="150.0" r="92" fill="none" stroke-width="10.6" stroke="#EEDE77" fill-opacity="0" />
 <circle cx="250.0" cy="150.0" r="102" fill="none" stroke-width="10.6" stroke="#CF7280" fill-opacity="0" />
-<circle cx="250.0" cy="150.0" r="58.2" fill="none" stroke-width="0" stroke="none" fill-opacity="0" />
-<circle cx="250.0" cy="150.0" r="106.2" fill="none" stroke-width="0" stroke="none" fill-opacity="0" />
+<circle cx="250.0" cy="150.0" r="58.2" fill="none" stroke-width="1.0" stroke="none" fill-opacity="0" />
+<circle cx="250.0" cy="150.0" r="106.2" fill="none" stroke-width="1.0" stroke="none" fill-opacity="0" />
 </svg>

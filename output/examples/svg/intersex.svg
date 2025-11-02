@@ -4,5 +4,5 @@
 <defs>
 </defs>
 <rect x="0" y="0" width="500" height="301" fill="#FDD70A" />
-<circle cx="250.0" cy="150.0" r="75.0" fill="none" stroke-width="24.0" stroke="#7A01AA" fill-opacity="1" />
+<circle cx="250.0" cy="150.0" r="75.0" fill="none" stroke-width="24.0" stroke="#7A01AA" fill-opacity="1.0" />
 </svg>

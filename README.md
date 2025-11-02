@@ -55,6 +55,14 @@ Crosses and Xs:
 * Concentric Xs (like in the Quasigender flags)
 * Concentric Ts (like in the Tgirl flag)
 
+Gender Symbols:
+* Gender neutral symbol
+* Mars symbol
+* Mercury symbol
+* Transgender symbol
+* Venus symbol
+* Xenous symbol
+
 And other possible flag elements:
 * Text (e.g. the original Polyamory flag)
 * Squares (like in the Dyadic and Endosex flags)

@@ -1,10 +1,11 @@
 import drawsvg
 
-from stars_and_hearts import *
+from gender_symbols import *
 
 def draw_pocketgender_hourglass(d, colours,
-              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+                                wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                                size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+                                orientation=HORIZONTAL):
     """
     Draw a straight hourglass type shape seen in the pocket gender flag
     :param d: Drawing object
@@ -51,8 +52,9 @@ def draw_pocketgender_hourglass(d, colours,
 
 
 def draw_triskelion(d, colours,
-              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+                    wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                    size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+                    orientation=HORIZONTAL):
     """
     Draw a triskelion symbol used for BDSM fetish flags.
     Based on: https://commons.wikimedia.org/wiki/File:Dotted_triskelion_(fixed_width).svg
@@ -155,10 +157,10 @@ def single_nautilus_segment(d, wid, hei, arr, primary_colour, step_size, border_
     d.append(p.Z())
 
 
-def draw_nautilus(d, colours,
-              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL,
-              border_colour='black', border_size=0):
+def draw_nautilus(d, colours, border_colour='black',
+                  wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                  size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+                  orientation=HORIZONTAL):
     """
     Draw an autistic spectrum nautilus symbol
     :param d: Drawing object
@@ -172,7 +174,7 @@ def draw_nautilus(d, colours,
     is_horizontal = orientation == HORIZONTAL
     wid, hei = get_effective_dimensions(d, wid, hei)
     height_perc = (120 / 300)*size_ratio
-    border_width = 5*size_ratio*border_size
+    border_width = 5 * size_ratio * (1-sharp_ratio)
     ang_each = 360 / len(colours)
     coords = []
     a = 0
@@ -215,8 +217,9 @@ def draw_nautilus(d, colours,
 
 
 def draw_trichevron(d, colours,
-              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+                    wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                    size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+                    orientation=HORIZONTAL):
     """
     Draw three chevrons in this style from https://queerflag.tumblr.com/post/151443283619/bizexuals-more-queer-pride-flagsvariations
     :param d: Drawing object
@@ -262,8 +265,9 @@ def draw_trichevron(d, colours,
 
 
 def draw_crossdresser(d, colours,
-              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+                      wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                      size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+                      orientation=HORIZONTAL):
     """
     Draw an X in the style of this crossdresser flag: https://flag.library.lgbt/flags/crossdresser/
     :param d: Drawing object
@@ -322,8 +326,9 @@ def draw_crossdresser(d, colours,
 
 
 def draw_longhair(d, colours,
-              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+                  wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                  size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+                  orientation=HORIZONTAL):
     """
     Draw stripes in the style of the Longhair flag
     :param d: Drawing object
@@ -376,8 +381,9 @@ def draw_longhair(d, colours,
 
 
 def draw_x_gender(d, colours,
-              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+                  wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                  size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+                  orientation=HORIZONTAL):
     """
     Draw an X in the style of the X gender flag
     :param d: Drawing object
@@ -444,8 +450,9 @@ def draw_x_gender(d, colours,
 
 
 def draw_lines(d, colours,
-              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio=1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+               wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+               size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+               orientation=HORIZONTAL):
     siding = ['none']*4
     new_colours = siding + colours + siding
     draw_stripes(d, new_colours, orientation=orientation, wid=wid, hei=hei, x_start=x_start, y_start=y_start,

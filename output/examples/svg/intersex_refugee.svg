@@ -5,5 +5,5 @@
 </defs>
 <rect x="0" y="0" width="500" height="301" fill="#f06942" />
 <rect x="0" y="189.0" width="500" height="39.0" fill="black" stroke="none" />
-<circle cx="250.0" cy="94.5" r="47.25" fill="none" stroke-width="15.12" stroke="#7A01AA" fill-opacity="1" />
+<circle cx="250.0" cy="94.5" r="47.25" fill="none" stroke-width="15.12" stroke="#7A01AA" fill-opacity="1.0" />
 </svg>

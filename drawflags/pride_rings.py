@@ -39,16 +39,18 @@ def inner_right_of_ring(hei):
 ##########################################################
 
 def draw_transparent_ring(d, colour_of_ring, fill_colour='none',
-                          opac=1, size_ratio=1.0, thick_ratio=1.0, stretch_ratio=1.0, orientation=HORIZONTAL,
-                          x_start=0, y_start=0, wid=UNSPECIFIED, hei=UNSPECIFIED):
+                      wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                      size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+                      orientation=HORIZONTAL):
     '''Draw a ring with a transparent fill, of the size for a Carpenter flag
     Useful for making the intersex flag.
 
     dimensions: wid x hei (int x int)
     colour_of_ring: the fill of the ring itself (hex code as str)
-    opac: opacity of the fill inside the ring (0-1 float)
+    sharp_ratio: opacity of the fill inside the ring (0-1 float)
     fill_colour: colour that goes *inside* the ring (hex code as str)
     '''
+    opac = sharp_ratio
     wid, hei = get_effective_dimensions(d, wid, hei)
 
     width_of_ring = thick_ratio*ring_thickness(hei)  # 29-21
@@ -82,16 +84,20 @@ def fill_outside_the_ring(d, fill_colour, border_width, wid=UNSPECIFIED, hei=UNS
                          fill=fill_colour, stroke_width=width_of_ring, stroke=fill_colour, opacity=opac,
                          fill_opacity=0))
 
-def draw_border_ring(d, border_colour, border_width, wid=UNSPECIFIED, hei=UNSPECIFIED, opac=0, fill_colour = 'white'):
+def draw_border_ring(d, border_colour, border_width, fill_colour='none',
+                     wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                     size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+                     orientation=HORIZONTAL):
     '''Draw a ring slightly larger than the Carpenter sized ring.
     Intended for making a border around a Carpenter ring.
 
     dimensions: wid x hei (int x int)
     border_colour: the fill of the ring itself (hex code as str)
     width: the width in pixels (int) of this ring border ring.
-    opac: opacity of the fill inside the ring (0-1 float)
+    sharp_ratio: opacity of the fill inside the ring (0-1 float)
     fill_colour: colour that goes *inside* the ring (hex code as str)
     '''
+    opac = sharp_ratio
     wid, hei = get_effective_dimensions(d, wid, hei)
     width_of_ring = ring_thickness(hei) + 2*border_width # 2x so it's on both sides
     top_o = top_of_ring(hei) + ring_thickness(hei)/2 # for a 100px
@@ -100,7 +106,10 @@ def draw_border_ring(d, border_colour, border_width, wid=UNSPECIFIED, hei=UNSPEC
         fill=fill_colour, stroke_width=width_of_ring, stroke=border_colour, fill_opacity=opac))
 
 
-def draw_inset_into_intersex(d, stripes, outer_colour, ring_colour, wid=UNSPECIFIED, hei=UNSPECIFIED, orientation=HORIZONTAL):
+def draw_inset_into_intersex(d, stripes, outer_colour, ring_colour,
+                             wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                             size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+                             orientation=HORIZONTAL):
     '''Given a list of stripes,
     draw the striped flag inside the ring of a Carpenter style intersex flag.
 
@@ -140,10 +149,10 @@ def draw_inset_into_intersex(d, stripes, outer_colour, ring_colour, wid=UNSPECIF
     return stp_h
 
 
-def draw_segmented_ring(d, colours, wid=UNSPECIFIED, hei=UNSPECIFIED, fill_colour = 'none',
-                        opac = 1, size_ratio=1.0, thick_ratio=1.0, stretch_ratio=1.0,
-                        border_fill='none', border_ratio=2, orientation=HORIZONTAL,
-                        x_start=0, y_start=0):
+def draw_segmented_ring(d, colours, fill_colour = 'none', border_fill='none',
+                        wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                        size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+                        orientation=HORIZONTAL):
     '''
     Draw a segmented ring flag.
     dimensions of image: wid x hei
@@ -152,7 +161,9 @@ def draw_segmented_ring(d, colours, wid=UNSPECIFIED, hei=UNSPECIFIED, fill_colou
     border_colour: border between segments, str hex code
     border_width: the width in pixels of the border (int)
     ang_offset = from where to start drawing the segments
+    border ratio is now called stretch_ratio
     '''
+    opac = sharp_ratio
     wid, hei = get_effective_dimensions(d, wid, hei)
     arc_width = 360 / len(colours)
     width_of_ring = ring_thickness(hei)*size_ratio  # 29-21
@@ -163,7 +174,7 @@ def draw_segmented_ring(d, colours, wid=UNSPECIFIED, hei=UNSPECIFIED, fill_colou
     y_centre = (hei/2)+y_start
 
     if border_fill != 'none':
-        border_ring = draw.Circle(x_centre, y_centre, top_o, stroke=border_fill, fill='none', stroke_width=width_of_ring*border_ratio)
+        border_ring = draw.Circle(x_centre, y_centre, top_o, stroke=border_fill, fill='none', stroke_width=width_of_ring * stretch_ratio*2)
         d.append(border_ring)
 
     rad = top_o*3 # used for the clip
@@ -201,9 +212,10 @@ def draw_ring(d, wid, hei, radius, thickness, ring_colour, fill_colour , opacity
 
 
 
-def draw_concentric_rings(d, colours, wid=UNSPECIFIED, hei=UNSPECIFIED,
-                          border_colour='none', border_thickness=0, inner_colour='none',
-                          size_ratio=1.0, x_start=0, y_start=0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+def draw_concentric_rings(d, colours, border_colour='none', inner_colour='none',
+                          wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                          size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+                          orientation=HORIZONTAL):
     """
     Draw concentric rings approximately the size of a Carpenter ring. Intended for intersex flag mashups.
     :param d: Drawing object
@@ -211,7 +223,7 @@ def draw_concentric_rings(d, colours, wid=UNSPECIFIED, hei=UNSPECIFIED,
     :param wid: width of the area that the rings are being added to
     :param hei: height of the area that the rings are being added to
     :param border_colour: possible colour for outlining the concentric rings
-    :param border_thickness: thickness in pixels if adding a border
+    :param thick_ratio: thickness in pixels if adding a border
     :param inner_colour: colour used to fill inside the innermost ring
     :param size_ratio: scaling factor
     :return: none
@@ -235,16 +247,15 @@ def draw_concentric_rings(d, colours, wid=UNSPECIFIED, hei=UNSPECIFIED,
         i += 1
 
     # border inside
-    draw_ring(d, wid, hei, radius - (thickness / 2), border_thickness, border_colour, 'none')
+    draw_ring(d, wid, hei, radius - (thickness / 2), thick_ratio, border_colour, 'none')
     # border outside
-    draw_ring(d, wid, hei, radius + (i + 1) * thickness - (thickness / 2), border_thickness, border_colour, 'none')
-
-
+    draw_ring(d, wid, hei, radius + (i + 1) * thickness - (thickness / 2), thick_ratio, border_colour, 'none')
 
 
 def draw_bullseye(d, colours,
-              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+                  wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                  size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+                  orientation=HORIZONTAL):
     """
     Draw concentric rings inside the intersex ring. All ring widths will be the same.
     :param d: Drawing object
@@ -277,7 +288,8 @@ def draw_bullseye(d, colours,
 
 def draw_inner_bullseye(d, colours,
                         wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-                        size_ratio=1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+                        size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+                        orientation=HORIZONTAL):
     """
     Draw concentric rings inside the intersex ring (outer ring will always have the standard thickness)
     :param d: Drawing object

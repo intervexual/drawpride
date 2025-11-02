@@ -20,9 +20,9 @@
 </defs>
 <rect x="0" y="0" width="500" height="301" fill="#FDD70A" />
 <circle cx="250.0" cy="150.0" r="75.0" stroke="#595959" fill="none" stroke-width="48.0" />
-<circle cx="250.0" cy="150.0" r="75.0" fill="none" stroke-width="24.0" stroke="#3CB07D" fill-opacity="1" clip-path="url(#d0)" />
-<circle cx="250.0" cy="150.0" r="75.0" fill="none" stroke-width="24.0" stroke="#7BC2E0" fill-opacity="1" clip-path="url(#d1)" />
-<circle cx="250.0" cy="150.0" r="75.0" fill="none" stroke-width="24.0" stroke="#E8E8E8" fill-opacity="1" clip-path="url(#d2)" />
-<circle cx="250.0" cy="150.0" r="75.0" fill="none" stroke-width="24.0" stroke="#EEDE77" fill-opacity="1" clip-path="url(#d3)" />
-<circle cx="250.0" cy="150.0" r="75.0" fill="none" stroke-width="24.0" stroke="#CF7280" fill-opacity="1" clip-path="url(#d4)" />
+<circle cx="250.0" cy="150.0" r="75.0" fill="none" stroke-width="24.0" stroke="#3CB07D" fill-opacity="1.0" clip-path="url(#d0)" />
+<circle cx="250.0" cy="150.0" r="75.0" fill="none" stroke-width="24.0" stroke="#7BC2E0" fill-opacity="1.0" clip-path="url(#d1)" />
+<circle cx="250.0" cy="150.0" r="75.0" fill="none" stroke-width="24.0" stroke="#E8E8E8" fill-opacity="1.0" clip-path="url(#d2)" />
+<circle cx="250.0" cy="150.0" r="75.0" fill="none" stroke-width="24.0" stroke="#EEDE77" fill-opacity="1.0" clip-path="url(#d3)" />
+<circle cx="250.0" cy="150.0" r="75.0" fill="none" stroke-width="24.0" stroke="#CF7280" fill-opacity="1.0" clip-path="url(#d4)" />
 </svg>

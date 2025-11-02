@@ -8,7 +8,7 @@
 <rect x="0" y="137.4" width="500" height="26" fill="white" />
 <rect x="0" y="162.60000000000002" width="500" height="26" fill="#5BCEFA" />
 <rect x="0" y="187.8" width="500" height="26" fill="#F5A9B8" />
-<circle cx="250.0" cy="150.0" r="75.0" fill="none" stroke-width="24.0" stroke="#7A01AA" fill-opacity="1" />
-<circle cx="250.0" cy="150.0" r="75.0" fill="white" stroke-width="26.0" stroke="#7A01AA" fill-opacity="0" />
+<circle cx="250.0" cy="150.0" r="75.0" fill="none" stroke-width="24.0" stroke="#7A01AA" fill-opacity="1.0" />
+<circle cx="250.0" cy="150.0" r="75.0" fill="none" stroke-width="26.0" stroke="#7A01AA" fill-opacity="1.0" />
 <circle cx="250.0" cy="150.0" r="300" fill="#FDD70A" stroke-width="425.0" stroke="#FDD70A" opacity="1" fill-opacity="0" />
 </svg>

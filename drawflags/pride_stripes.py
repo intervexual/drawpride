@@ -191,9 +191,10 @@ def get_relative_sizes(lst):
 
 ##################################################
 
-def draw_stripes(d, colours, orientation, n_bars = EMPTY,
+def draw_stripes(d, colours, n_bars = EMPTY,
                  wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-                 size_ratio=1.0, stretch_ratio=1.0, thick_ratio=1.0):
+                 size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+                 orientation=HORIZONTAL):
     """
     Wrapper function to draw any given stripes
     :param d: Drawing object
@@ -219,7 +220,8 @@ def draw_stripes(d, colours, orientation, n_bars = EMPTY,
 
 def draw_horiz_bars(d, colours,
                     wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-                    thick_ratio=1.0, orientation=HORIZONTAL):
+                    size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+                    orientation=HORIZONTAL):
     """
     Add horizontal bars to the flag
     :param d: Drawing object
@@ -259,9 +261,10 @@ def draw_horiz_bars(d, colours,
     return stp_hei
 
 
-def draw_vert_bars(d, colours,
+def draw_vert_bars(d, colours, buffer=0,
                    wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-                   thick_ratio = 1.0, buffer = 0, orientation = HORIZONTAL):
+                   size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+                   orientation=HORIZONTAL):
     """
     Add vertical bars to the flag
     :param d: Drawing object
@@ -303,8 +306,9 @@ def draw_vert_bars(d, colours,
 
 
 def draw_diagonal_stripes(d, colours, fudge=2,
-                          wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0.0, y_start=0.0,
-                          thick_ratio=1.0):
+                          wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                          size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+                          orientation=HORIZONTAL):
     """
     Draw diagonal stripes in the style of the Magill Disability Pride Flag
     :param d: Drawing object
@@ -344,8 +348,9 @@ def draw_diagonal_stripes(d, colours, fudge=2,
 
 
 def draw_reverse_diagonal_stripes(d, colours, offset=2,
-                                  wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0.0, y_start=0.0,
-                                  thick_ratio=1.0):
+                                  wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                                  size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+                                  orientation=HORIZONTAL):
     """
     Draw diagonal stripes, in the mirror image orientation of the Magill Disability Pride Flag
     :param d: Drawing object
@@ -385,8 +390,9 @@ def draw_reverse_diagonal_stripes(d, colours, offset=2,
 
 
 def draw_multipile(d, colours,
-              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+                   wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                   size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+                   orientation=HORIZONTAL):
     """
     Draw multiple piles (horizontal chevrons/vees)
     :param d: drawing object
@@ -462,7 +468,8 @@ def draw_multipile(d, colours,
 
 def draw_vees(d, colours,
               wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+              size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+              orientation=HORIZONTAL):
     """
     Draw concentric Vs in the style of the varsex flag
     :param d: Drawing object
@@ -502,7 +509,8 @@ def draw_vees(d, colours,
 
 def draw_chevrons(d, colours,
                   wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-                  size_ratio=1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+                  size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+                  orientation=HORIZONTAL):
     """
     Draw a series of chevrons with the colours provided by colours
     :param d: Drawing object
@@ -550,8 +558,9 @@ def draw_chevrons(d, colours,
 
 
 def draw_concentric_rectangles(d, colours,
-              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+                               wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                               size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+                               orientation=HORIZONTAL):
     """
     Draw concentric rectangles from the outside to the inside
     :param d: Drawing object
@@ -599,11 +608,10 @@ def draw_concentric_rectangles(d, colours,
 
 
 
-
-
 def draw_seychelles(d, colours,
-              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+                    wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                    size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+                    orientation=HORIZONTAL):
     """
     Draw stripes like the flag of Seychelles
     :param d: Drawing object
@@ -641,12 +649,10 @@ def draw_seychelles(d, colours,
     return last_height
 
 
-
-
-
 def draw_starburst(d, colours,
                    wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-                   size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+                   size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+                   orientation=HORIZONTAL):
     """
     Draw stripes as a starburst from the centre
     :param d: Drawing object
@@ -684,7 +690,8 @@ def draw_starburst(d, colours,
 
 def draw_concentric_circles(d, colours,
                             wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-                            size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+                            size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+                            orientation=HORIZONTAL):
     """
     Draw concentric circles from the outside inward
     :param d: Drawing object
@@ -722,7 +729,8 @@ def draw_concentric_circles(d, colours,
 
 def draw_concentric_ellipses(d, colours,
                              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-                             size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+                             size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+                             orientation=HORIZONTAL):
     """
     Draw concentric circles from the outside inward
     :param d: Drawing object
@@ -757,7 +765,8 @@ def draw_concentric_ellipses(d, colours,
 
 def draw_concentric_beziers(d, colours,
                             wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-                            size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+                            size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+                            orientation=HORIZONTAL):
     """
     Draw concentric bezier curves in the style of the Mental Health flag
     :param d: Drawing object
@@ -829,9 +838,9 @@ def draw_concentric_beziers(d, colours,
 
 
 def draw_concentric_infinities(d, colours, bg_colour='none',
-                             wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-                             size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL,
-                             ):
+                               wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                               size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+                               orientation=HORIZONTAL):
     """
     Draw concentric infinity loops in the style of the Autistic Pride Day logo.
     :param d: drawing object
@@ -899,8 +908,9 @@ def draw_concentric_infinities(d, colours, bg_colour='none',
 
 
 def draw_concentric_tees(d, colours,
-                             wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-                             size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+                         wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                         size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+                         orientation=HORIZONTAL):
     """
     Draw concentric circles from the outside inward
     :param d: Drawing object
@@ -952,8 +962,9 @@ def draw_concentric_tees(d, colours,
 
 
 def draw_ally_stripes(d, colours,
-                             wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-                             size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+                      wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                      size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+                      orientation=HORIZONTAL):
     """
     Draw a chevron/vee in the style of the ally flag, but with stripes!
     :param d: Drawing object
@@ -995,8 +1006,9 @@ def draw_ally_stripes(d, colours,
 
 
 def draw_armpit_stripes(d, colours,
-                             wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-                             size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+                        wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                        size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+                        orientation=HORIZONTAL):
     """
     Draw stripes in the style of the armpit flag
     :param d: Drawing object
@@ -1039,8 +1051,9 @@ def draw_armpit_stripes(d, colours,
 
 
 def draw_buddhist(d, colours,
-                             wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-                             size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+                  wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                  size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+                  orientation=HORIZONTAL):
     """
     Draw stripes like in the buddhist flag
     :param d: Drawing object
@@ -1064,8 +1077,9 @@ def draw_buddhist(d, colours,
 
 
 def draw_pluralrole(d, colours,
-                             wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-                             size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+                    wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                    size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+                    orientation=HORIZONTAL):
     """
     Draw the template used for Plural Roles like Caretaker and Announcer
     e.g. https://pluralpedia.org/w/Caretaker
@@ -1152,8 +1166,9 @@ def draw_pluralrole(d, colours,
 
 
 def draw_concentric_exes(d, colours,
-              wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
-              size_ratio = 1.0, stretch_ratio=1.0, thick_ratio=1.0, orientation=HORIZONTAL):
+                         wid=UNSPECIFIED, hei=UNSPECIFIED, x_start=0, y_start=0,
+                         size_ratio=1.0, stretch_ratio=1.0, sharp_ratio=1.0, sparse_ratio=1.0, thick_ratio=1.0,
+                         orientation=HORIZONTAL):
     """
     Draw concentric Xs in the style of the Quasigender flags
     :param d: Drawing object
